@@ -5,11 +5,14 @@ import {
     Image, ImageBackground,
     Button,
     TouchableOpacity,
-    
+
 
 } from 'react-native';
+
+import { UIButton } from '../components/index'
 import { images } from '../constants/indexConstants'
-function WellcomeScreen({navigation}) {
+
+function WellcomeScreen({ props, navigation }) {
     return <View style={{
         backgroundColor: 'blue',
         flex: 100,
@@ -32,8 +35,8 @@ function WellcomeScreen({navigation}) {
                 <View style={{
                     flexDirection: 'row',
                     height: 60,
-                    paddingLeft:25,
-                    paddingTop:25,
+                    paddingLeft: 25,
+                    paddingTop: 25,
                     justifyContent: 'flex-start',
                     alignItems: 'center',
                 }}>
@@ -66,44 +69,21 @@ function WellcomeScreen({navigation}) {
             </View>
             <View style={{
                 flex: 10,
-                
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
                 {/* ++++++++++++++++++++++++++++++++++++++++++ */}
-               
-                    <TouchableOpacity
-                    onPress={() =>{
-                        navigation.navigate('SelectUser')
-                    }}
-                    style ={{
-                        borderColor: 'White'
-                        ,borderWidth:1
-                        ,height:70
-                        ,width:200
-                        ,borderRadius:50
-                        ,marginHorizontal:10
-                        ,justifyContent:'center'
-                        ,alignItems:'center'
-                        ,backgroundColor:'#2C3333'
 
 
-                    }}>
-                        <Text style ={{
-                            color:'white',
-                            fontSize:22,
-                            fontWeight:'600'
-
-                        }}>GET STARTED</Text>
-
-                    </TouchableOpacity>
+                <UIButton
+                    onPress={() => { navigation.navigate('SelectUser') }}
+                />
 
 
-             
 
             </View>
-        {/* ++++++++++++++++++++++++++++++++++++++++++ */}
+            {/* ++++++++++++++++++++++++++++++++++++++++++ */}
             <View style={{
                 flex: 40,
 

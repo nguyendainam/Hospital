@@ -18,9 +18,9 @@ const windownWith = Dimensions.get('window').width
 const windownHeight = Dimensions.get('window').height
 
 
-export default SelectUser = () => {
+export default SelectUser = ({ navigation }) => {
     const [getPasswordVisible, setPasswordVisible] = useState(false)
- 
+
     return (
         <View style={{
             flex: 100
@@ -136,7 +136,7 @@ export default SelectUser = () => {
 
 
                             <TextInput
-                                secureTextEntry= {getPasswordVisible? false :true}
+                                secureTextEntry={getPasswordVisible ? false : true}
                                 autoCapitalize='none'
                                 style={{
 
@@ -144,35 +144,35 @@ export default SelectUser = () => {
                                     borderBottomColor: 'white',
                                     borderBottomWidth: 1,
                                     color: 'white',
-                                    textAlign: 'center',         
+                                    textAlign: 'center',
 
                                 }}>
 
                             </TextInput>
-                            <TouchableOpacity 
-                            onPress={ () => {
-                                setPasswordVisible(!getPasswordVisible)
-                            }}
-                            style ={{
-                                right: 20
-                            }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setPasswordVisible(!getPasswordVisible)
+                                }}
+                                style={{
+                                    right: 20
+                                }}>
 
-                            { getPasswordVisible?
+                                {getPasswordVisible ?
 
-                             <Icon
-                                color={'white'}
-                                size={25}
-                                name='eye-slash'
-                                 />  :
-                            <Icon
-                                color={'white'}
-                                size={25}
-                                name='eye'
-                                 /> 
+                                    <Icon
+                                        color={'white'}
+                                        size={25}
+                                        name='eye-slash'
+                                    /> :
+                                    <Icon
+                                        color={'white'}
+                                        size={25}
+                                        name='eye'
+                                    />
 
                                 }
                             </TouchableOpacity>
-        
+
 
 
 
@@ -184,93 +184,98 @@ export default SelectUser = () => {
                 {/* +++++++++++++++++++ LOGIN ++++++++++++++++++++ */}
                 <View style={{
                     flex: 10,
-                    
-                  
+
+
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
 
 
-                   <View style= {{
-                      flexDirection: 'row',
-                   }}>
-
-                   <TouchableOpacity style={{
-                        borderColor: 'White'
-                        , borderWidth: 1
-                        , height: 70
-                        , width: 300
-                        , borderRadius: 50
-                        , marginHorizontal: 10
-                        , justifyContent: 'center'
-                        , alignItems: 'center'
-                        , backgroundColor: '#FFACC7'
-
-
+                    <View style={{
+                        flexDirection: 'row',
                     }}>
 
+                        <TouchableOpacity style={{
+                            borderColor: 'White'
+                            , borderWidth: 1
+                            , height: 70
+                            , width: 300
+                            , borderRadius: 50
+                            , marginHorizontal: 10
+                            , justifyContent: 'center'
+                            , alignItems: 'center'
+                            , backgroundColor: '#FFACC7'
 
-                        <Icon
-                            size={20}
-                            name={"user"}
-                            style={{
 
+                        }}>
+
+
+                            <Icon
+                                size={20}
+                                name={"user"}
+                                style={{
+
+                                    color: 'white',
+                                    position: 'absolute',
+                                    left: 25
+
+
+                                }} />
+                            <Text style={{
                                 color: 'white',
-                                position: 'absolute',
-                                left: 25
+                                fontSize: 22,
+                                fontWeight: '600'
 
+                            }}>  Login
+                            </Text>
 
-                            }} />
-                        <Text style={{
-                            color: 'white',
-                            fontSize: 22,
-                            fontWeight: '600'
+                        </TouchableOpacity>
+                    </View>
 
-                        }}>  Login
-                        </Text>
-
-                    </TouchableOpacity>
-                   </View>
-                    
-                   <View style ={{
-                    paddingTop:10
-                   }}>
-                   <TouchableOpacity style={{
-                        borderColor: 'White'
-                        , borderWidth: 1
-                        , height: 70
-                        , width: 300
-                        , borderRadius: 50
-                        , marginHorizontal: 10
-                        , justifyContent: 'center'
-                        , alignItems: 'center'
-                        , backgroundColor: '#FFB9B9'
-
-
+                    <View style={{
+                        paddingTop: 10
                     }}>
+                        <TouchableOpacity
 
-
-                        <Icon
-                            size={20}
-                            name={"user-plus"}
+                            onPress={() => {
+                                navigation.navigate('RegisterUser')
+                            }}
                             style={{
+                                borderColor: 'White'
+                                , borderWidth: 1
+                                , height: 70
+                                , width: 300
+                                , borderRadius: 50
+                                , marginHorizontal: 10
+                                , justifyContent: 'center'
+                                , alignItems: 'center'
+                                , backgroundColor: '#FFB9B9'
 
+
+                            }}>
+
+
+                            <Icon
+                                size={20}
+                                name={"user-plus"}
+                                style={{
+
+                                    color: 'white',
+                                    position: 'absolute',
+                                    left: 25
+
+
+                                }} />
+                            <Text style={{
                                 color: 'white',
-                                position: 'absolute',
-                                left: 25
+                                fontSize: 22,
+                                fontWeight: '600'
 
+                            }}>  Register
+                            </Text>
 
-                            }} />
-                        <Text style={{
-                            color: 'white',
-                            fontSize: 22,
-                            fontWeight: '600'
-
-                        }}>  Register
-                        </Text>
-
-                    </TouchableOpacity>
-                   </View>
+                        </TouchableOpacity>
+                    </View>
 
 
 
