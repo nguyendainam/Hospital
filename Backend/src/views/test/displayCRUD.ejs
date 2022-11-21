@@ -32,10 +32,11 @@
             <th>Fname</th>
             <th>Lname</th>
             <th>Address</th>
+            <th>Actions</th>
 
         </tr>
 
-        <% for ( let i=0 ;i <dataTable.length ;i++) { %>
+        <% for(let i=0 ;i < dataTable.length; i++) { %>
             <tr>
                 <td>
                     <%= dataTable[i].email %>
@@ -44,10 +45,15 @@
                     <%= dataTable[i].firstName %>
                 </td>
                 <td>
-                    <%= dataTable[i].l  astName %>
+                    <%= dataTable[i].lastName %>
                 </td>
                 <td>
                     <%= dataTable[i].address %>
+                </td>
+
+                <td>
+                    <a href="/edit-crud?id=<%= dataTable[i].id %>" type="button">Edit</a>
+                    <a type="button">Delete</a>
                 </td>
             </tr>
             <% } %>
