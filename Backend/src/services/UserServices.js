@@ -59,7 +59,7 @@ let handleUserLogin = (email, password) => {
                 }
             } else {
                 userData.errCode = 1;
-                userData.errMessage = `Your's email isn't exits in your system. Please try othe Email`
+                userData.errMessage = `Your's email isn't exits in your system. Please try other Email`
 
             }
             resolve(userData)

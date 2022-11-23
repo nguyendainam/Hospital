@@ -11,7 +11,7 @@ let handleLogin = async (req, res) => {
 
         return res.status(500).json({
             errCode: 1,
-            message: 'Missing inputs parameter'
+            message: 'Please enter full information'
         })
     }
 
