@@ -6,25 +6,92 @@ import {
     Button,
     TouchableOpacity,
     Dimensions,
-    TextInput
+    TextInput,
 } from 'react-native';
 
-
+import LoginComponents from '../components/LoginComponents';
 import { images } from '../constants/indexConstants';
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import axios from 'axios';
+// import handleLoginApi from '../services/userservice';
 
 const windownWith = Dimensions.get('window').width
 const windownHeight = Dimensions.get('window').height
 
 
+
+
 export default SelectUser = ({ navigation }) => {
+
+
     const [getPasswordVisible, setPasswordVisible] = useState(false)
+    const [email, setemail] = useState("");
+    const [password, setpassword] = useState("");
+    const [showModal, setShowModal] = useState(false)
+    const [errorMessage, seterrMessage] = useState("")
+
+    const onChangedEmail = (value) => {
+        setemail(value)
+    }
+    const onChangedPassword = (value) => {
+        setpassword(value)
+    }
+
+    // HIDE information
+    const onHideModal = () => {
+        setShowModal(false)
+    }
+
+
+    const onClickLogin = () => {
+        if (!email || !password) {
+            seterrMessage("Please input login information")
+            setShowModal(true)
+
+            return;
+        }
+        axios({
+
+            url: 'http://192.168.2.35:8080/api/login',
+            method: 'POST',
+            data: {
+                email: email,
+                password: password,
+            },
+        }).then(result => {
+            // console.log(data.message)
+
+            // console.log(result.data);
+            console.log(result.data.message);
+            seterrMessage("" + result.data.message);
+
+            if (result.data.errCode == 0) {
+                console.log("dang nhap thanh cong")
+                navigation.navigate('MainScreen')
+
+            } else {
+                setShowModal(true)
+            }
+        })
+
+            .catch(e => {
+                // console.log(data.message)
+                seterrMessage(e.response.data.message);
+                setShowModal(true)
+                // seterrMessage = data.message;
+            });
+
+    }
+
 
     return (
         <View style={{
             flex: 100
         }}>
+            {/* THONG BAO VE DANG NHAP */}
+            <LoginComponents visible={showModal} message={errorMessage} onHide={onHideModal} />
+
+
 
             <ImageBackground
                 source={images.backgroundApp}
@@ -68,15 +135,18 @@ export default SelectUser = ({ navigation }) => {
 
                 </View>
 
-                {/* +++++++++++++++++++ LOGIN ++++++++++++++++++++ */}
+
+
+                {/* +++++++++++++++++++ iput ++++++++++++++++++++ */}
                 <View style={{
-                    flex: 80,
-                    marginTop: 0.2 * windownHeight,
+                    flex: 70,
+                    height: '100%',
+                    marginTop: 100
+                    // marginTop: 0.2 * windownHeight,
 
                 }}>
                     {/* =====================================  */}
                     <View style={{
-                        width: '100%',
                         height: '100%',
                         alignItems: 'center'
                     }}>
@@ -90,6 +160,8 @@ export default SelectUser = ({ navigation }) => {
                             justifyContent: 'space-between'
 
                         }}>
+
+
                             <Text style={{
                                 width: '20%',
                                 fontStyle: "italic",
@@ -99,6 +171,8 @@ export default SelectUser = ({ navigation }) => {
 
                             }}> Email: </Text>
                             <TextInput
+                                value={email}
+                                onChangeText={onChangedEmail}
                                 autoCapitalize='none'
                                 style={{
 
@@ -136,6 +210,9 @@ export default SelectUser = ({ navigation }) => {
 
 
                             <TextInput
+
+                                value={password}
+                                onChangeText={onChangedPassword}
                                 secureTextEntry={getPasswordVisible ? false : true}
                                 autoCapitalize='none'
                                 style={{
@@ -183,9 +260,9 @@ export default SelectUser = ({ navigation }) => {
                 </View>
                 {/* +++++++++++++++++++ LOGIN ++++++++++++++++++++ */}
                 <View style={{
-                    flex: 10,
+                    flex: 5,
 
-
+                    paddingTop: 100,
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
@@ -195,19 +272,21 @@ export default SelectUser = ({ navigation }) => {
                         flexDirection: 'row',
                     }}>
 
-                        <TouchableOpacity style={{
-                            borderColor: 'White'
-                            , borderWidth: 1
-                            , height: 70
-                            , width: 300
-                            , borderRadius: 50
-                            , marginHorizontal: 10
-                            , justifyContent: 'center'
-                            , alignItems: 'center'
-                            , backgroundColor: '#FFACC7'
+                        <TouchableOpacity
+                            onPress={onClickLogin}
+                            style={{
+                                borderColor: 'White'
+                                , borderWidth: 1
+                                , height: 70
+                                , width: 300
+                                , borderRadius: 50
+                                , marginHorizontal: 10
+                                , justifyContent: 'center'
+                                , alignItems: 'center'
+                                , backgroundColor: '#FFACC7'
 
 
-                        }}>
+                            }}>
 
 
                             <Icon

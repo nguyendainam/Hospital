@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
     Text, View, Image, ImageBackground, Button, SafeAreaView, StatusBar
 
@@ -9,29 +9,48 @@ import WellcomeScreen from "./WellcomeScreen";
 import SelectUser from "./selectUser";
 import MainScreen from "./MainScreen";
 import RegisterUser from "./RegisterUser";
+import TestScreen from "./test/test"
 
+// require('dotenv').config();
 
 const Stack = createNativeStackNavigator();
 
-export default RootComponent = function () {
-    return (
+export default class RootComponent extends React.Component {
+    constructor() {
+        super();
 
-        <View style={{
-            flex: 100
-        }}>
+    }
+    render() {
+        return (
 
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName="WellcomeScreen" screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="WellcomeScreen" component={WellcomeScreen} />
-                    <Stack.Screen name="SelectUser" component={SelectUser} />
-                    <Stack.Screen name="MainScreen" component={MainScreen} />
-                    <Stack.Screen name="RegisterUser" component={RegisterUser} />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </View>
+            <View style={{
+                flex: 100
+            }}>
+
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="WellcomeScreen" screenOptions={{ headerShown: false }}>
+                        <Stack.Screen name="WellcomeScreen" component={WellcomeScreen} />
+                        <Stack.Screen name="SelectUser" component={SelectUser} />
+                        <Stack.Screen name="MainScreen" component={MainScreen} />
+                        <Stack.Screen name="RegisterUser" component={RegisterUser} />
+                        <Stack.Screen name="TestScreen" component={TestScreen} />
+
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </View>
 
 
 
 
-    )
+        );
+    }
+
+
+
 }
+//  RootComponent
+
+
+
+
+

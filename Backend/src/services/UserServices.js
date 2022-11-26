@@ -73,8 +73,41 @@ let handleUserLogin = (email, password) => {
 
 // ====================FINISH  CHECK EMAIL USER ========================
 
+// ============================== get all or single user=================
+
+let GetAllUsers = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = '';
+            if (userId === 'ALL') {
+                users = await db.User.findAll({
+                    attributes: {
+                        exclude: ['password']
+                    }
+
+                })
+            } if (userId && userId !== 'ALL') {
+                users = await db.User.findOne({
+                    where: {
+                        id: userId
+                    },
+                    attributes: {
+                        exclude: ['password']
+                    }
+                })
+            }
+            resolve(users)
+        } catch (error) {
+            reject(error)
+        }
+    });
+}
+
+
+// ============================== finish get all or single user=================
 
 
 module.exports = {
-    handleUserLogin: handleUserLogin
+    handleUserLogin: handleUserLogin,
+    GetAllUsers: GetAllUsers
 }

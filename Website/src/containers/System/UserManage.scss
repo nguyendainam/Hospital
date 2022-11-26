@@ -1,0 +1,35 @@
+.user-container {
+  .table-container {
+    .table {
+      th {
+        background-color: aqua;
+        tr {
+        }
+      }
+    }
+  }
+}
+
+.btn-edit {
+  width: 70px;
+  color: #f9fafb;
+  background-color: #e8556f;
+  margin-right: 15px;
+  border: none;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: transparent !important;
+    color: #e8556f !important;
+  }
+}
+button.btn-delete {
+  background-color: #40b4ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  &:hover {
+    background-color: transparent !important;
+    color: #1c2de5 !important;
+  }
+}

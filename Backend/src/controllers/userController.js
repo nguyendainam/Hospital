@@ -1,3 +1,4 @@
+import { response } from 'express';
 import UserService from '../services/UserServices'
 
 
@@ -27,8 +28,24 @@ let handleLogin = async (req, res) => {
 
 }
 
+let handleGetAllUser = async (req, res) => {
+    let id = req.query.id; // ALL OR id
+    if (!id) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Missing require parameter',
 
+        })
+    }
+    let users = await UserService.GetAllUsers(id);
+    return res.status(200).json({
+        errCode: 0,
+        errMessage: 'oke',
+        users
+    })
+}
 
 module.exports = {
-    handleLogin: handleLogin
+    handleLogin: handleLogin,
+    handleGetAllUser: handleGetAllUser
 }
