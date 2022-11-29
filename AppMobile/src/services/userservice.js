@@ -1,15 +1,24 @@
 // import axios from "../axios"
-import axios from "react-native-axios"
+import axios from "axios"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const baseurl = process.env['REACT_APP_URL']
 
-const handleLoginApi = (email_input, password_input) => {
-    return {
 
-    }
-    // return axios.post('/api/login', {
-    //     email: email_input,
-    //     password: password_input
-    // })
+
+sendDataLogin =(email,password) =>{
+    
+    fetch(`${baseurl}/api/login`,{
+        method: 'POST',
+        data: {
+            
+        }
+    }) 
+
+    
 }
 
 
-export { handleLoginApi } 
+
+
+
+export { sendDataLogin } 

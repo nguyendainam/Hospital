@@ -1,0 +1,71 @@
+.HomeHeader-Container {
+  height: 80px;
+  width: 100%;
+  padding: 0 25px;
+
+  .HomeHeader-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .left-header {
+      width: 25%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+
+      i.fas.fa-bars {
+        font-size: 25px;
+        color: pink;
+        cursor: pointer;
+      }
+
+      .headerLogo {
+        height: 100%;
+        width: 100%;
+        background: no-repeat center/40% url("../../../assets/logo1.png");
+      }
+    }
+
+    .center-header {
+      width: 55%;
+      height: 100%;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .content-center {
+        .sub_titlte {
+          font-size: 13px;
+        }
+      }
+    }
+    .right-header {
+      width: 20%;
+      height: 100%;
+      justify-items: center;
+      align-items: center;
+
+      .right_content {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        i.fas.fa-question-circle {
+          font-size: 26px;
+          padding-left: 75px;
+          color: darksalmon;
+          padding-right: 10px;
+        }
+
+        .flat {
+          padding-top: 9px;
+          margin-left: 8px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

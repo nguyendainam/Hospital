@@ -1,11 +1,7 @@
-.user-container {
-  .table-container {
-    .table {
-      th {
-        background-color: aqua;
-        tr {
-        }
-      }
+.table {
+  th {
+    background-color: aqua;
+    tr {
     }
   }
 }
@@ -31,5 +27,20 @@ button.btn-delete {
   &:hover {
     background-color: transparent !important;
     color: #1c2de5 !important;
+  }
+}
+.AddnewUserModal {
+  .headermodal {
+    background-color: rgb(12, 141, 98) !important;
+    color: rgb(233, 232, 245) !important;
+  }
+
+  .close {
+    font-size: 20px;
+    border: none;
+    background-color: rgb(12, 141, 98) !important;
+  }
+  button {
+    width: 130px !important;
   }
 }

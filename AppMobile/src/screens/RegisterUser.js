@@ -9,21 +9,127 @@ import {
     TextInput
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
-
 import { images } from '../constants/indexConstants';
 import Icon from 'react-native-vector-icons/FontAwesome'
-
-
-const windownWith = Dimensions.get('window').width
-const windownHeight = Dimensions.get('window').height
 const sex = ["Male", "FeMale"]
-function RegisterUser(props) {
+import LoginComponents from '../components/LoginComponents';
+import axios from 'axios';
+const baseurl = process.env['REACT_APP_URL']
+export default RegisterUser = ({ navigation }) => {
+
+
+
+
+
+    const [getPasswordVisible, setPasswordVisible] = useState(false)
+    const [errorMessage, seterrMessage] = useState("")
+    const [showModal, setShowModal] = useState(false)
+
+
+    const [email, setemail] = useState("")
+    const [password, setpassword] = useState("")
+    const [firstName, setfirstName] = useState("")
+    const [lastName, setlastName] = useState("")
+    const [gender, setgender] = useState("0")
+    const [phonenumber, setphonenumber] = useState("")
+    const [address, setaddress] = useState("")
+
+    const onChangedEmail = (value) => {
+        setemail(value)
+    }
+
+    const onChangedPassword = (value) => {
+        setpassword(value)
+    }
+    const onChangefirstName = (value) => {
+        setfirstName(value)
+    }
+    const onChangelastName = (value) => {
+        setlastName(value)
+    }
+    const onChangeGender = (value) => {
+        setgender(value)
+    }
+    const onChangePhonenumber = (value) => {
+        setphonenumber(value)
+    }
+    const onChangeAddress = (value) => {
+        setaddress(value)
+    }
+
+
+
+    const onHideModal = () => {
+        setShowModal(false)
+    }
+
+    const RegisterUser = () => {
+        if (!email || !password || !firstName || !lastName) {
+            seterrMessage("Please enter full information ")
+            setShowModal(true)
+
+            return;
+        }
+        axios({
+
+            url: `${baseurl}/api/create-new-users`,
+            method: 'POST',
+            data: {
+                email: email,
+                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                gender: gender,
+                phonenumber: phonenumber,
+                address: address
+            },
+
+
+        }).then(result => {
+
+            console.log(result.data.errMessage);
+            seterrMessage("" + result.data.errMessage);
+
+            if (result.data.errCode == 0) {
+                alert("Tao Tai Khoang Thanh Cong")
+                navigation.navigate('SelectUser')
+
+            }
+            else {
+                setShowModal(true)
+            }
+        })
+
+            .catch(e => {
+                // console.log(data.message)
+                seterrMessage(e.response.data.errMessage);
+                setShowModal(true)
+                // seterrMessage = data.message;
+            });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // HIDE information
+
 
     return (
+
         <View style={{
             flex: 100
         }}>
-
+            <LoginComponents visible={showModal} message={errorMessage} onHide={onHideModal} />
             <ImageBackground
                 source={images.backgroundApp}
                 resizeMode='cover'
@@ -56,7 +162,7 @@ function RegisterUser(props) {
 
                         <Text style={{
                             color: 'white',
-                            fontSize: 30
+                            fontSize: 20
 
                         }}> YourHeart</Text>
 
@@ -66,7 +172,6 @@ function RegisterUser(props) {
 
                 </View>
 
-                {/* +++++++++++++++++++ LOGIN ++++++++++++++++++++ */}
                 <View style={{
                     flex: 80,
                     marginTop: 20
@@ -97,10 +202,13 @@ function RegisterUser(props) {
 
                             }}> Email: </Text>
                             <TextInput
+
+                                value={email}
+                                onChangeText={onChangedEmail}
                                 autoCapitalize='none'
                                 style={{
 
-                                    width: '70%',
+                                    width: '60%',
                                     borderBottomColor: 'white',
                                     borderBottomWidth: 1,
                                     color: 'white',
@@ -135,6 +243,9 @@ function RegisterUser(props) {
 
                             <TextInput
 
+                                value={password}
+                                onChangeText={onChangedPassword}
+                                secureTextEntry={getPasswordVisible ? false : true}
                                 autoCapitalize='none'
                                 style={{
 
@@ -147,6 +258,33 @@ function RegisterUser(props) {
                                 }}>
 
                             </TextInput>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setPasswordVisible(!getPasswordVisible)
+                                }}
+                                style={{
+                                    right: 20
+                                }}>
+
+                                {getPasswordVisible ?
+
+                                    <Icon
+                                        color={'white'}
+                                        size={25}
+                                        name='eye-slash'
+                                    /> :
+                                    <Icon
+                                        color={'white'}
+                                        size={25}
+                                        name='eye'
+                                    />
+
+                                }
+                            </TouchableOpacity>
+
+
+
+
                         </View>
 
                         <View style={{
@@ -162,17 +300,18 @@ function RegisterUser(props) {
                                 fontWeight: 'bold',
                                 fontSize: 20,
                                 color: 'white',
-                                width: '30%',
+                                width: '40%',
 
                             }}> FirstName: </Text>
 
 
                             <TextInput
-
+                                value={firstName}
+                                onChangeText={onChangefirstName}
                                 autoCapitalize='none'
                                 style={{
 
-                                    width: '70%',
+                                    width: '60%',
                                     borderBottomColor: 'white',
                                     borderBottomWidth: 1,
                                     color: 'white',
@@ -195,17 +334,18 @@ function RegisterUser(props) {
                                 fontWeight: 'bold',
                                 fontSize: 20,
                                 color: 'white',
-                                width: '30%',
+                                width: '40%',
 
                             }}> LastName: </Text>
 
 
                             <TextInput
-
+                                value={lastName}
+                                onChangeText={onChangelastName}
                                 autoCapitalize='none'
                                 style={{
 
-                                    width: '70%',
+                                    width: '60%',
                                     borderBottomColor: 'white',
                                     borderBottomWidth: 1,
                                     color: 'white',
@@ -235,6 +375,8 @@ function RegisterUser(props) {
                             <View>
 
                                 <SelectDropdown
+                                    value={gender}
+                                    onChangeText={onChangeGender}
                                     data={sex}
                                     onSelect={(selectedItem, index) => {
                                         console.log(index)   // tra ve 0 hoac 1 
@@ -266,6 +408,8 @@ function RegisterUser(props) {
 
 
                             <TextInput
+                                value={phonenumber}
+                                onChangeText={onChangePhonenumber}
 
                                 autoCapitalize='none'
                                 style={{
@@ -300,7 +444,8 @@ function RegisterUser(props) {
 
 
                             <TextInput
-
+                                value={address}
+                                onChangeText={onChangeAddress}
                                 autoCapitalize='none'
                                 style={{
 
@@ -324,7 +469,7 @@ function RegisterUser(props) {
 
                         }}>
                             <TouchableOpacity
-
+                                onPress={RegisterUser}
                                 style={{
                                     borderColor: 'White'
                                     , borderWidth: 1
@@ -371,7 +516,9 @@ function RegisterUser(props) {
 
                         }}>
                             <TouchableOpacity
-
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
                                 style={{
                                     borderColor: 'White'
                                     , borderWidth: 1
@@ -420,5 +567,4 @@ function RegisterUser(props) {
     )
 }
 
-export default RegisterUser
 

@@ -9,7 +9,7 @@ import WellcomeScreen from "./WellcomeScreen";
 import SelectUser from "./selectUser";
 import MainScreen from "./MainScreen";
 import RegisterUser from "./RegisterUser";
-import TestScreen from "./test/test"
+import MainScreens from "./home/index"
 
 // require('dotenv').config();
 
@@ -33,7 +33,8 @@ export default class RootComponent extends React.Component {
                         <Stack.Screen name="SelectUser" component={SelectUser} />
                         <Stack.Screen name="MainScreen" component={MainScreen} />
                         <Stack.Screen name="RegisterUser" component={RegisterUser} />
-                        <Stack.Screen name="TestScreen" component={TestScreen} />
+
+                        <Stack.Screen name="MainScreens" component={MainScreens} />
 
                     </Stack.Navigator>
                 </NavigationContainer>

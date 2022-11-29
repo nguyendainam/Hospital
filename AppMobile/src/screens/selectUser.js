@@ -13,15 +13,17 @@ import LoginComponents from '../components/LoginComponents';
 import { images } from '../constants/indexConstants';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios';
-// import handleLoginApi from '../services/userservice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const windownWith = Dimensions.get('window').width
 const windownHeight = Dimensions.get('window').height
 
+const baseurl = process.env['REACT_APP_URL']
 
+export default SelectUser = () => {
 
-
-export default SelectUser = ({ navigation }) => {
+    const navigation = useNavigation()
 
 
     const [getPasswordVisible, setPasswordVisible] = useState(false)
@@ -29,6 +31,10 @@ export default SelectUser = ({ navigation }) => {
     const [password, setpassword] = useState("");
     const [showModal, setShowModal] = useState(false)
     const [errorMessage, seterrMessage] = useState("")
+
+
+
+
 
     const onChangedEmail = (value) => {
         setemail(value)
@@ -43,34 +49,43 @@ export default SelectUser = ({ navigation }) => {
     }
 
 
-    const onClickLogin = () => {
+    const onClickLogin = async () => {
         if (!email || !password) {
             seterrMessage("Please input login information")
             setShowModal(true)
 
             return;
         }
-        axios({
+        console.log('Địa chỉ URL đang sử dụng', baseurl)
+        await axios({
 
-            url: 'http://192.168.2.35:8080/api/login',
+            url: `${baseurl}/api/login`,
             method: 'POST',
             data: {
                 email: email,
                 password: password,
             },
         }).then(result => {
-            // console.log(data.message)
 
-            // console.log(result.data);
-            console.log(result.data.message);
+
+            const currentUser = result.data.user
+            console.log(result.data)
             seterrMessage("" + result.data.message);
 
             if (result.data.errCode == 0) {
-                console.log("dang nhap thanh cong")
-                navigation.navigate('MainScreen')
+                AsyncStorage.setItem("email", currentUser.email)
+                AsyncStorage.setItem("roleId", currentUser.roleId)
+                AsyncStorage.setItem("firstName", currentUser.firstName)
+                AsyncStorage.setItem("lastName", currentUser.lastName)
+                navigation.navigate('MainScreens')
+                // navigation.navigate('MainScreen')
+                // AsyncStorage.clear()
+                // // ridirect to Home
+
 
             } else {
                 setShowModal(true)
+                seterrMessage("" + result.data.message)
             }
         })
 
