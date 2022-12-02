@@ -1,23 +1,50 @@
 @import "../../styles/common.scss";
 
 .header-container {
-    z-index: 99;
-    display: flex;
-    justify-content: space-between;
-    background-color: $colormain;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  background-color: $colormain;
+  color: $common-text-color;
+  height: 40px;
+  position: relative;
+  .btn-logout {
     color: $common-text-color;
+    line-height: 40px;
     height: 40px;
-    position: relative;
-    .btn-logout {
-        color: $common-text-color;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 10px;
-        &:hover {
-            background-color: darken($colormain, 5);
-        }
-        i {
-            font-size: $base-size + 1px;
-        }
+    padding: 0 10px;
+    &:hover {
+      background-color: darken($colormain, 5);
     }
+    i {
+      font-size: $base-size + 1px;
+    }
+  }
+
+  .navigator-menu .menu-group .menu-group-name:first-child {
+    border-left: none;
+    border: 0px;
+  }
+
+  .language-vi {
+    cursor: pointer;
+    padding-right: 10px;
+    padding-left: 10px;
+    &.active {
+      span {
+        font-weight: bold;
+        color: rgb(255, 44, 142);
+      }
+    }
+  }
+
+  .language-en {
+    cursor: pointer;
+    &.active {
+      span {
+        font-weight: bold;
+        color: rgb(255, 44, 142);
+      }
+    }
+  }
 }

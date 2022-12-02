@@ -9,4 +9,6 @@ export default {
     consultation: require('../picture/consultation.png'),
     pharmace: require('../picture/pharmace.png'),
     doctorimage: require('../picture/doctor.png'),
+    bg_main: require('../picture/bg_main.png'),
+    in4: require('../picture/infor_doctor.png'),
 }

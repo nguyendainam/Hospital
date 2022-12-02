@@ -14,6 +14,8 @@ import reduxStore, { persistor } from './redux';
 const renderApp = () => {
     ReactDOM.render(
         <Provider store={reduxStore}>
+
+            {/* IntlProviderWrapper GỌI ĐẾN COMPONENT LANGUAGE */}
             <IntlProviderWrapper>
                 <App persistor={persistor} />
             </IntlProviderWrapper>

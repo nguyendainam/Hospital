@@ -10,10 +10,15 @@ import SelectUser from "./selectUser";
 import MainScreen from "./MainScreen";
 import RegisterUser from "./RegisterUser";
 import MainScreens from "./home/index"
+import SettingsScreen from "./SettingsScreen"
+import Profile from "./Profile"
+import HomeTabs from "./Tabs/Tab"
 
-// require('dotenv').config();
+
 
 const Stack = createNativeStackNavigator();
+
+
 
 export default class RootComponent extends React.Component {
     constructor() {
@@ -23,24 +28,17 @@ export default class RootComponent extends React.Component {
     render() {
         return (
 
-            <View style={{
-                flex: 100
-            }}>
+            <NavigationContainer>
 
-                <NavigationContainer>
-                    <Stack.Navigator initialRouteName="WellcomeScreen" screenOptions={{ headerShown: false }}>
-                        <Stack.Screen name="WellcomeScreen" component={WellcomeScreen} />
-                        <Stack.Screen name="SelectUser" component={SelectUser} />
-                        <Stack.Screen name="MainScreen" component={MainScreen} />
-                        <Stack.Screen name="RegisterUser" component={RegisterUser} />
+                <Stack.Navigator initialRouteName="WellcomeScreen" screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="WellcomeScreen" component={WellcomeScreen} />
+                    <Stack.Screen name="SelectUser" component={SelectUser} />
+                    <Stack.Screen name="MainScreen" component={MainScreen} />
+                    <Stack.Screen name="RegisterUser" component={RegisterUser} />
+                    <Stack.Screen name="HomeTabs" component={HomeTabs} />
 
-                        <Stack.Screen name="MainScreens" component={MainScreens} />
-
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </View>
-
-
+                </Stack.Navigator>
+            </NavigationContainer>
 
 
         );

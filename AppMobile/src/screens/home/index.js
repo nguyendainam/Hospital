@@ -4,7 +4,7 @@ import {
     Dimensions, Image,
 } from 'react-native'
 
-import HomeScreens from './InforHeader'
+import InforHeader from './InforHeader'
 
 function MainScreens() {
 
@@ -15,16 +15,9 @@ function MainScreens() {
             marginRight: 10,
         }}>
             <ScrollView >
-
-
-
                 <View>
-                    <HomeScreens />
+                    <InforHeader />
                 </View>
-
-
-
-
             </ScrollView>
         </View >
 

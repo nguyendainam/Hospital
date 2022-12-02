@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import Header from './Header/Header.js'
-
+import Specialty from './section/Specialty.js';
+import MedicalFacility from './section/MedicalFacility.js';
+import Handbook from './section/Handbook.js';
+import './HomePage.scss'
+import Doctor_OutStanding from './section/Doctor_OutStanding.js';
+import Footer from './Footer/Footer.js';
 class HomePage extends Component {
 
     render() {
@@ -10,10 +14,12 @@ class HomePage extends Component {
         return (
             <div>
                 <Header />
-                <div>
-                    this is a  HomePage
-                </div>
+                <Specialty />
+                <MedicalFacility />
+                <Doctor_OutStanding />
+                <Handbook />
 
+                <Footer />
 
             </div>
         );

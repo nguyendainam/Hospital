@@ -1,0 +1,48 @@
+.section-Doctor_OutStanding {
+  height: 350px;
+  margin-top: 20px;
+  padding-top: 4px;
+
+  .Doctor_OutStanding-header {
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 106px;
+    margin-left: 106px;
+
+    span.title-header-Doctor_OutStanding {
+      font-size: 25px;
+      font-weight: 600;
+    }
+  }
+  .infor_doctor {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .slick-slider.slick-initialized {
+    height: "100%";
+    height: 310px;
+  }
+  .slick-initialized .slick-slide {
+    display: block;
+    height: 310px;
+  }
+  button.slick-arrow.slick-prev {
+    width: 35px;
+    height: 35px;
+    background: #ffb8b8;
+  }
+  button.slick-arrow.slick-next {
+    width: 35px;
+    height: 35px;
+    background: #ffb8b8;
+  }
+  .slick-slide img {
+    display: block;
+    padding-top: 55px;
+    width: 150px;
+    margin: auto;
+  }
+}

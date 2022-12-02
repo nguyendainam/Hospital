@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import images from "../constants/images";
 import Icon from 'react-native-vector-icons/FontAwesome5'
-
-
+import Header from '../components/Main/Header'
+import Solution from '../components/Main/Solution'
 let screenWidth = Dimensions.get('window').width;
 let screenHeight = Dimensions.get('window').height;
 function MainScreen(props) {
@@ -18,68 +18,16 @@ function MainScreen(props) {
     return (
         <View style={{
             flex: 100,
-            marginLeft: 10,
-            marginRight: 10,
+            backgroundColor: 'white'
         }}>
 
             <ScrollView >
-
-                {/* =========== Hello  ============  */}
-                <View style={{
-                    flex: 20,
-
-                    flexDirection: 'row',
-                    paddingTop: 5,
-                }}>
-                    <View
-                        style={{
-                            width: '50%',
-
-                            flexDirection: 'row',
-                            alignItems: 'center'
-                        }}>
-                        <View style={{
-                        }}>
-
-                            <Image
-                                source={images.userImage}
-                                style={{
-                                    marginHorizontal: 5,
-                                    width: 50,
-                                    height: 50,
-                                    borderRadius: 50,
-
-                                }}></Image>
-                        </View>
-                        <Text>Hello, Name gì gì đó </Text>
-
-
-                    </View>
-
-                    <View style={{
-                        width: '50%',
-                        justifyContent: 'center',
-                        alignItems: 'flex-end',
-
-                    }}>
-                        <View>
-                            <TouchableOpacity >
-                                <Icon name="search"
-                                    color={'#FF97C1'}
-                                    size={25}
-                                    style={{
-
-                                    }}> </Icon>
-                            </TouchableOpacity>
-
-                        </View>
-
-
-                    </View>
-
-                </View>
-
                 {/* ===========  ============  */}
+                <Header />
+                {/* ===========  ============  */}
+
+
+
                 <View style={{
                     flex: 20,
 
@@ -90,190 +38,24 @@ function MainScreen(props) {
                         width: '100%',
                         paddingLeft: 20,
                         fontWeight: 'bold',
-                        color: '#5CB8E4'
+                        color: 'pink'
                     }}>Find Your</Text>
                     <Text style={{
                         fontSize: 30,
                         paddingLeft: 20,
                         fontWeight: '500',
-                        color: '#5CB8E4'
+                        color: 'pink',
+                        borderColor: 'white'
                     }}>Media solution!</Text>
 
                 </View>
+
+
                 {/* ===========  ============  */}
-                <View style={{
-                    flex: 30,
-
-                    alignItems: 'center'
-                }}>
-                    <View
-                        style=
-                        {{
-                            flexDirection: 'row'
-                        }}>
-                        {/* BUTTON DOCTOR */}
-                        <View >
-                            <TouchableOpacity
-                                style={{
-                                    borderColor: 'black',
-                                    width: 100,
-                                    height: 100,
-                                    backgroundColor: '#E8F9FD',
-
-                                    borderRadius: 20,
-                                    margin: 10,
-                                    alignItems: 'center'
-                                    , justifyContent: 'center'
-                                }}
-                            >
-                                <Image source={images.iconDoctor}
-                                    style={{
-                                        backfaceVisibility: 'hidden',
-                                        width: 50,
-                                        height: 60,
-
-                                    }} />
-                                <Text>Doctor</Text>
-                            </TouchableOpacity>
-                        </View>
-                        {/* BUTTON HOSPITAL */}
-                        <View>
-                            <TouchableOpacity
-                                style={{
-                                    borderColor: 'black',
-                                    width: 100,
-                                    height: 100,
-                                    backgroundColor: '#E8F9FD',
-
-                                    borderRadius: 20,
-                                    margin: 10,
-                                    alignItems: 'center'
-                                    , justifyContent: 'center'
-                                }}
-                            >
-                                <Image source={images.iconHospital}
-                                    style={{
-                                        backfaceVisibility: 'hidden',
-                                        width: 60,
-                                        height: 60,
-
-                                    }} />
-                                <Text>Hospital</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        {/* Booking HOSPITAL */}
-                        <View >
-                            <TouchableOpacity
-                                style={{
-                                    borderColor: 'black',
-                                    width: 100,
-                                    height: 100,
-                                    backgroundColor: '#E8F9FD',
-
-                                    borderRadius: 20,
-                                    margin: 10,
-                                    alignItems: 'center'
-                                    , justifyContent: 'center'
-                                }}
-                            >
-                                <Image source={images.schedule}
-                                    style={{
-                                        backfaceVisibility: 'hidden',
-                                        width: 60,
-                                        height: 60,
-
-                                    }} />
-                                <Text>Schedule</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
-                    <View style=
-                        {{
-
-                            flexDirection: 'row'
-                        }}>
-                        {/* BUTTON Ambulance */}
-                        <View >
-                            <TouchableOpacity
-                                style={{
-                                    borderColor: 'black',
-                                    width: 100,
-                                    height: 100,
-                                    backgroundColor: '#E8F9FD',
-
-                                    borderRadius: 20,
-                                    margin: 10,
-                                    alignItems: 'center'
-                                    , justifyContent: 'center'
-                                }}
-                            >
-                                <Image source={images.ambulance}
-                                    style={{
-                                        backfaceVisibility: 'hidden',
-                                        width: 60,
-                                        height: 60,
-
-                                    }} />
-                                <Text>Ambulance</Text>
-                            </TouchableOpacity>
-                        </View>
-                        {/* BUTTON Consultation */}
-                        <View >
-                            <TouchableOpacity
-                                style={{
-                                    borderColor: 'black',
-                                    width: 100,
-                                    height: 100,
-                                    backgroundColor: '#E8F9FD',
-
-                                    borderRadius: 20,
-                                    margin: 10,
-                                    alignItems: 'center'
-                                    , justifyContent: 'center'
-                                }}
-                            >
-                                <Image source={images.consultation}
-                                    style={{
-                                        backfaceVisibility: 'hidden',
-                                        width: 60,
-                                        height: 60,
-
-                                    }} />
-                                <Text>Consultation</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        {/* Button Pharmacy */}
-                        <View >
-                            <TouchableOpacity
-                                style={{
-                                    borderColor: 'black',
-                                    width: 100,
-                                    height: 100,
-                                    backgroundColor: '#E8F9FD',
-
-                                    borderRadius: 20,
-                                    margin: 10,
-                                    alignItems: 'center'
-                                    , justifyContent: 'center'
-                                }}
-                            >
-                                <Image source={images.pharmace}
-                                    style={{
-                                        backfaceVisibility: 'hidden',
-                                        width: 60,
-                                        height: 60,
-
-                                    }} />
-                                <Text>Pharmacy</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                </View>
+                <Solution />
                 {/* ===========  ============  */}
+
+
                 <View>
                     <Text style={{
                         fontSize: 25,

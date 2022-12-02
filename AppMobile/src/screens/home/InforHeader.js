@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import images from "../../constants/images";
 import Icon from 'react-native-vector-icons/FontAwesome5'
-HomeScreens = () => {
+InforHeader = () => {
 
     const [email, setemail] = useState("")
     const [roleId, setroleId] = useState("")
@@ -77,7 +77,7 @@ HomeScreens = () => {
 
                             }}></Image>
                     </View>
-                    <Text>{firstName} {lastName}</Text>
+                    <Text>{firstName} </Text>
 
 
                 </View>
@@ -109,4 +109,4 @@ HomeScreens = () => {
     )
 }
 
-export default HomeScreens
+export default InforHeader
