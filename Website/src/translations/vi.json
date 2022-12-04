@@ -64,7 +64,9 @@
         "Role":"Vai trò",
         "address":"Địa chỉ",
         "male": "Nam",
-        "female":"Nữ"
+        "female":"Nữ",
+        "uploadImg":"Tải ảnh",
+        "edit":"Cập Nhật"
 
     }
    

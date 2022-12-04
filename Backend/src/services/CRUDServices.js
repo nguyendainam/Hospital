@@ -14,8 +14,8 @@ let createNewUser = async (data) => {
                 lastName: data.lastName,
                 address: data.address,
                 phoneNumber: data.phonenumber,
-                gender: data.gender === '1' ? true : false,
-                roleId: data.roleId,
+                gender: data.gender,
+                roleId: data.role,
 
             })
             resolve('create a new user success')
@@ -72,22 +72,26 @@ let getUserInforById = (userId) => {
     })
 }
 
-let updateUserData = (data) =>{
-    return new Promise(async(resolve,reject) =>{
+let updateUserData = (data) => {
+    return new Promise(async (resolve, reject) => {
         try {
-            let user =await db.User.findOne({where: {
-                id: data.id 
-            }})
-            if(user) {
+            let user = await db.User.findOne({
+                where: {
+                    id: data.id
+                }
+            })
+            if (user) {
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
-                user.address = data.address
+                user.address = data.address;
+
+
 
                 await user.save();
 
                 let allUsers = await db.User.findAll()
                 resolve(allUsers) // tra ve
-            }else{
+            } else {
                 resolve()
             }
         } catch (e) {
@@ -97,27 +101,27 @@ let updateUserData = (data) =>{
 }
 
 
-let  deleteUserById = (userid) =>{
-        return new Promise(async(resolve,reject) => {
-            try {
-                let user  = await db.User.findOne({
-                    where: {id: userid}
-                })
+let deleteUserById = (userid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                where: { id: userid }
+            })
 
-                if (user) {
-                    user.destroy();
-                }
-                resolve();
-            } catch (e) {
-                reject(e);
+            if (user) {
+                user.destroy();
             }
-        })
+            resolve();
+        } catch (e) {
+            reject(e);
+        }
+    })
 }
- 
+
 module.exports = {
     createNewUser: createNewUser,
     getAllUser: getAllUser,
     getUserInforById: getUserInforById,
     updateUserData: updateUserData,
-    deleteUserById:deleteUserById
+    deleteUserById: deleteUserById
 } 

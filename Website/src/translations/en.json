@@ -63,7 +63,9 @@
         "Role":"Role User",
         "address":"Address",
         "male": "Male",
-        "female":"Female"
+        "female":"Female",
+        "uploadImg":"Upload File",
+        "edit":"Update"
 
     }
 }

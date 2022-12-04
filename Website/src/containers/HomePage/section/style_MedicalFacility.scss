@@ -16,6 +16,24 @@
       font-weight: 600;
     }
   }
+  .Main_Clinic {
+    display: flex;
+    flex-direction: column;
+
+    .Imange_clinic {
+      width: 300px;
+      height: 260px;
+
+      img {
+        width: 300px !important ;
+        height: 300px !important  ;
+      }
+      span {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    }
+  }
 
   .slick-slider.slick-initialized {
     height: "100%";

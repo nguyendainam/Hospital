@@ -11,7 +11,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 import MedicalFacilityImg from '../../../assets/medical/medical.png'
 
-
+import ngoaikhoa from '../../../assets/ngoaikhoa.png'
+import thankinh from '../../../assets/thankinh.png'
+import thieunhi from '../../../assets/thieunhi.png'
 
 class MedicalFacility extends Component {
 
@@ -29,47 +31,61 @@ class MedicalFacility extends Component {
                 <div className='section-MedicalFacility'>
                     <div className='speciaty-content'>
                         <div className='MedicalFacility-header'>
-                            <span className='title-header-MedicalFacility'>Cơ Sở Y Tế Nổi Bật</span>
+                            <span className='title-header-MedicalFacility'>Chuyên Khoa Nổi Tiếng</span>
                             <div className='Button-header-MedicalFacility'>
                                 <button type="button" class="btn btn-outline-secondary">Xem thêm</button>
                             </div>
                         </div>
                         <div className='container'>
                             <Slider {...settings}>
-                                <div className='sepecialty_content_body'>
-                                    <div>
-                                        <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
-                                        <span>Cơ Xương Khớp 1</span>
+                                <div className='medical_content_body'>
+                                    <div className='Main_Clinic'>
+                                        <div className='Imange_clinic'>
+                                            <img className='picture_MedicalFacility' src={ngoaikhoa} />
+
+                                        </div>
+                                    </div>
+
+                                    <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }} >Ngoại Khoa</span>
+                                </div>
+                                <div>
+                                    <div className='Main_Clinic' >
+                                        <div className='Imange_clinic'>
+                                            <img className='picture_MedicalFacility' src={thankinh} />
+                                        </div>
+                                        <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }}>Khoa Thần Kinh</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
-                                        <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
+                                    <div className='Main_Clinic'
+                                    ><div className='Imange_clinic'>
+                                            <img className='picture_MedicalFacility' src={thieunhi} />
+                                        </div>
+                                        <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }}>Khoa Trẻ Em </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className='Main_Clinic'>
+                                        <div className='Imange_clinic'>
+                                            <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
+                                        </div>
+                                        <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }}>Nha Khoa</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className='Main_Clinic' >
+                                        <div className='Imange_clinic'>
+                                            <img className='picture_MedicalFacility' src={thankinh} />
+                                        </div>
                                         <span>Cơ Xương Khớp 2</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
-                                        <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
-                                        <span>Cơ Xương Khớp 3</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
-                                        <span>Cơ Xương Khớp 4</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
-                                        <span>Cơ Xương Khớp 5</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
-                                        <span>Cơ Xương Khớp 6</span>
+                                    <div className='Main_Clinic'>
+                                        <div className='Imange_clinic'>
+                                            <img className='picture_MedicalFacility' src={thankinh} />
+                                        </div>
+                                        <span>Răng Hàm Mặt</span>
                                     </div>
                                 </div>
                             </Slider>

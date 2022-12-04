@@ -126,9 +126,11 @@ let createNewUser = async (data) => {
                     firstName: data.firstName,
                     lastName: data.lastName,
                     address: data.address,
-                    phoneNumber: data.phonenumber,
-                    gender: data.gender === '1' ? true : false,
+                    phoneNumber: data.phoneNumber,
+                    gender: data.gender,
                     roleId: data.roleId,
+                    positionId: data.positionId,
+                    image: data.avatar
 
                 })
                 resolve({
@@ -206,9 +208,14 @@ let updateUserData = (data) => {
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
                 user.address = data.address
-                user.phoneNumber = data.phonenumber
+                user.phoneNumber = data.phoneNumber
                 user.gender = data.gender
-                user.image = data.image
+                if (data.avatar) {
+                    user.image = data.avatar
+                }
+
+                user.positionId = data.positionId
+                user.roleId = data.roleId
 
                 await user.save();
 

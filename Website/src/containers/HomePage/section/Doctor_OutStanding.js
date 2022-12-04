@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux'
 import "./style_Doctor_OutStanding.scss"
 import { FormattedMessage } from 'react-intl'
 import { changLanguageApp } from '../../../store/actions/appActions';
-
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import * as actions from '../../../store/actions'
 import Doctor_OutStandingImg from '../../../assets/medical/doctor.png'
-
+import { LANGUAGES, } from "../../../utils"
 
 
 class Doctor_OutStanding extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            arrDoctor: []
+        }
+    }
+
+    componentDidUpdate(prevProps, pervState, snapShot) {
+        if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
+            this.setState({
+                arrDoctor: this.props.topDoctorsRedux
+            })
+        }
+
+    }
+
+    componentDidMount() {
+        this.props.loadTopDoctorRedux()
+    }
 
     render() {
         let settings = {
@@ -22,8 +39,14 @@ class Doctor_OutStanding extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 2
+            slidesToScroll: 1
         };
+
+
+        let all_arr_Doctors = this.state.arrDoctor;
+        let { language } = this.props
+
+        console.log("check TopdoctorRedux: ", this.props.topDoctorsRedux)
         return (
             <React.Fragment>
                 <div className='section-Doctor_OutStanding'>
@@ -36,53 +59,44 @@ class Doctor_OutStanding extends Component {
                         </div>
                         <div className='container'>
                             <Slider {...settings}>
-                                <div className='sepecialty_content_body'>
-                                    <div className='infor_doctor'>
-                                        <img className='picture_Doctor_OutStanding' src={Doctor_OutStandingImg} />
-                                        <span>Bác sĩ: Nguyễn Văn A</span>
-                                        <span>Chuyên khoa thần kinh</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='infor_doctor'>
-                                        <img className='picture_Doctor_OutStanding' src={Doctor_OutStandingImg} />
-                                        <span>Bác sĩ: Nguyễn Văn A</span>
-                                        <span>Chuyên khoa thần kinh</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='infor_doctor'>
-                                        <img className='picture_Doctor_OutStanding' src={Doctor_OutStandingImg} />
-                                        <span>Bác sĩ: Nguyễn Văn A</span>
-                                        <span>Chuyên khoa thần kinh</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='infor_doctor'>
-                                        <img className='picture_Doctor_OutStanding' src={Doctor_OutStandingImg} />
-                                        <span>Bác sĩ: Nguyễn Văn A</span>
-                                        <span>Chuyên khoa thần kinh</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='infor_doctor'>
-                                        <img className='picture_Doctor_OutStanding' src={Doctor_OutStandingImg} />
-                                        <span>Bác sĩ: Nguyễn Văn A</span>
-                                        <span>Chuyên khoa thần kinh</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='infor_doctor'>
-                                        <img className='picture_Doctor_OutStanding' src={Doctor_OutStandingImg} />
-                                        <span>Bác sĩ: Nguyễn Văn A</span>
-                                        <span>Chuyên khoa thần kinh</span>
-                                    </div>
-                                </div>
+                                {all_arr_Doctors && all_arr_Doctors.length > 0 && all_arr_Doctors.map((item, index) => {
+                                    let imageBase64 = ''
+                                    if (item.image) {
+                                        imageBase64 = new Buffer(item.image, 'base64').toString('binary')
+                                    }
+                                    let nameVi = `${item.positionData.valueVi}: ${item.lastName} ${item.firstName} `;
+                                    let nameEn = `${item.positionData.valueEn}: ${item.lastName} ${item.firstName} `;
+
+                                    return (
+                                        <div className='sepecialty_content_body' key={index}>
+
+                                            <div className='Top_doctor'>
+                                                <div className='infor_doctor'>
+                                                    <div className='imange_dr'
+                                                        style={{ backgroundImage: `url(${imageBase64}) ` }} >
+
+                                                    </div>
+                                                </div>
+                                                <div className='title_doctor'>
+                                                    <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
+                                                    {/* <div>Chuyên khoa thần kinh</div> */}
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    )
+
+
+                                })}
+
+
                             </Slider>
                         </div>
                     </div>
 
-                </div>
+                </div >
             </React.Fragment >
         );
     }
@@ -92,12 +106,16 @@ class Doctor_OutStanding extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language
+        language: state.app.language,
+        topDoctorsRedux: state.admin.topDoctors,
+        language: state.app.language,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+
+        loadTopDoctorRedux: () => dispatch(actions.fetchTopDoctor())
 
     };
 };

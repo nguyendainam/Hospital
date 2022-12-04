@@ -78,7 +78,7 @@ function WellcomeScreen({ props, navigation }) {
 
                 <UIButton
                     // onPress={() => { navigation.navigate('SelectUser') }}
-                    onPress={() => { navigation.navigate('HomeTabs') }}
+                    onPress={() => { navigation.navigate('SelectUser') }}
                 />
 
 

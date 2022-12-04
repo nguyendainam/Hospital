@@ -9,7 +9,9 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import specialtyImg from '../../../assets/specialty/xuongkhop.png'
+import specialtyImg4 from '../../../assets/hanoi.png'
+import specialtyImg1 from '../../../assets/danang.png'
+import specialtyImg3 from '../../../assets/saigon.png'
 
 
 
@@ -29,7 +31,7 @@ class Specialty extends Component {
                 <div className='section-specialty'>
                     <div className='speciaty-content'>
                         <div className='specialty-header'>
-                            <span className='title-header-specialty'>Chuyên Khoa Phổ Biến</span>
+                            <span className='title-header-specialty'>Các Chi Nhánh Phòng Khám</span>
                             <div className='Button-header-specialty'>
                                 <button type="button" class="btn btn-outline-secondary">Xem thêm</button>
                             </div>
@@ -38,40 +40,30 @@ class Specialty extends Component {
                             <Slider {...settings}>
                                 <div className='sepecialty_content_body'>
                                     <div>
-                                        <img className='picture_specialty' src={specialtyImg} />
-                                        <span>Cơ Xương Khớp 1</span>
+                                        <img className='picture_specialty' src={specialtyImg4} />
+                                        <span>Đà Nẵng</span>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <img className='picture_specialty' src={specialtyImg} />
-                                        <span>Cơ Xương Khớp 2</span>
+                                        <img className='picture_specialty' src={specialtyImg1} />
+                                        <span>Hồ Chí Minh </span>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='sepecialty_content_body'>
                                     <div>
-                                        <img className='picture_specialty' src={specialtyImg} />
-                                        <span>Cơ Xương Khớp 3</span>
+                                        <img className='picture_specialty' src={specialtyImg3} />
+                                        <span>Hà Nội</span>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='sepecialty_content_body'>
                                     <div>
-                                        <img className='picture_specialty' src={specialtyImg} />
-                                        <span>Cơ Xương Khớp 4</span>
+                                        <img className='picture_specialty' src={specialtyImg3} />
+                                        <span>Hà Nội</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <div>
-                                        <img className='picture_specialty' src={specialtyImg} />
-                                        <span>Cơ Xương Khớp 5</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img className='picture_specialty' src={specialtyImg} />
-                                        <span>Cơ Xương Khớp 6</span>
-                                    </div>
-                                </div>
+
+
                             </Slider>
                         </div>
                     </div>

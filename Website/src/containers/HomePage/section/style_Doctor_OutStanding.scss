@@ -2,6 +2,8 @@
   height: 350px;
   margin-top: 20px;
   padding-top: 4px;
+  text-align: center;
+  margin-top: 50px;
 
   .Doctor_OutStanding-header {
     height: 34px;
@@ -19,6 +21,21 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    padding-top: 20px;
+
+    .imange_dr {
+      width: 200px;
+      height: 165px;
+      background: #c2bbbb;
+      margin: auto;
+      border-radius: 54px;
+
+      background-size: cover;
+    }
+
+    .title_doctor {
+      display: flex;
+    }
   }
 
   .slick-slider.slick-initialized {
