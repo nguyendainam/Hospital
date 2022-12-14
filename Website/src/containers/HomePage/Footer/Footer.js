@@ -11,7 +11,7 @@ class Footer extends Component {
         return (
             <React.Fragment>
                 <div className='main-footer'>
-                    <p>&copy; 2015 DoAnChuyenNghanh1_HoaHong_DaiNam.com</p>
+                    <p>&copy; 2022 DoAnChuyenNghanh1_HoaHong_DaiNam.com</p>
 
                 </div>
 

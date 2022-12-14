@@ -1,10 +1,15 @@
 @import "../../styles/common.scss";
 
 .header-container {
+  width: "100%";
   z-index: 99;
   display: flex;
   justify-content: space-between;
-  background-color: $colormain;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgb(138, 41, 138) 100%
+  );
   color: $common-text-color;
   height: 40px;
   position: relative;
@@ -24,6 +29,17 @@
   .navigator-menu .menu-group .menu-group-name:first-child {
     border-left: none;
     border: 0px;
+
+    &.active {
+      span {
+        font-weight: bold;
+        color: rgb(147, 18, 78);
+      }
+    }
+  }
+
+  .navigator-menu .menu-group .menu-list .menu {
+    width: 220px;
   }
 
   .language-vi {

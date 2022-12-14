@@ -10,22 +10,28 @@ module.exports = {
             },
 
             doctorId: {
+                allowNull: true,
                 type: Sequelize.INTEGER
             },
             clinicId: {
+                allowNull: true,
                 type: Sequelize.INTEGER
             },
             specialtyId: {
-                type: Sequelize.STRING
+                allowNull: true,
+                type: Sequelize.INTEGER
             },
             contentHTML: {
-                type: Sequelize.STRING
+                allowNull: false,
+                type: Sequelize.TEXT('long')
             },
             contentMarkdown: {
-                type: Sequelize.STRING
+                allowNull: false,
+                type: Sequelize.TEXT('long')
             },
             description: {
-                type: Sequelize.TEXT
+                allowNull: true,
+                type: Sequelize.TEXT('long')
             },
 
 

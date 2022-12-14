@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import {
     getAllCodeService, getAllUsers, getTopDoctorHome,
-    createNewUserService, deleUserService, editUserService
+    createNewUserService, deleUserService, editUserService, getAllDoctors, saveDetailDoctors
 } from '../../services/userService';
 
 export const fetchGenderStart = () => {
@@ -255,5 +255,70 @@ export const fetchTopDoctor = () => {
     }
 }
 
-// let res1 =  await getTopDoctorHome('')
+
+export const fetchallDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllDoctors();
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,
+                    allDoctors: res.data
+                })
+            }
+
+        } catch (error) {
+            console.log("Fetch data failed from adminaction")
+            dispatch({
+                type: actionTypes.FETCH_ALL_DOCTOR_FAILED
+            })
+        }
+    }
+}
+
+
+
+export const saveDetailDoctorAction = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await saveDetailDoctors(data);
+
+            if (res && res.errCode === 0) {
+                console.log("SAVE_DETAIL_DOCTOR_SUCCESS")
+                alert('SAVE_DETAIL_DOCTOR_SUCCESS')
+                dispatch({
+                    type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+                })
+            }
+
+        } catch (error) {
+            console.log("SAVE_DETAIL_DOCTOR_FAILED")
+            dispatch({
+                type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED
+            })
+        }
+    }
+}
+
+
+export const fetchAllScheduleTime = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService("TIME");
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CODE_SCHEDULE_SUCCESS,
+                    dataTime: res.data
+                })
+            }
+
+        } catch (error) {
+            console.log("Fetch data failed from adminaction")
+            dispatch({
+                type: actionTypes.FETCH_ALL_CODE_SCHEDULE_FAILED
+            })
+        }
+    }
+}
+
 

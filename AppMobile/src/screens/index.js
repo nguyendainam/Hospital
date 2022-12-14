@@ -36,6 +36,7 @@ export default class RootComponent extends React.Component {
                     <Stack.Screen name="MainScreen" component={MainScreen} />
                     <Stack.Screen name="RegisterUser" component={RegisterUser} />
                     <Stack.Screen name="HomeTabs" component={HomeTabs} />
+                    <Stack.Screen name="MainScreens" component={MainScreens} />
 
                 </Stack.Navigator>
             </NavigationContainer>

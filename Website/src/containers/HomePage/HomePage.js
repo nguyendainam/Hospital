@@ -7,6 +7,7 @@ import Handbook from './section/Handbook.js';
 import './HomePage.scss'
 import Doctor_OutStanding from './section/Doctor_OutStanding.js';
 import Footer from './Footer/Footer.js';
+import BottomHeader from './Header/BottomHeader.js';
 class HomePage extends Component {
 
     render() {
@@ -14,6 +15,7 @@ class HomePage extends Component {
         return (
             <div>
                 <Header />
+                <BottomHeader />
                 <Specialty />
                 <MedicalFacility />
                 <Doctor_OutStanding />

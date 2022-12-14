@@ -47,6 +47,10 @@
             "manage-clinic":"Clinic",
             "manage-specialty":"Specialty",
             "manage-handbook":"Manage Handbook"
+        },
+        "doctor" :{
+            "menu-schedule": "Manage medical examination plan" ,
+            "title_sc":"MANAGE SCHEDULE"
         }
 
     },

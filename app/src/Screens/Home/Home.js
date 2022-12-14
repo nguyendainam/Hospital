@@ -1,22 +1,26 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
+import Header from '../../components/Home/headerHome';
+import TopDoctor from '../../components/Home/TopDoctor';
+class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-const Home = () => {
-    return (
-        <View style={styles.container}>
-            <Text>HOME</Text>
-        </View>
-    );
+        };
+    }
+    render() {
+
+        return (
+            <View>
+                <Header />
+                <TopDoctor navigation={this.props.navigation} />
+
+            </View>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'green'
-    }
-
-})
+const styles = StyleSheet.create({})
 
 export default Home;

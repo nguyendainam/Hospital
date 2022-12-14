@@ -11,7 +11,7 @@ import {
 import SelectDropdown from 'react-native-select-dropdown'
 import { images } from '../constants/indexConstants';
 import Icon from 'react-native-vector-icons/FontAwesome'
-const sex = ["Male", "FeMale"]
+
 import LoginComponents from '../components/LoginComponents';
 import axios from 'axios';
 const baseurl = process.env['REACT_APP_URL']
@@ -20,7 +20,11 @@ export default RegisterUser = ({ navigation }) => {
 
 
 
+    const sex = [{ label: 'Male', value: 'M' },
 
+    { label: 'FeMale', value: 'F' },
+    { label: 'Other', value: 'O' },
+    ]
     const [getPasswordVisible, setPasswordVisible] = useState(false)
     const [errorMessage, seterrMessage] = useState("")
     const [showModal, setShowModal] = useState(false)
@@ -30,7 +34,6 @@ export default RegisterUser = ({ navigation }) => {
     const [password, setpassword] = useState("")
     const [firstName, setfirstName] = useState("")
     const [lastName, setlastName] = useState("")
-    const [gender, setgender] = useState("0")
     const [phonenumber, setphonenumber] = useState("")
     const [address, setaddress] = useState("")
 
@@ -47,9 +50,7 @@ export default RegisterUser = ({ navigation }) => {
     const onChangelastName = (value) => {
         setlastName(value)
     }
-    const onChangeGender = (value) => {
-        setgender(value)
-    }
+
     const onChangePhonenumber = (value) => {
         setphonenumber(value)
     }
@@ -79,9 +80,9 @@ export default RegisterUser = ({ navigation }) => {
                 password: password,
                 firstName: firstName,
                 lastName: lastName,
-                gender: gender,
                 phonenumber: phonenumber,
-                address: address
+                address: address,
+                roleId: 'R3'
             },
 
 
@@ -354,39 +355,6 @@ export default RegisterUser = ({ navigation }) => {
                                 }}>
 
                             </TextInput>
-                        </View>
-                        <View style={{
-                            width: '80%',
-                            marginTop: 20,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between'
-
-                        }}>
-                            <Text style={{
-                                fontStyle: "italic",
-                                fontWeight: 'bold',
-                                fontSize: 20,
-                                color: 'white',
-                                width: '30%',
-
-                            }}> Sex: </Text>
-
-                            <View>
-
-                                <SelectDropdown
-                                    value={gender}
-                                    onChangeText={onChangeGender}
-                                    data={sex}
-                                    onSelect={(selectedItem, index) => {
-                                        console.log(index)   // tra ve 0 hoac 1 
-                                    }}
-
-
-                                >
-
-                                </SelectDropdown>
-                            </View>
                         </View>
 
                         <View style={{

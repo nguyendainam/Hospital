@@ -47,6 +47,10 @@
             "manage-handbook":"Bài Viết Cẩm Nang"
 
 
+        },
+        "doctor" :{
+            "menu-schedule": "Quản lý kế hoạch khám bệnh" ,
+            "title_sc":"Quản lý lịch khám bệnh"
         }
 
     },

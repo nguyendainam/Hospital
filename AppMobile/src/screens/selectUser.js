@@ -16,8 +16,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
-const windownWith = Dimensions.get('window').width
-const windownHeight = Dimensions.get('window').height
 
 const baseurl = process.env['REACT_APP_URL']
 
@@ -58,7 +56,6 @@ export default SelectUser = () => {
         }
         console.log('Địa chỉ URL đang sử dụng', baseurl)
         await axios({
-
             url: `${baseurl}/api/login`,
             method: 'POST',
             data: {
@@ -81,6 +78,7 @@ export default SelectUser = () => {
                 // navigation.navigate('MainScreen')
                 // AsyncStorage.clear()
                 // // ridirect to Home
+                
 
 
             } else {
