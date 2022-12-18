@@ -23,7 +23,7 @@ class headerHome extends Component {
             <View style={styles.mainHeader}>
                 <ImageBackground source={image.img_bg} style={styles.img_bg}>
                     <View style={styles.title_header}>
-                        <Text style={styles.title_text}>WELLCOME!!!👋</Text>
+                        <Text style={styles.title_text}>HeartHospital</Text>
 
                         <Text style={styles.title_text_1}>
                             {dataUser && dataUser.userInfor ?
@@ -34,7 +34,7 @@ class headerHome extends Component {
                     </View>
 
                     <View style={styles.title_header_2}>
-                        <Text style={{ fontStyle: 'italic' }}>Have a nice day !!! </Text>
+                        <Text style={{ fontStyle: 'italic', fontSize: 18, color: '#EE6983', fontWeight: '700' }}>Have a nice day</Text><Text style={{ fontSize: 20 }}> 😊 </Text>
                     </View>
 
                 </ImageBackground>
@@ -47,36 +47,45 @@ const styles = StyleSheet.create({
     mainHeader: {
         width: '100%',
         height: 280,
+
     },
     title_header_2: {
         fontStyle: 'italic',
         marginLeft: 25,
-        marginRight: 190,
-        textAlign: 'center',
-        justifyContent: 'center',
-        alignItems: 'center'
+        display: 'flex',
+        flexDirection: 'row',
+        marginBottom: 200
+
+
     },
     title_text_1: {
+
         fontSize: 25
         , fontWeight: 'bold',
-        color: 'black'
+        color: '#EE6983',
+        paddingRight: 300
     },
     img_bg: {
         width: '100%',
         height: '100%'
     },
     title_header: {
-        marginTop: 50,
-        width: 200,
-        height: 70,
+        marginTop: 70,
+        width: 500,
+        height: 100,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     title_text: {
         fontSize: 25,
         fontWeight: 'bold',
-        color: 'black',
-        fontFamily: 'FontFamily'
+        color: '#E97777',
+        fontFamily: 'FontFamily',
+        width: 480,
+        paddingLeft: 0,
+        borderWidth: 1,
+        paddingBottom: 50
+
     }
 
 })

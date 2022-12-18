@@ -59,9 +59,42 @@ let getDetailDoctor = async (req, res) => {
     }
 }
 
+let bulkCreateSchedule = async (req, res) => {
+    try {
+        let schedule = await DoctorServices.bulkCreateScheduleService(req.body)
+        return res.status(200).json({
+            schedule
+        })
+
+    } catch (error) {
+        console.log('Error From  bulkCreateSchedule doctorController')
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Missing Data  bulkCreateSchedule '
+        })
+    }
+}
+
+let getScheduleByDay = async (req, res) => {
+    try {
+        let infor = await DoctorServices.getScheduleBydate(req.query.doctorId, req.query.date)
+        return res.status(200).json({
+            infor
+        })
+    } catch (e) {
+        console.log('Error From getScheduleByDay')
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Missing Data  bulkCreateSchedule '
+        })
+    }
+}
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctor: getAllDoctor,
     postInforDoctor: postInforDoctor,
-    getDetailDoctor: getDetailDoctor
+    getDetailDoctor: getDetailDoctor,
+    bulkCreateSchedule: bulkCreateSchedule,
+    getScheduleByDay: getScheduleByDay
 }

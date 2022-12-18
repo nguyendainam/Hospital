@@ -18,7 +18,9 @@
         ,"Medical_Test":"Medical Test",
         "Mental_health" :"Mental health"
         ,"Dental":"Dental Examination"
-        ,"Wellcome":"Wellcome!" 
+        ,"Wellcome":"Wellcome!" ,
+        "Schedule":"Schedule",
+        "NoSchedule":"The doctor does not have a medical appointment, please choose another time !"
     },
 
 

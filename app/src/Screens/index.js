@@ -18,6 +18,9 @@ import Tab from '../screens/Tabs/Tab'
 import WellcomeScreen from "./WellcomeScreen";
 import Infor from "../components/Doctor/informationDoctor";
 import Register from "./home/Register";
+import BookSchedule from "../components/Doctor/bookSchedule";
+
+
 const Stack = createNativeStackNavigator();
 
 const rootReducer = combineReducers({
@@ -41,6 +44,10 @@ export default class RootComponent extends React.Component {
                         <Stack.Screen name="Home" component={Home} />
                         <Stack.Screen name="Infor" component={Infor} />
                         <Stack.Screen name="Register" component={Register} />
+                        <Stack.Screen name="BookSchedule" component={BookSchedule} />
+
+
+
 
 
 

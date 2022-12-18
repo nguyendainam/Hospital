@@ -18,7 +18,9 @@
         ,"Medical_Test":"Xét Nghiệm Y Học",
         "Mental_health":"Sức Khỏe Tinh Thần",
         "Dental":"Khám Nha Khoa",
-        "Wellcome":"Xin Chào!," 
+        "Wellcome":"Xin Chào!," ,
+        "Schedule":" Lịch Khám",
+        "NoSchedule":"Bác sĩ không có lịch khám bệnh, vui lòng chọn thời gian khác ! "
         
     },
 

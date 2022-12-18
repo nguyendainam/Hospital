@@ -5,23 +5,30 @@ import './DetailsDoctor.scss'
 import { getDetailsInforDoctor } from '../../../../services/userService';
 import { LANGUAGES } from '../../../../utils';
 import Footer from '../../Footer/Footer'
+import ScheduleDoctor from './ScheduleDoctor';
+import Address_DoctorClinic from './Address_DoctorClinic';
+
 class DetailsDoctor extends Component {
 
 
     constructor(props) {
         super(props);
         this.state = {
-            arrDoctor: {}
+            arrDoctor: {},
+            DoctorId_Details: -1
         }
     }
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id
+            this.setState({
+                DoctorId_Details: id
+            })
             let res = await getDetailsInforDoctor(id)
             if (res && res.errCode === 0) {
                 this.setState({
-                    arrDoctor: res.data
+                    arrDoctor: res.data,
                 })
             }
 
@@ -93,6 +100,17 @@ class DetailsDoctor extends Component {
                         </div>
 
                         <div className='Form_Schedule'>
+                            <div className='Form_Schedule_Left'>
+                                <ScheduleDoctor
+                                    doctorId={this.props.match.params.id}
+
+                                // {this.state.DoctorId_Details}
+                                />
+                            </div>
+                            <div className='Form_Schedule_Right'>
+                                <Address_DoctorClinic />
+
+                            </div>
 
                         </div>
 

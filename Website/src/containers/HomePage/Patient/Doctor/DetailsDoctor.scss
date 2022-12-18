@@ -39,6 +39,18 @@
       }
     }
   }
+  .Form_Schedule {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    .Form_Schedule_Left {
+      width: 700px;
+    }
+    .Form_Schedule_Right {
+      width: 500px;
+      margin-left: 20px;
+    }
+  }
 
   .Form_comment {
     width: 80%;

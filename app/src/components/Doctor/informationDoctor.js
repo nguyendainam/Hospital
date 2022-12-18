@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { route, Component, useState, useEffect } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView, SafeAreaView, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import images from '../../constants/images';
 import base64 from 'react-native-base64'
@@ -8,6 +8,9 @@ import { Buffer } from 'buffer'
 
 import { useWindowDimensions } from 'react-native';
 import RenderHTML from 'react-native-render-html';
+import ScheduleDoctor from './ScheduleDoctor';
+import Footer from '../Footer';
+
 const baseurl = process.env['REACT_APP_URL']
 
 function Infor({ route, navigation }) {
@@ -39,72 +42,123 @@ function Infor({ route, navigation }) {
         })
 
     }
+
     const { width } = useWindowDimensions();
 
     const html = content_HTML.contentHTML
     return (
-        <View>
-            <View style={styles.buttonBack}>
-                <TouchableOpacity
-                    onPress={() => { navigation.goBack() }}
-                    style={styles.back_sreen}>
-                    <Image style={styles.img_return} source={images.undo} />
-                </TouchableOpacity>
-            </View>
+
+        <>
+            <ScrollView horizontal='false'>
+
+                <View style={{ backgroundColor: 'white' }}>
+                    <View style={styles.container_InforDr}>
+                        <View style={styles.buttonBack}>
+                            <TouchableOpacity
+                                onPress={() => { navigation.goBack() }}
+                                style={styles.back_sreen}>
+                                <Image style={styles.img_return} source={images.undo} />
+                            </TouchableOpacity>
+                        </View>
 
 
-            <View style={styles.Drom_infor_doctor}>
-                <View style={styles.Img_Doctor_from}>
 
 
-                    <Image style={styles.img_doctor} source={{ uri: image }}>
-                    </Image>
+                        <View style={styles.Drom_infor_doctor}>
+                            <View style={styles.Img_Doctor_from}>
+
+
+                                <Image style={styles.img_doctor} source={{ uri: image }}>
+                                </Image>
+                            </View>
+
+
+
+
+                            <View style={styles.Desc_Doctor_form}>
+                                <Text style={styles.form_name_dr}>
+                                    {dataDoctor.data && dataDoctor.data.positionData.valueEn ? dataDoctor.data.positionData.valueVi + ': ' : ''}
+                                    {dataDoctor.data && dataDoctor.data.lastName ? dataDoctor.data.lastName : ''}
+                                    {dataDoctor.data && dataDoctor.data.firstName ? dataDoctor.data.firstName : ''}
+
+
+
+                                </Text>
+                                <View>
+                                    <ScrollView horizontal={false}>
+
+                                        <Text style={styles.form_descr_dr}>
+                                            {dataDoctor.data && dataDoctor.data.Markdown.description ? dataDoctor.data.Markdown.description : ''}
+                                        </Text>
+
+
+                                    </ScrollView>
+
+                                </View>
+
+
+                            </View>
+                        </View>
+
+                        <View  >
+                            <ScheduleDoctor
+                                idDoctor={dataDoctor}
+                                navigation={navigation}
+                                idDr={id}
+                            />
+                        </View>
+
+
+
+
+
+                        <View style={styles.content_doctor}>
+                            <Text style={styles.TitleIN4}> THÔNG TIN VỀ BÁC SĨ</Text>
+
+
+
+
+
+
+                            <View >
+                                <ScrollView horizontal={false} style={{ marginHorizontal: 10, flex: 1 }}>
+
+                                    <RenderHTML
+                                        contentWidth={width}
+                                        source={{ html }}
+                                        enableExperimentalMarginCollapsing={true}
+                                        baseStyle={{ color: 'black', fontSize: 17 }}
+
+                                    />
+
+
+                                </ScrollView>
+
+                            </View>
+
+
+
+
+
+
+
+
+                        </View>
+
+
+
+
+
+
+
+                    </View >
+
+
+
                 </View>
-                <View style={styles.Desc_Doctor_form}>
-                    <Text style={styles.form_name_dr}>
-                        {dataDoctor.data && dataDoctor.data.positionData.valueEn ? dataDoctor.data.positionData.valueVi + ': ' : ''}
-                        {dataDoctor.data && dataDoctor.data.lastName ? dataDoctor.data.lastName : ''}
-                        {dataDoctor.data && dataDoctor.data.firstName ? dataDoctor.data.firstName : ''}
-
-
-
-                    </Text>
-
-                    <ScrollView horizontal='true'>
-
-                        <Text style={styles.form_descr_dr}>
-                            {dataDoctor.data && dataDoctor.data.Markdown.description ? dataDoctor.data.Markdown.description : ''}
-                        </Text>
-
-
-                    </ScrollView>
-
-
-                </View>
-            </View>
-
-
-            <View style={styles.content_doctor}>
-
-
-                <ScrollView style={{ flex: 1, height: 100, width: '100%', color: 'black' }} horizontal='true'>
-
-
-                    <RenderHTML
-                        contentWidth={width} source={{ html }} />
-
-
-                </ScrollView>
-
-
-
-
-            </View>
-
-
-        </View >
-
-
+                <Footer />
+            </ScrollView>
+        </>
     )
 }
 
@@ -121,6 +175,18 @@ const mapDispatchToProps = {}
 
 
 const styles = StyleSheet.create({
+    TitleIN4: {
+        borderWidth: 2,
+        borderColor: 'white',
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#FF597B',
+        height: 40,
+        paddingTop: 10,
+        fontSize: 18
+
+    }
+    ,
 
     document: {
         fontSize: 20,
@@ -131,12 +197,12 @@ const styles = StyleSheet.create({
     content_doctor: {
         marginTop: 5,
         width: '100%',
-        height: 400,
         borderWidth: 1,
-        backgroundColor: '#EFF5F5',
+        backgroundColor: 'white',
         borderColor: 'white',
         paddingLeft: 5,
         paddingRight: 10,
+        color: 'black',
 
 
     },
@@ -182,7 +248,7 @@ const styles = StyleSheet.create({
 
     Drom_infor_doctor: {
         width: '100%',
-        height: 150,
+        height: 180,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -206,7 +272,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingLeft: 5
 
-    }
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Infor)

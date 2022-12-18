@@ -14,12 +14,6 @@ console.log("url top doctor", baseurl)
 
 
 
-function InforDoctor() {
-    return (
-        <Infor />
-    )
-}
-
 
 class TopDoctor extends Component {
 
@@ -137,9 +131,9 @@ const styles = StyleSheet.create({
     mainTopdr: {
         width: '100%',
         height: 300,
-        backgroundColor: '#EAF6F6',
+        backgroundColor: '#CEE8EF',
         borderWidth: 1,
-        borderColor: 'white'
+        borderColor: '#CEE8EF'
 
     },
     formDoctor: {
@@ -152,14 +146,13 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#A6D1E6'
+        borderColor: '#B8E8FC'
     },
 
     Image_Doctor: {
         width: 190,
         height: 170,
-        backgroundColor: '#CDF0EA',
+        backgroundColor: '#BCCEF8',
         borderRadius: 10
     }
     ,
@@ -168,6 +161,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         paddingBottom: 5,
         paddingLeft: 10,
+        fontSize: 18,
+        color: '#EE6983',
+        fontWeight: 'bold'
 
     }
 
