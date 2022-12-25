@@ -8,6 +8,11 @@ const initialState = {
     topDoctors: [],
     allDoctors: [],
     allScheduleTime: [],
+    allPrices: [],
+    allPayments: [],
+    allProvince: [],
+    isloadingData: false,
+    isloadingProvinceData: false
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -113,6 +118,49 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
         }
+        case actionTypes.FETCH_PAYMENT_SUCCESS:
+            state.allPayments = action.data
+            return {
+                ...state
+            }
+
+        case actionTypes.FETCH_PAYMENT_FAILED:
+            state.allPayments = []
+            return {
+                ...state,
+                isloadingData: false
+            }
+
+        case actionTypes.FETCH_PRICE_SUCCESS:
+            state.allPrices = action.data
+            return {
+                ...state,
+                isloadingData: true
+
+            }
+
+        case actionTypes.FETCH_PRICE_FAILED:
+            state.allPrices = []
+            return {
+                ...state,
+                isloadingData: false
+            }
+
+        case actionTypes.FETCH_PROVINCE_SUCCESS:
+            state.allProvince = action.data
+            return {
+                ...state,
+                isloadingData: true
+
+            }
+
+        case actionTypes.FETCH_PROVINCE_FAILED:
+            state.allProvince = []
+            return {
+                ...state,
+                isloadingData: false
+            }
+
 
 
 

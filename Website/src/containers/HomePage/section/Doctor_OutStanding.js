@@ -7,7 +7,6 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as actions from '../../../store/actions'
-import Doctor_OutStandingImg from '../../../assets/medical/doctor.png'
 import { LANGUAGES, } from "../../../utils"
 import { withRouter } from 'react-router';
 
@@ -61,7 +60,7 @@ class Doctor_OutStanding extends Component {
                         <div className='Doctor_OutStanding-header'>
                             <span className='title-header-Doctor_OutStanding'>Bác Sĩ Nổi Bật</span>
                             <div className='Button-header-Doctor_OutStanding'>
-                                <button type="button" class="btn btn-outline-secondary">Xem thêm</button>
+                                <button type="button" className="btn btn-outline-secondary">Xem thêm</button>
                             </div>
                         </div>
                         <div className='container'>
@@ -86,7 +85,12 @@ class Doctor_OutStanding extends Component {
                                                 </div>
                                                 <div className='title_doctor'>
                                                     <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
-                                                    {/* <div>Chuyên khoa thần kinh</div> */}
+                                                    <div>{language === LANGUAGES.VI ? `Khoa: ${item.Doctor_infor.InforDrSpecialty.nameVi}`
+                                                        :
+                                                        `Department: ${item.Doctor_infor.InforDrSpecialty.nameEn}`
+
+
+                                                    }</div>
                                                 </div>
 
                                             </div>

@@ -4,18 +4,37 @@ import { connect } from 'react-redux'
 import "./style_MedicalFacility.scss"
 import { FormattedMessage } from 'react-intl'
 import { changLanguageApp } from '../../../store/actions/appActions';
-
+import { LANGUAGES } from '../../../utils';
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import MedicalFacilityImg from '../../../assets/medical/medical.png'
 
-import ngoaikhoa from '../../../assets/ngoaikhoa.png'
-import thankinh from '../../../assets/thankinh.png'
-import thieunhi from '../../../assets/thieunhi.png'
-
+import { getAllClinic } from '../../../services/userService';
+import { withRouter } from 'react-router';
 class MedicalFacility extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            arrClinic: [],
+            Imagebase64: ''
+        }
+    }
+
+    componentDidMount = async () => {
+
+        let data = await getAllClinic()
+
+        console.log("dataa.. clinic............", data)
+        this.setState({
+            arrClinic: data.data
+        })
+
+    }
+    handleViewDetailClinic = (idClinic) => {
+        this.props.history.push(`/detail-clinic/${idClinic.id}`)
+    }
+
 
 
     render() {
@@ -24,75 +43,54 @@ class MedicalFacility extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 2
+            slidesToScroll: 1
         };
+
+        const { arrClinic } = this.state
+
         return (
             <React.Fragment>
-                <div className='section-MedicalFacility'>
+                <div className='section-specialty'>
                     <div className='speciaty-content'>
-                        <div className='MedicalFacility-header'>
-                            <span className='title-header-MedicalFacility'>Chuyên Khoa Nổi Tiếng</span>
-                            <div className='Button-header-MedicalFacility'>
-                                <button type="button" class="btn btn-outline-secondary">Xem thêm</button>
+                        <div className='specialty-header'>
+                            <span className='title-header-specialty'>Các Chi Nhánh Phòng Khám</span>
+                            <div className='Button-header-specialty'>
+                                <button type="button" className="btn btn-outline-secondary">Xem thêm</button>
                             </div>
                         </div>
                         <div className='container'>
                             <Slider {...settings}>
-                                <div className='medical_content_body'>
-                                    <div className='Main_Clinic'>
-                                        <div className='Imange_clinic'>
-                                            <img className='picture_MedicalFacility' src={ngoaikhoa} />
 
-                                        </div>
-                                    </div>
+                                {arrClinic && arrClinic.length > 0 &&
 
-                                    <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }} >Ngoại Khoa</span>
-                                </div>
-                                <div>
-                                    <div className='Main_Clinic' >
-                                        <div className='Imange_clinic'>
-                                            <img className='picture_MedicalFacility' src={thankinh} />
-                                        </div>
-                                        <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }}>Khoa Thần Kinh</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='Main_Clinic'
-                                    ><div className='Imange_clinic'>
-                                            <img className='picture_MedicalFacility' src={thieunhi} />
-                                        </div>
-                                        <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }}>Khoa Trẻ Em </span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='Main_Clinic'>
-                                        <div className='Imange_clinic'>
-                                            <img className='picture_MedicalFacility' src={MedicalFacilityImg} />
-                                        </div>
-                                        <span style={{ fontSize: 20, fontWeight: 'bold', color: '#97FFFF' }}>Nha Khoa</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='Main_Clinic' >
-                                        <div className='Imange_clinic'>
-                                            <img className='picture_MedicalFacility' src={thankinh} />
-                                        </div>
-                                        <span>Cơ Xương Khớp 2</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='Main_Clinic'>
-                                        <div className='Imange_clinic'>
-                                            <img className='picture_MedicalFacility' src={thankinh} />
-                                        </div>
-                                        <span>Răng Hàm Mặt</span>
-                                    </div>
-                                </div>
+                                    arrClinic.map((item, index) => {
+                                        let language = this.props.language
+                                        let imageBase64 = ''
+                                        if (item.image) {
+                                            imageBase64 = new Buffer(item.image, 'base64').toString('binary')
+                                        }
+                                        return (
+                                            <div className='Clinic_content_body' key={index}
+                                                onClick={() => this.handleViewDetailClinic(item)}
+                                            >
+                                                <div className='clinic_From' >
+                                                    <img className='picture_specialty' src={imageBase64} />
+
+                                                </div>
+                                                <span className='nameClinic'>{language === LANGUAGES.VI ? item.nameVi : item.nameEn}</span>
+                                            </div>
+                                        )
+                                    })
+
+                                }
+
+
                             </Slider>
                         </div>
                     </div>
 
                 </div>
+
             </React.Fragment >
         );
     }
@@ -112,4 +110,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MedicalFacility));

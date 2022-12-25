@@ -187,7 +187,7 @@ class ManageSchedule extends Component {
                                 return (
                                     <button
                                         onClick={() => this.handleClickButton(item)}
-                                        class={item.isSelected === true ?
+                                        className={item.isSelected === true ?
                                             ' buttonTime btn btn-outline-warning' : ' buttonTime btn btn-outline-success'}
                                         key={index}>
                                         {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
@@ -202,7 +202,7 @@ class ManageSchedule extends Component {
                 </div>
                 <button
                     onClick={() => this.handleSaveSchedule()}
-                    class="btn btn-outline-warning"> Lưu Thông tin</button>
+                    className="btn btn-outline-warning"> Lưu Thông tin</button>
             </div>
 
 

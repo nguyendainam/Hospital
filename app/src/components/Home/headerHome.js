@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         fontFamily: 'FontFamily',
         width: 480,
         paddingLeft: 0,
-        borderWidth: 1,
         paddingBottom: 50
 
     }

@@ -20,7 +20,32 @@
         ,"Dental":"Dental Examination"
         ,"Wellcome":"Wellcome!" ,
         "Schedule":"Schedule",
-        "NoSchedule":"The doctor does not have a medical appointment, please choose another time !"
+        "NoSchedule":"The doctor does not have a medical appointment, please choose another time !",
+        "Paycash":"Patients must pay in cash",
+        "Paycard":"Patients must pay by card",
+        "Payall":"Patients can pay by card or cash",
+        "title_booking":"People who come to the clinic who book through the app will receive a priority check-up and on time as booked!!!",
+        "See_details":"See details",
+        "unSee_details":"Hide View details",
+        "city":"City",
+        "address":"Address: ",
+        "freeSchedule":"Free booking",
+
+        "patient" :{
+            "bookSchedule":"Book a medical appointment",
+            "email":"Email",
+            "name":"FullName",
+            "phone":"PhoneNumber",
+            "address":"Address",
+            "gender" :"Gender",
+            "Note":"Reason for medical examination",
+            "birthday":"Date of birth"
+            
+        }
+
+
+
+
     },
 
 
@@ -52,7 +77,18 @@
         },
         "doctor" :{
             "menu-schedule": "Manage medical examination plan" ,
-            "title_sc":"MANAGE SCHEDULE"
+            "title_sc":"MANAGE SCHEDULE",
+            "doctor-infor" :"Medical examination information",
+            "doctor":"Doctor",
+            "price":"Price",
+            "payment":"Payment",
+            "province":"Province",
+            "nameclinic":"Name Clinic",
+            "addclinic":"Address Clinic",
+            "note":"Note",
+            "tittle_inforDR":"Information Doctor",
+            "dr_specialty":"Specialties",
+            "dr_clinic":"Clinics"
         }
 
     },

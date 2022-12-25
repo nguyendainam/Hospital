@@ -7,6 +7,9 @@ import moment from 'moment';
 import localization from 'moment/locale/vi'
 import { getScheduleDoctorbyDay } from '../../../../services/userService';
 import { FormattedMessage } from 'react-intl'
+
+import BookingModel from './Model/BookingModel';
+
 class ScheduleDoctor extends Component {
 
 
@@ -14,7 +17,10 @@ class ScheduleDoctor extends Component {
         super(props);
         this.state = {
             allDays: [],
-            allAvalableTime: []
+            allAvalableTime: [],
+            isBookingModel: false,
+            dataBookingModel: [],
+            dataTime: []
         }
     }
 
@@ -28,9 +34,9 @@ class ScheduleDoctor extends Component {
 
 
 
-        this.setState({
-            allDays: alldays,
-        })
+        // this.setState({
+        //     allDays: alldays,
+        // })
 
     }
 
@@ -40,53 +46,44 @@ class ScheduleDoctor extends Component {
         let arrDate = []
         for (let i = 0; i < 7; i++) {
             let object = {}
+
             if (language === LANGUAGES.VI) {
-                object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                if (i === 0) {
+                    let letDateandMonth = moment(new Date()).format(' DD/MM');
+                    let Today = ` Hôm nay -${letDateandMonth} `
+                    object.label = Today
+                } else {
+
+                    object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                }
             }
+
+
             if (language === LANGUAGES.EN) {
-                object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+
+                if (i === 0) {
+                    let letDateandMonthEn = moment(new Date()).locale('en').format('ddd - DD/MM');
+
+                    let TodayEn = ` Today - ${letDateandMonthEn} `
+                    object.label = TodayEn
+                } else {
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+                }
+
+
             }
+
             object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf()
             arrDate.push(object)
 
 
         }
         return arrDate;
-        // this.setState({
-        //     allDays: arrDate
-        // })
-
-
     }
 
 
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
-
-
-        let { language } = this.props
-        if (this.props.language !== prevProps.language) {
-            let arrDate = []
-            for (let i = 0; i < 7; i++) {
-                let object = {}
-
-                if (language === LANGUAGES.VI) {
-                    object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
-                }
-                if (language === LANGUAGES.EN) {
-                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
-                }
-
-
-                object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf()
-
-                arrDate.push(object)
-            }
-
-            this.setState({
-                allDays: arrDate
-            })
-        }
 
         if (this.props.doctorId !== prevProps.doctorId) {
             let alldays = this.ScheduleLanguage()
@@ -97,12 +94,53 @@ class ScheduleDoctor extends Component {
             })
 
         }
+        const { language } = this.props
+        if (this.props.language !== prevProps.language) {
+            let arrDate = []
+            for (let i = 0; i < 7; i++) {
+
+                let object = {}
+
+                if (language === LANGUAGES.VI) {
+                    if (i === 0) {
+                        let letDateandMonth = moment(new Date()).format(' DD/MM');
+                        let Today = ` Hôm nay -${letDateandMonth} `
+                        object.label = Today
+                    } else {
+
+                        object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    }
+                }
+
+
+                else {
+
+                    if (i === 0) {
+                        let letDateandMonth = moment(new Date()).format(' DD/MM');
+
+                        let TodayEn = ` Today - ${letDateandMonth} `
+                        object.label = TodayEn
+                    } else {
+                        object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+                    }
+
+
+                }
+
+                object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf()
+                arrDate.push(object)
+
+                this.setState({
+                    allDays: arrDate
+                })
+            }
+
+        }
 
 
     }
 
     handleOnchange = async (event) => {
-        console.log('datadoctor', this.props.doctorId)
         if (this.props.doctorId) {
             let doctorId = this.props.doctorId
             let date = event.target.value
@@ -125,12 +163,38 @@ class ScheduleDoctor extends Component {
 
     }
 
+    handleHideScheduleTime = (item) => {
+        this.setState({
+            isBookingModel: true,
+            dataBookingModel: item,
+
+
+
+
+        })
+    }
+
+    closeBookingModel = () => {
+        this.setState({
+            isBookingModel: false
+        })
+    }
+
     render() {
         let dataDay = this.state.allDays
         let { language } = this.props
-        let { allAvalableTime } = this.state
+        let { allAvalableTime, isBookingModel, dataBookingModel, dataTime } = this.state
+
         return (
             <>
+                <BookingModel
+                    isOpenModel={isBookingModel}
+                    isCloseModel={this.closeBookingModel}
+                    dataBookingModel={dataBookingModel}
+                    dataTime={this.state.dataBookingModel}
+
+                />
+
                 <div className='mainschedule_doctor'>
                     <div className='all_schedule'>
                         <select className='selectDay'
@@ -163,12 +227,13 @@ class ScheduleDoctor extends Component {
                                 allAvalableTime.map((item, index) => {
                                     let timevi = `${item.TimeTypeData.valueVi}`;
                                     let timeEn = `${item.TimeTypeData.valueEn}`;
-
                                     return (
                                         <button
                                             type="button"
-                                            class="button_schedule btn btn-outline-success"
+                                            className="button_schedule btn btn-outline-success"
                                             key={index}
+                                            onClick={() => this.handleHideScheduleTime(item)}
+
                                         > {language === LANGUAGES.VI ? timevi : timeEn}
                                         </button>
                                     )

@@ -20,7 +20,31 @@
         "Dental":"Khám Nha Khoa",
         "Wellcome":"Xin Chào!," ,
         "Schedule":" Lịch Khám",
-        "NoSchedule":"Bác sĩ không có lịch khám bệnh, vui lòng chọn thời gian khác ! "
+        "NoSchedule":"Bác sĩ không có lịch khám bệnh, vui lòng chọn thời gian khác ! ",
+        "Paycash":"Người bệnh phải trả bằng tiền mặt",
+        "Paycard":"Người bệnh phải thanh toán qua thẻ ",
+        "Payall":"Người bệnh có thể trả bằng thẻ hoặc tiền mặt ",
+        "title_booking":"Người đến khám đặt qua ứng dụng sẽ được khám ưu tiên và đúng giờ đã đặt !!! ",
+        "See_details":"Xem chi tiết",
+        "unSee_details":"Ẩn xem chi tiết",
+        "city":"Thành Phố",
+        "address":"Địa chỉ: ",
+        "freeSchedule":"Miễn Phí đặt lịch"
+
+        ,
+
+
+        "patient" :{
+            "bookSchedule":"Đặt lịch khám bệnh",
+            "email":"Tài khoản Email",
+            "name":"Tên người khám ",
+            "phone":"Số điện thoại",
+            "address":"Địa chỉ liên hệ",
+            "gender" :"Giới tính",
+            "Note":"Lý do khám bệnh",
+            "birthday":"Ngày sinh "
+        }
+
         
     },
 
@@ -40,7 +64,7 @@
 
         "admin" :{
             "manage-user":"Quản lý",
-            "manage-doctor":"Quản Lý Bác Sĩ" ,
+            "manage-doctor":"Quản Lý Thông Tin Bác Sĩ" ,
             "manage-admin":"Quản Lý admin", 
             "crud" : "Quản lý người dùng ",
             "crud-redux" : "CRUD Redux",
@@ -52,9 +76,19 @@
         },
         "doctor" :{
             "menu-schedule": "Quản lý kế hoạch khám bệnh" ,
-            "title_sc":"Quản lý lịch khám bệnh"
+            "title_sc":"Quản lý lịch khám bệnh",
+            "doctor-infor" :"Thông tin khám bệnh",
+            "doctor":"Bác Sĩ",
+            "price":"Giá",
+            "payment":"Thanh Toán",
+            "province":"Thành Phố",
+            "nameclinic":"Tên phòng khám",
+            "addclinic":"Địa chỉ",
+            "note":"Ghi chú",
+            "tittle_inforDR":"Thông tin khám bệnh",
+            "dr_specialty":"Chuyên Khoa",
+            "dr_clinic":"Phòng khám"
         }
-
     },
 
     "manage-user": {

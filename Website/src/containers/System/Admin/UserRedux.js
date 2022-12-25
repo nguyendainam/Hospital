@@ -257,7 +257,7 @@ class UserRedux extends Component {
 
                     <form>
                         <div className="row">
-                            <div class="col-md-3">
+                            <div className="col-md-3">
                                 <label for="inputEmail4"><FormattedMessage id="manage-user.Email" /></label>
                                 <input type="email" className="form-control" id="inputEmail4" placeholder="Email"
                                     value={email}
@@ -265,7 +265,7 @@ class UserRedux extends Component {
                                     disabled={this.state.action === CRUD_ACTION.EDIT ? true : false}
                                 />
                             </div>
-                            <div class=" col-md-3">
+                            <div className=" col-md-3">
                                 <label for="inputPassword4"><FormattedMessage id="manage-user.Password" /></label>
                                 <input type="password" className="form-control" id="inputPassword4" placeholder="Password"
                                     value={password}
@@ -326,7 +326,7 @@ class UserRedux extends Component {
 
 
                         <div className="row">
-                            <div class=" col-md-2">
+                            <div className=" col-md-2">
                                 <label for="inputCity"><FormattedMessage id="manage-user.address" /></label>
                                 <input type="text" className="form-control" id="inputCity"
                                     value={address}

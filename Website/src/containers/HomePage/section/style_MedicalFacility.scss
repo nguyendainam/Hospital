@@ -1,40 +1,37 @@
-.section-MedicalFacility {
+.section-specialty {
   height: 350px;
   margin-top: 20px;
   padding-top: 4px;
-  background-color: #f1f0f0;
 
-  .MedicalFacility-header {
+  .specialty-header {
     height: 34px;
     display: flex;
     justify-content: space-between;
     margin-right: 106px;
     margin-left: 106px;
 
-    span.title-header-MedicalFacility {
+    span.title-header-specialty {
       font-size: 25px;
       font-weight: 600;
     }
   }
-  .Main_Clinic {
-    display: flex;
-    flex-direction: column;
 
-    .Imange_clinic {
+  .Clinic_content_body {
+    justify-content: center;
+    align-items: center;
+
+    .picture_specialty {
       width: 300px;
-      height: 260px;
+      height: 250px;
+    }
 
-      img {
-        width: 300px !important ;
-        height: 300px !important  ;
-      }
-      span {
-        font-weight: bold;
-        font-size: 30px;
-      }
+    span.nameClinic {
+      text-align: center;
+      font-size: 15px;
+      color: deeppink;
+      font-weight: 700;
     }
   }
-
   .slick-slider.slick-initialized {
     height: "100%";
     height: 310px;

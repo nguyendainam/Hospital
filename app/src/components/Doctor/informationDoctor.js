@@ -61,9 +61,6 @@ function Infor({ route, navigation }) {
                             </TouchableOpacity>
                         </View>
 
-
-
-
                         <View style={styles.Drom_infor_doctor}>
                             <View style={styles.Img_Doctor_from}>
 

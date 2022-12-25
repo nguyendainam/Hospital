@@ -1,6 +1,5 @@
 import db from '../models/index'
 require('dotenv').config();
-import _, { reject } from 'lodash'
 
 
 
@@ -18,7 +17,21 @@ let getTopDoctorHomeServices = (limitInput) => {
                 },
                 include: [
                     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
-                    { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
+                    { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] },
+
+                    {
+                        model: db.Doctor_infor,
+                        attributes: {
+                            exclude: ['id', 'doctorId'],
+                        },
+                        include: [
+
+                            { model: db.Specialty, as: 'InforDrSpecialty', attributes: ['nameEn', 'nameVi'] }
+
+                        ],
+
+                    },
+
                 ],
                 raw: true,
                 nest: true
@@ -217,8 +230,11 @@ let getScheduleBydate = (doctorId, date) => {
 
                     include: [
                         { model: db.Allcode, as: 'TimeTypeData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.User, as: 'doctorSchedule', attributes: ['firstName', 'lastName', 'positionId'] }
 
                     ],
+
+
                     raw: true,
                     nest: true
 
@@ -241,11 +257,174 @@ let getScheduleBydate = (doctorId, date) => {
 }
 
 
+let postInforCostDoctorService = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+
+            if (!data.doctorId || !data.priceId || !data.provinceId || !data.paymentId || !data.nameClinic || !data.addressClinic) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter form saveDetailInforDoctor'
+                })
+            } else {
+                if (data.actions === 'CREATE') {
+                    await db.Doctor_infor.create({
+                        doctorId: data.doctorId,
+                        clinicId: data.clinicId,
+                        specialtyId: data.specialtyId,
+                        priceId: data.priceId,
+                        provinceId: data.provinceId,
+                        paymentId: data.paymentId,
+                        nameClinic: data.nameClinic,
+                        addressClinic: data.addressClinic,
+                        note: data.note
+                    })
+
+                } if (data.actions === 'UPDATE') {
+                    let checkIdDoctor = await db.Doctor_infor.findOne({
+                        where: { doctorId: data.doctorId },
+                        raw: false
+                    })
+
+                    if (checkIdDoctor) {
+
+                        checkIdDoctor.priceId = data.priceId;
+                        checkIdDoctor.provinceId = data.provinceId;
+                        checkIdDoctor.paymentId = data.paymentId;
+                        checkIdDoctor.nameClinic = data.nameClinic;
+                        checkIdDoctor.addressClinic = data.addressClinic;
+                        checkIdDoctor.note = data.note;
+                        await checkIdDoctor.save()
+                    }
+
+
+                }
+            }
+
+
+
+
+
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
+let getCostInforDoctorByIdService = (inputId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!inputId) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing id parameter'
+                })
+            } else {
+                let data = await db.Doctor_infor.findOne({
+                    where: { doctorId: inputId },
+
+                    include: [
+
+                        { model: db.Allcode, as: 'PriceData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'ProVinceData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'PaymenteData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Specialty, as: 'InforDrSpecialty', attributes: ['nameEn', 'nameVi', 'id'] },
+                        { model: db.Clinic, as: 'InforDrclinicId', attributes: ['nameEn', 'nameVi', 'id'] }
+
+                    ],
+                    raw: true,
+                    nest: true
+                })
+                if (!data) data = {}
+                resolve({
+                    errCode: 0,
+                    data: data
+                })
+
+            }
+
+
+
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
+
+let getProfileDoctorByIdService = (IdInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!IdInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter'
+                })
+            } else {
+                let dataInfor = await db.User.findOne({
+                    where: { id: IdInput },
+                    attributes: {
+                        exclude: ['password']
+                    },
+                    include: [
+
+                        { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+
+                        { model: db.Markdown, attributes: ['description'] },
+
+                        {
+                            model: db.Doctor_infor,
+                            attributes: {
+                                exclude: ['id', 'doctorId'],
+                            },
+                            include: [
+
+                                { model: db.Allcode, as: 'PriceData', attributes: ['valueEn', 'valueVi'] },
+                                { model: db.Allcode, as: 'ProVinceData', attributes: ['valueEn', 'valueVi'] },
+                                { model: db.Allcode, as: 'PaymenteData', attributes: ['valueEn', 'valueVi'] }
+
+                            ],
+
+                        },
+
+                    ],
+                    raw: true,
+                    nest: true
+                })
+                if (!dataInfor) dataInfor = {}
+
+                resolve({
+                    errCode: 0,
+                    data: dataInfor
+                })
+
+
+
+
+            }
+
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+
+}
+
+
 module.exports = {
     getTopDoctorHomeServices: getTopDoctorHomeServices,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
     getDetailDoctorById: getDetailDoctorById,
     bulkCreateScheduleService: bulkCreateScheduleService,
-    getScheduleBydate: getScheduleBydate
+    getScheduleBydate: getScheduleBydate,
+    postInforCostDoctorService: postInforCostDoctorService,
+    getCostInforDoctorByIdService: getCostInforDoctorByIdService,
+    getProfileDoctorByIdService: getProfileDoctorByIdService
 }

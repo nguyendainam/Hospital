@@ -62,10 +62,75 @@ const getScheduleDoctorbyDay = (doctorId, date) => {
     return axios.get(`/api/get-schedule-by-day?doctorId=${doctorId}&date=${date}`,)
 }
 
+
+const postCostInforDoctor = (data) => {
+    return axios.post('/api/post-infor-cost-doctor', data)
+}
+
+const getDataCostInforDoctor = (doctorId) => {
+    return axios.get(`/api/get-infor-cost-doctor-byid?doctorId=${doctorId}`)
+}
+
+
+const getDataProfileDoctor = (doctorId) => {
+    return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`)
+}
+
+
+const postPatientAppoiment = (data) => {
+    return axios.post('/api/patient-book-Appointment', data)
+}
+
+
+const postVerifyPatientAppoiment = (data) => {
+    return axios.post('/api/comfirm-verify-book-Appointment', data)
+}
+
+// ===========================SPECIALTY
+const createNewSpecialty = (data) => {
+    return axios.post('/api/create-new-speciaties', data)
+}
+
+
+const getAllSpecialty = () => {
+    return axios.get('/api/get-all-speciaties')
+}
+
+const getIdNameSpecialty = () => {
+    return axios.get('/api/get-id-name-speciaties')
+}
+
+
+
+
+
+// ===========================CLINIC
+const createNewClinic = (data) => {
+    return axios.post('/api/create-new-clinic', data)
+}
+
+const getIdNameClinic = () => {
+    return axios.get('/api/get-id-name-clinic')
+}
+
+const getAddressClinic = (id) => {
+    return axios.get(`/api/get-address-clinic-by-id?id=${id}`)
+}
+
+const getAllClinic = () => {
+    return axios.get('/api/get-all-clinic')
+}
+
+
+
+
+
 export {
     handleLoginApi, getAllUsers, createNewUserService,
     deleUserService, editUserService, getAllCodeService,
     getTopDoctorHome, getAllDoctors, saveDetailDoctors,
-    getDetailsInforDoctor, saveBulkSchedule, getScheduleDoctorbyDay
-
+    getDetailsInforDoctor, saveBulkSchedule, getScheduleDoctorbyDay, postCostInforDoctor,
+    getDataCostInforDoctor, getDataProfileDoctor, postPatientAppoiment, postVerifyPatientAppoiment,
+    createNewSpecialty, getAllSpecialty, createNewClinic, getIdNameSpecialty, getIdNameClinic, getAddressClinic,
+    getAllClinic
 } 

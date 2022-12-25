@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       Schedule.belongsTo(models.Allcode, { foreignKey: 'timeType', targetKey: 'keyMap', as: 'TimeTypeData' })
+      Schedule.belongsTo(models.User, { foreignKey: 'doctorId', targetKey: 'id', as: 'doctorSchedule' })
+
+      /////////////////////////////
+
+
     }
   };
   Schedule.init({

@@ -108,7 +108,10 @@ class DetailsDoctor extends Component {
                                 />
                             </div>
                             <div className='Form_Schedule_Right'>
-                                <Address_DoctorClinic />
+                                <Address_DoctorClinic
+                                    doctorId={this.props.match.params.id}
+
+                                />
 
                             </div>
 

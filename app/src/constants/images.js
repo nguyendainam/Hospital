@@ -18,4 +18,5 @@ export default {
     undo: require('../picture/undo.png'),
     eye: require('../picture/eye.png'),
     hide: require('../picture/hide.png'),
+    localtion: require('../picture/localtion.png')
 }

@@ -1,0 +1,36 @@
+.container {
+  .tittle_infor {
+    padding-left: 600px;
+    font-size: 20px;
+    color: rgb(81, 47, 215);
+  }
+
+  .form_InformationDr {
+    width: 1400px;
+    height: 600px;
+    border: 1px solid rgba(38, 0, 255, 0.281);
+  }
+
+  .FormSelect {
+    margin-left: 10px;
+    padding-left: 10px;
+    width: 220px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  .form2 {
+    margin-left: 20px;
+  }
+
+  .text_loading {
+    color: red;
+  }
+
+  .but_sendata {
+    margin-left: 120px;
+
+    .btn_senddata {
+      width: 120px;
+    }
+  }
+}

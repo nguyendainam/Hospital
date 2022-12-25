@@ -44,31 +44,37 @@ export const adminMenu = [
             },
 
 
+            {
+                name: 'menu.doctor.doctor-infor', link: '/doctor/dr-information',
+
+            },
+
+
         ]
     },
 
-    { //hệ thống quản lý phòng khám
-        name: 'menu.admin.manage-clinic',
+    {
+        //hệ thống quản lý chuyên khoa
 
-
+        name: 'menu.admin.manage-specialty',
         menus: [
 
             {
-                name: 'menu.admin.manage-clinic', link: '/system/manage-clinic'
+                name: 'menu.admin.manage-specialty', link: '/system/manage-specialist'
 
             }
 
         ]
     },
 
-    { //hệ thống quản lý chuyên khoa
-        name: 'menu.admin.manage-specialty',
-
+    {
+        //hệ thống quản lý phòng khám
+        name: 'menu.admin.manage-clinic',
 
         menus: [
 
             {
-                name: 'menu.admin.manage-specialty', link: '/system/manage-specialty'
+                name: 'menu.admin.manage-clinic', link: '/system/manage-clinics'
 
             }
 

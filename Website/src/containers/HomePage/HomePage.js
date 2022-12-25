@@ -16,8 +16,9 @@ class HomePage extends Component {
             <div>
                 <Header />
                 <BottomHeader />
-                <Specialty />
+
                 <MedicalFacility />
+                <Specialty />
                 <Doctor_OutStanding />
                 <Handbook />
 

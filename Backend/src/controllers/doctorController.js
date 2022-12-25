@@ -90,11 +90,58 @@ let getScheduleByDay = async (req, res) => {
     }
 }
 
+let postInforCostDoctor = async (req, res) => {
+    try {
+        let response = await DoctorServices.postInforCostDoctorService(req.body)
+        return res.status(200).json(response)
+    } catch (e) {
+        console.log("Error From postInforCostDoctor")
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Missing Data postInforCostDoctor"
+        })
+    }
+}
+
+
+let getCostInforDoctorByid = async (req, res) => {
+    try {
+
+        let data = await DoctorServices.getCostInforDoctorByIdService(req.query.doctorId)
+        return res.status(200).json({ data: data })
+
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Missing Data postInforCostDoctor"
+        })
+    }
+}
+
+
+let getProfileDoctorbyId = async (req, res) => {
+    try {
+        let profileDoctor = await DoctorServices.getProfileDoctorByIdService(req.query.doctorId)
+        return res.status(200).json({ profileDoctor: profileDoctor })
+
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Missing parameter from getProfileDoctorbyId '
+        })
+    }
+}
+
+
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctor: getAllDoctor,
     postInforDoctor: postInforDoctor,
     getDetailDoctor: getDetailDoctor,
     bulkCreateSchedule: bulkCreateSchedule,
-    getScheduleByDay: getScheduleByDay
+    getScheduleByDay: getScheduleByDay,
+    postInforCostDoctor: postInforCostDoctor,
+    getCostInforDoctorByid: getCostInforDoctorByid,
+    getProfileDoctorbyId: getProfileDoctorbyId
 }

@@ -8,39 +8,53 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-
-            // doctorId: DataTypes.INTEGER,
-            // priceId: DataTypes.STRING,
-            // provinceId: DataTypes.STRING,
-            // paymentId: DataTypes.STRING,
-            // addressClinic: DataTypes.STRING,
-            // nameClinic: DataTypes.STRING,
-            // note: DataTypes.STRING,
-            // count: DataTypes.STRING,
+            // doctorId
+            // priceId
+            // provinceId
+            // paymentId
+            // addressClinic
+            // nameClinic
+            // note
+            // count
 
             doctorId: {
+                allowNull: false,
+                type: Sequelize.INTEGER
+            },
+            specialtyId: {
+                type: Sequelize.INTEGER
+            },
+            clinicId: {
                 type: Sequelize.INTEGER
             },
             priceId: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             provinceId: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             paymentId: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
-            paymentId: {
+
+            nameClinic: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             addressClinic: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             note: {
                 type: Sequelize.STRING
             },
             count: {
-                type: Sequelize.STRING
+                allowNull: false,
+                defaultValue: 0,
+                type: Sequelize.INTEGER
             },
 
             createdAt: {

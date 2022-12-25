@@ -7,6 +7,7 @@ import { Buffer } from 'buffer'
 
 import { useWindowDimensions } from 'react-native';
 import RenderHTML from 'react-native-render-html';
+import AddressDoctor from './AddressDoctor';
 
 import { SelectList } from 'react-native-dropdown-select-list'
 import moment from "moment-timezone";
@@ -23,6 +24,7 @@ class ScheduleDoctor extends Component {
             allDays: {},
             keyDate: '',
             ListDate: [],
+            idDr: ''
         };
     }
 
@@ -33,10 +35,9 @@ class ScheduleDoctor extends Component {
 
     componentDidMount = () => {
 
+        let idDoctor = this.props.idDr
         let getDate = this.getArrayDate()
         let firstDate = getDate[0].key
-        let doctorId = this.props.idDr
-        console.log("===================", doctorId)
         axios({
             method: 'GET',
             url: `${baseurl}/api/get-schedule-by-day?doctorId=${this.props.idDr}&date=${firstDate}`
@@ -52,7 +53,8 @@ class ScheduleDoctor extends Component {
 
 
         this.setState({
-            allDays: getDate
+            allDays: getDate,
+            idDr: idDoctor
         })
 
 
@@ -65,9 +67,18 @@ class ScheduleDoctor extends Component {
         let arrDate = []
         for (let i = 0; i < 7; i++) {
             let object = {}
-            object.value = moment(new Date()).add(i, 'days').format('dddd - DD/MM')
-            object.key = moment(new Date()).add(i, 'days').startOf('day').valueOf()
-            arrDate.push(object)
+            if (i === 0) {
+                let today = moment(new Date()).format('- DD/MM')
+                object.value = `Hôm nay ${today} `
+                object.key = moment(new Date()).add(i, 'days').startOf('day').valueOf()
+                arrDate.push(object)
+            } else {
+                object.value = moment(new Date()).add(i, 'days').format('dddd - DD/MM')
+                object.key = moment(new Date()).add(i, 'days').startOf('day').valueOf()
+                arrDate.push(object)
+
+            }
+
 
         }
         return arrDate
@@ -88,7 +99,7 @@ class ScheduleDoctor extends Component {
                 ListDate: schedule.data.infor
             })
 
-            console.log('=======lisdate========', this.state.ListDate)
+            // console.log('=======lisdate========', this.state.ListDate)
 
         }).catch((err) => {
             console.log("ERROR................", err);
@@ -98,41 +109,64 @@ class ScheduleDoctor extends Component {
 
     }
 
-    BookSchedule = () => {
-        this.props.navigation.push('BookSchedule')
+    BookSchedule = (item) => {
+        this.props.navigation.push('BookSchedule', {
+            data: item.doctorId,
+            Time: item
+        }
+
+
+        )
     }
 
-
     render() {
-        // console.log("========================", this.state.allDays)
+
         dataDate = this.state.allDays
         ListDate = this.state.ListDate.data
+        let idDoctor = this.props.idDr
+
+        console.log('List Date', ListDate)
+
         return (
             <View style={styles.mainSchedule}>
                 <Text style={{ paddingLeft: 30, fontSize: 18, color: '#FF597B', fontWeight: 'bold' }}>
                     Chọn lịch khám bệnh
                 </Text>
                 <View style={styles.ScheduleDRform} >
+                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <View style={styles.formChooseDate}>
+                            <SelectList
 
-                    <View style={styles.formChooseDate}>
-                        <SelectList
-
-                            data={dataDate}
-                            label={dataDate.label}
-                            setSelected={(key) => { this.dateSelected(key) }}
-                            search={false}
-                            boxStyles={{ marginHorizontal: 20, borderColor: '#FF8E9E', fontWeight: 'blod' }}
-                            inputStyles={{ color: '#FF577F', fontWeight: '900' }}
-                            dropdownStyles={{ color: 'pink', borderColor: 'white' }}
-                            placeholder='Chọn lịch '
-                            dropdownTextStyles={{ color: '#FF8E9E', fontWeight: '700' }}
-                            dropdownItemStyles={{ marginHorizontal: 10 }}
-                            defaultOption={key = dataDate[0]}
+                                data={dataDate}
+                                label={dataDate.label}
+                                setSelected={(key) => { this.dateSelected(key) }}
+                                search={false}
+                                boxStyles={{ marginHorizontal: 20, borderColor: '#FF8E9E', fontWeight: 'blod' }}
+                                inputStyles={{ color: '#FF577F', fontWeight: '900' }}
+                                dropdownStyles={{ color: 'pink', borderColor: 'white' }}
+                                placeholder='Chọn lịch '
+                                dropdownTextStyles={{ color: '#FF8E9E', fontWeight: '700' }}
+                                dropdownItemStyles={{ marginHorizontal: 10 }}
+                                defaultOption={key = dataDate[0]}
 
 
 
-                        />
 
+                            />
+
+
+                        </View>
+                        <View style={styles.formclinic}>
+                            <View style={{ width: 1, height: '50%', borderColor: '#00F5FF', borderWidth: 2 }}></View>
+                            <View style={styles.formClinicDoctor}>
+                                <AddressDoctor
+                                    idDoctor={idDoctor}
+
+
+                                />
+                            </View>
+
+                        </View>
 
                     </View>
 
@@ -144,9 +178,12 @@ class ScheduleDoctor extends Component {
                             {ListDate && ListDate.length > 0
                                 ?
                                 ListDate.map((item, index) => {
+                                    // console.log("itemm", item)
                                     return (
                                         <TouchableOpacity
-                                            onPress={() => { this.BookSchedule() }}
+                                            // onPress={() => { this.BookSchedule(idDoctor) }}
+                                            onPress={() => this.BookSchedule((item))}
+
                                             key={index}
                                         >
                                             <View style={styles.fontSchedule}>
@@ -186,6 +223,17 @@ const mapDispatchToProps = {}
 
 const styles = StyleSheet.create({
 
+    formClinicDoctor: {
+        width: '100%',
+        height: '100%',
+        paddingLeft: 5,
+    }
+    , formclinic: {
+        width: 230, height: 250,
+        display: 'flex',
+        flexDirection: 'row'
+
+    },
     textHour: {
         fontWeight: '900',
         color: '#F56EB3'
@@ -203,7 +251,7 @@ const styles = StyleSheet.create({
         borderColor: '#F65A83'
     },
     formChooseDate: {
-        width: 200,
+        width: 170,
         height: 70,
 
     }
@@ -211,7 +259,7 @@ const styles = StyleSheet.create({
     mainSchedule: {
         marginTop: 30,
         width: '100%',
-        height: 320,
+        height: 400,
         borderTopColor: 'white'
     }
 
@@ -228,7 +276,7 @@ const styles = StyleSheet.create({
     },
     formListSchedule: {
         marginLeft: 10,
-        marginTop: 100,
+        marginTop: 10,
         width: 390,
         height: 100,
         display: 'flex',

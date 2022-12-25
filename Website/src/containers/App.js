@@ -18,6 +18,9 @@ import HomePage from './HomePage/HomePage.js'
 import CustomScrollbars from '../components/CustomScrollbars'
 import DetailsDoctor from './HomePage/Patient/Doctor/DetailsDoctor';
 import Doctor from '../routes/Doctor';
+import VerifyEmail from './HomePage/Patient/VerifyEmail';
+import Specialties from './HomePage/Patient/Specialty/Specialties';
+import Clinic from './HomePage/Patient/Clinic/Clinic';
 
 class App extends Component {
 
@@ -51,8 +54,14 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={path.VERIFY_EMAIL} component={(VerifyEmail)} />
+
                                     <Route path={path.HOMEPAGE} exact component={(HomePage)} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailsDoctor} />
+                                    <Route path={path.DETAIL_SPECIALTY} component={Specialties} />
+                                    <Route path={path.DETAIL_CLINIC} component={Clinic} />
+
+
 
                                 </Switch>
                             </CustomScrollbars>

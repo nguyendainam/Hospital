@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import {
     getAllCodeService, getAllUsers, getTopDoctorHome,
-    createNewUserService, deleUserService, editUserService, getAllDoctors, saveDetailDoctors
+    createNewUserService, deleUserService, editUserService, getAllDoctors, saveDetailDoctors, postCostInforDoctor
 } from '../../services/userService';
 
 export const fetchGenderStart = () => {
@@ -322,3 +322,99 @@ export const fetchAllScheduleTime = () => {
 }
 
 
+
+
+export const fetchAllPrice = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService("PRICE");
+
+            console.log("ress.........", res.data)
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_PRICE_SUCCESS,
+                    data: res.data
+
+                }
+                )
+            } else {
+                dispatch(fetchPositionFaided())
+            }
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_PRICE_FAILED
+            })
+            console.log(" fetchAllPrice from Redux", error)
+        }
+    }
+}
+
+export const fetchAllPayment = () => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await getAllCodeService("PAYMENT");
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_PAYMENT_SUCCESS,
+                    data: res.data
+                })
+            } else {
+                dispatch(fetchPositionFaided())
+            }
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_PAYMENT_FAILED
+            })
+            console.log("fetchAllPayment from Redux", error)
+        }
+    }
+}
+
+
+export const fetchAllProvince = () => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await getAllCodeService("PROVINCE");
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_PROVINCE_SUCCESS,
+                    data: res.data
+                })
+            } else {
+                dispatch(fetchPositionFaided())
+            }
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_PROVINCE_FAILED
+            })
+            console.log(" fetchAllPayment from Redux", error)
+        }
+    }
+}
+
+
+
+export const saveInforCostDoctor = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await postCostInforDoctor(data)
+            if (res && res.errCode === 0) {
+
+                alert('SAVE_DETAIL_DOCTOR_SUCCESS')
+                dispatch({
+                    type: actionTypes.SAVE_INFOR_COST_DOCTOR_SUCCESS,
+                })
+            }
+
+
+        } catch (error) {
+            console.log("SAVE_DETAIL_DOCTOR_FAILED")
+            dispatch({
+                type: actionTypes.SAVE_INFOR_COST_DOCTOR_FAILED
+            })
+        }
+    }
+}
