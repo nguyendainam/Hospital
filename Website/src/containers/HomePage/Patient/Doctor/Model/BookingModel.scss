@@ -1,0 +1,57 @@
+.booking_modal {
+  .container_modal {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+
+    .header_modal {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 25px;
+      padding-left: 20px;
+      span.title_booking_left {
+        font-size: 19px;
+        color: deeppink;
+        padding-top: -11px;
+      }
+      span.title_booking_right {
+        float: right;
+        font-size: 19px;
+        color: deeppink;
+      }
+    }
+    .form_inputModal {
+      margin-top: 5px;
+      height: 500px;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .Doctor_infor {
+        height: 150px;
+        width: 100%;
+      }
+      .form_booking {
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 30px;
+      }
+    }
+
+    .fomr_footer {
+      margin: auto;
+
+      .button_inform {
+        width: 125px;
+        margin: auto;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

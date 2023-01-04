@@ -1,0 +1,25 @@
+.content_handbook {
+  display: flex;
+  margin-right: 108px;
+
+  .Text_handbook {
+    display: flex;
+    flex-direction: column;
+
+    width: 249px;
+    text-align: start;
+    justify-content: center;
+    span.title_handbook {
+      size: 30px;
+      font-size: 25px;
+    }
+    span.content_title_handbook {
+      width: 500px;
+      height: 300px;
+    }
+  }
+}
+span.title-header-Handbook {
+  font-size: 25px;
+  font-weight: bold;
+}

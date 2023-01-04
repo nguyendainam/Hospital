@@ -1,0 +1,61 @@
+.Main_Details_Doctor {
+  width: 100%;
+  height: 100%;
+
+  .layout_infor_doctor {
+    display: flex;
+    flex-direction: row;
+
+    .Image_doctor {
+      width: 150px;
+      height: 150px;
+      background-color: aqua;
+      border-radius: 50%;
+
+      .imange_dr {
+        width: 150px;
+        height: 150px;
+        background: #c2bbbb;
+        margin: auto;
+        border-radius: 50%;
+
+        background-size: cover;
+      }
+    }
+
+    .information_doctor {
+      width: 600px;
+      height: 150px;
+      margin-left: 30px;
+
+      .form_name_doctor {
+        padding-top: 20px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .form_des_doctor {
+        padding-top: 10px;
+        font-size: 10;
+      }
+    }
+  }
+  .Form_Schedule {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    .Form_Schedule_Left {
+      width: 700px;
+    }
+    .Form_Schedule_Right {
+      width: 500px;
+      margin-left: 20px;
+    }
+  }
+
+  .Form_comment {
+    width: 80%;
+    height: 1000px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+  }
+}

@@ -1,0 +1,113 @@
+{
+
+    "home-header":{
+        "specialist" :"Specialist",
+        "health_facilities":"Health Facilities",
+        "Find_a_doctor":"Find a doctor by specialty",
+        "choose_hos":"Choose hospital Clinic",
+        "doctor":"Doctor",
+        "select_doctor":"Choose a Doctor",
+        "goikhambenh":"Medical Examination Package",
+        "General_health":"General health check",
+        "support":"Support",
+        "slogan_main":"Give Us Belief",
+        "slogan_2":"We give you all we have."
+        ,"spec_E":"Specialist Examination"
+        ,"remove":"Remote Examination"
+        ,"ge_E":"General Examination"
+        ,"Medical_Test":"Medical Test",
+        "Mental_health" :"Mental health"
+        ,"Dental":"Dental Examination"
+        ,"Wellcome":"Wellcome!" ,
+        "Schedule":"Schedule",
+        "NoSchedule":"The doctor does not have a medical appointment, please choose another time !",
+        "Paycash":"Patients must pay in cash",
+        "Paycard":"Patients must pay by card",
+        "Payall":"Patients can pay by card or cash",
+        "title_booking":"People who come to the clinic who book through the app will receive a priority check-up and on time as booked!!!",
+        "See_details":"See details",
+        "unSee_details":"Hide View details",
+        "city":"City",
+        "address":"Address: ",
+        "freeSchedule":"Free booking",
+
+        "patient" :{
+            "bookSchedule":"Book a medical appointment",
+            "email":"Email",
+            "name":"FullName",
+            "phone":"PhoneNumber",
+            "address":"Address",
+            "gender" :"Gender",
+            "Note":"Reason for medical examination",
+            "birthday":"Date of birth"
+            
+        }
+
+
+
+
+    },
+
+
+
+    "menu": {
+        "system": {
+            "header": "System",
+            "system-administrator": {
+                "header": "System Administrator",
+                "user-manage": "User manage",
+                "user-redux":"Manage user using Redux" ,
+                "product-manage": "Package manage",
+                "register-package-group-or-account": "Register service package for group/account"
+            },
+            "system-parameter": {
+                "header": "System-parameter"
+            }
+        },
+
+        "admin" :{
+            "manage-user":"Manage",
+            "manage-doctor":"Doctor-Manage" ,
+            "manage-admin":"Admin-Manage" ,
+            "crud" : "Manage User",
+            "crud-redux" : "CRUD Redux",
+            "manage-clinic":"Clinic",
+            "manage-specialty":"Specialty",
+            "manage-handbook":"Manage Handbook"
+        },
+        "doctor" :{
+            "menu-schedule": "Manage medical examination plan" ,
+            "title_sc":"MANAGE SCHEDULE",
+            "doctor-infor" :"Medical examination information",
+            "doctor":"Doctor",
+            "price":"Price",
+            "payment":"Payment",
+            "province":"Province",
+            "nameclinic":"Name Clinic",
+            "addclinic":"Address Clinic",
+            "note":"Note",
+            "tittle_inforDR":"Information Doctor",
+            "dr_specialty":"Specialties",
+            "dr_clinic":"Clinics"
+        }
+
+    },
+    "manage-user": {
+        "add": "SAVE",
+        "Email" : "Email",
+        "Password": "Password",
+        "PhoneNumber":"PhoneNumber",
+        "FName": "First Name",
+        "LName":"Last Name",
+        "Position":"Position",
+        "gender":"Gender",
+        "Image":"Imange",
+        "Role":"Role User",
+        "address":"Address",
+        "male": "Male",
+        "female":"Female",
+        "uploadImg":"Upload File",
+        "edit":"Update"
+
+    }
+}

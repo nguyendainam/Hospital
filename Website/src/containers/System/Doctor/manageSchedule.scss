@@ -1,0 +1,23 @@
+.container_schedule {
+  border: 1px solid black;
+  text-align: center;
+  .tittle_ms {
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 20px;
+    color: rgb(0, 30, 255);
+  }
+  .hour_schedule {
+    height: 120px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .hour_schedule {
+    padding: auto;
+    button.buttonTime {
+      /* padding-right: 11px; */
+      margin-right: 33px;
+      margin-top: 20px;
+    }
+  }
+}

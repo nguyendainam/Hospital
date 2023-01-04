@@ -1,0 +1,64 @@
+.mainsClinic_doctor {
+  margin-top: 20px;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+
+  .thanhdoc {
+    margin-top: 20px;
+    width: 10px;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    height: 50%;
+    border-left: 2px solid red;
+  }
+
+  .container_clinic {
+    padding-left: 40px;
+    color: #236a07;
+    font-weight: 700;
+    padding-bottom: 20px;
+  }
+
+  .thanhngang {
+    margin-top: 50px;
+    width: 350px;
+    border-bottom: 2px solid rgb(232, 209, 209);
+  }
+  .address-doctor {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px 20px;
+  }
+
+  .nameClinic {
+    margin: 10px 20px;
+  }
+
+  span.giakham {
+    padding-left: 10px;
+    color: deeppink;
+  }
+
+  .content_dow {
+    display: flex;
+    flex-direction: row;
+    padding-inline-start: 10px;
+
+    .giakham {
+      padding-right: 150px;
+    }
+
+    .banggia {
+      .costtable {
+        flex-direction: row;
+        display: flex;
+      }
+    }
+  }
+  .text_detail {
+    color: rgb(21, 126, 145);
+  }
+}

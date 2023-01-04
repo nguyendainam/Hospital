@@ -1,0 +1,79 @@
+.container_profile {
+  display: flex;
+  flex-direction: row;
+
+  .Image_doctor_booking {
+    margin-top: 5px;
+    margin-left: 15px;
+    width: 90px;
+    height: 90px;
+    background-color: aqua;
+    border-radius: 50%;
+
+    .imange_dr_booking {
+      width: 90px;
+      height: 90px;
+      background: #c2bbbb;
+      margin: auto;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 34, 218, 0.867);
+      background-size: cover;
+    }
+  }
+
+  .City {
+    padding-left: 20px;
+    color: #0328ab;
+    display: flex;
+    flex-direction: column;
+    .iconaddress {
+      padding-right: 5px;
+      color: rgb(12, 115, 166);
+    }
+    .city_name {
+      padding-right: 30px;
+    }
+    span.address_clinic {
+      padding-left: 20px !important;
+      color: #1924ab;
+    }
+  }
+  .Name_Doctor {
+    font-weight: bold;
+    color: deeppink;
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 18px;
+  }
+  .description_doctor {
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .price_doctor {
+    width: 100%;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    font-size: 15px;
+    padding-left: 20px;
+
+    font-weight: bold;
+    padding-top: 6px;
+    color: deeppink;
+
+    .price_doctor_1 {
+      padding-right: 20px;
+    }
+  }
+
+  .dateTime {
+    display: flex;
+    color: deeppink;
+    font-weight: 500;
+
+    .Timeeschedule {
+      padding-right: 10px;
+    }
+  }
+}
