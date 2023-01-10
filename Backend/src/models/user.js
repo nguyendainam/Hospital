@@ -12,9 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsTo(models.Allcode, { foreignKey: 'positionId', targetKey: 'keyMap', as: 'positionData' })
       User.belongsTo(models.Allcode, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
+
+      //1 - 1
       User.hasOne(models.Markdown, { foreignKey: 'doctorId' })
       User.hasOne(models.Doctor_infor, { foreignKey: 'doctorId' })
+
+      //// 1 - n 
       User.hasMany(models.Schedule, { foreignKey: 'doctorId', as: 'doctorSchedule' })
+      User.hasMany(models.Booking, { foreignKey: 'doctorId', as: 'BookingDoctor' })
 
 
 

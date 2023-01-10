@@ -104,11 +104,65 @@ let getAllClinicService = () => {
 }
 
 
+let getDoctorClinicServices = (ClinicId, specialtyId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            if (!ClinicId || !specialtyId) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing required parameter"
+                })
+            } else {
+                let data = {}
+                if (specialtyId === 'ALL') {
+                    data = await db.Doctor_infor.findAll({
+                        where: { clinicId: ClinicId },
+                        attributes: {
+                            exclude: ['priceId', 'paymentId', 'addressClinic', 'nameClinic',
+                                'note', 'count', 'createdAt', 'updatedAt'
+                            ]
+
+
+                        },
+                    })
+                }
+                else {
+                    data = await db.Doctor_infor.findAll({
+                        where: {
+                            clinicId: ClinicId,
+                            specialtyId: specialtyId
+                        },
+                        attributes: {
+                            exclude: ['priceId', 'paymentId', 'addressClinic', 'nameClinic',
+                                'note', 'count', 'createdAt', 'updatedAt'
+                            ]
+
+
+                        },
+                    })
+                }
+                if (!data) data = {}
+                resolve({
+                    errCode: 1,
+                    errMessage: 'get DataDoctor Clinic successfull',
+                    data: data
+                })
+            }
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
 
 
 module.exports = {
     createNewClinicService: createNewClinicService,
     getIdNameClinicService: getIdNameClinicService,
     getAddressClinicByIdService: getAddressClinicByIdService,
-    getAllClinicService: getAllClinicService
+    getAllClinicService: getAllClinicService,
+    getDoctorClinicServices: getDoctorClinicServices
 }

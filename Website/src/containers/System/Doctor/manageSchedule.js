@@ -143,6 +143,8 @@ class ManageSchedule extends Component {
             alert("Lỗi, Không lưu được data")
         }
 
+        console.log(".....state.....", this.state)
+
     }
     render() {
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));

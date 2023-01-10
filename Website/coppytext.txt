@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './ExamInforDr.scss'
-import { LANGUAGES } from '../../../../utils';
 import { FormattedMessage } from 'react-intl'
 class ExamInforDr extends Component {
 

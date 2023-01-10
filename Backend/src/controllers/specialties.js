@@ -88,11 +88,25 @@ let getSpecialtybyId = async (req, res) => {
 }
 
 
+let getAllCodeSpecialty = async (req, res) => {
+    try {
+        let data = await Specialties.getAllcodeSpecialtyService()
+        return res.status(200).json({ data })
+
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Err from getAllCodeSpecialty'
+        })
+    }
+}
+
 
 module.exports = {
     createNewSpecialty: createNewSpecialty,
     getAllSpecialty: getAllSpecialty,
     getIdNameSpecalty: getIdNameSpecalty,
     getDoctorSpecitalty: getDoctorSpecitalty,
-    getSpecialtybyId: getSpecialtybyId
+    getSpecialtybyId: getSpecialtybyId,
+    getAllCodeSpecialty: getAllCodeSpecialty
 }

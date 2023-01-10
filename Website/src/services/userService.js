@@ -108,7 +108,9 @@ const getInforSpecitaltybyId = (id) => {
     return axios.get(`/api/get-inforspecialty-by-id?id=${id}`)
 }
 
-
+const getAllcodeSpecialty = () => {
+    return axios.get(`/api/list-allcode-specialty`)
+}
 
 
 
@@ -130,6 +132,12 @@ const getAllClinic = () => {
 }
 
 
+const getDataDoctorClinic = (idClinic, idSpecialty) => {
+
+    return axios.get(`/api/get-doctors-clinics?idClinic=${idClinic}&specialtyId=${idSpecialty}`)
+}
+
+
 
 
 
@@ -140,5 +148,5 @@ export {
     getDetailsInforDoctor, saveBulkSchedule, getScheduleDoctorbyDay, postCostInforDoctor,
     getDataCostInforDoctor, getDataProfileDoctor, postPatientAppoiment, postVerifyPatientAppoiment,
     createNewSpecialty, getAllSpecialty, createNewClinic, getIdNameSpecialty, getIdNameClinic, getAddressClinic,
-    getAllClinic, getdoctorSpecitalty, getInforSpecitaltybyId
+    getAllClinic, getdoctorSpecitalty, getInforSpecitaltybyId, getDataDoctorClinic, getAllcodeSpecialty
 } 

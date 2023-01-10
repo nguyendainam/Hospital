@@ -39,13 +39,13 @@ export const adminMenu = [
             },
 
             {
-                name: 'menu.doctor.menu-schedule', link: '/doctor/manage-schedule',
+                name: 'menu.doctor.menu-schedule', link: '/system/doctor/manage-schedule/doctor/manage-schedule',
 
             },
 
 
             {
-                name: 'menu.doctor.doctor-infor', link: '/doctor/dr-information',
+                name: 'menu.doctor.doctor-infor', link: '/system/doctor/dr-information',
 
             },
 
@@ -102,11 +102,18 @@ export const DoctorMenu = [
         name: 'menu.admin.manage-user',
         menus: [
 
+
             {
+                name: 'menu.doctor.information', link: '/doctor/manage-information',
+            },
+            {
+                name: 'menu.doctor.menu-schedule', link: '/doctor/dr-manage-schedule',
+            },
 
-                name: 'menu.doctor.menu-schedule', link: '/doctor/manage-schedule',
+            {
+                name: 'menu.doctor.listpatient', link: '/doctor/dr-manage-list-patient',
+            },
 
-            }
 
 
         ]

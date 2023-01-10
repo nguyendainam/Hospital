@@ -419,6 +419,134 @@ let getProfileDoctorByIdService = (IdInput) => {
 }
 
 
+let getDataDoctorByEmail = (emailInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!emailInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter'
+                })
+            } else {
+                let data = await db.User.findOne({
+                    where: { email: emailInput },
+                    attributes: { exclude: ['password', 'positionId', 'roleId', 'image', 'address', 'phoneNumber', 'gender', 'createdAt', 'updatedAt'] },
+                    include: [
+                        {
+                            model: db.Markdown,
+                            attributes: ['description', 'contentMarkdown', 'contentHTML']
+
+                        },
+
+                        // { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] }
+
+                    ],
+
+                    raw: true,
+                    nest: true
+                })
+                resolve({
+                    errCode: 0,
+                    dataDoctor: data
+                })
+            }
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+
+}
+
+
+
+let DoctorDeleteSchedule = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.doctorId || !data.date || !data.timeType) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter'
+                })
+            } else {
+                await db.Schedule.destroy({
+                    where: {
+                        doctorId: data.doctorId,
+                        timeType: data.timeType,
+                        date: data.date
+                    }
+                })
+
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Delete SUCCESSFULL'
+                });
+
+            }
+
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
+let getListPatientforDoctorServices = (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!doctorId || !date) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing data parameter'
+                })
+            } else {
+                let data = await db.Booking.findAll({
+                    where: {
+                        doctorId: doctorId,
+                        date: date,
+                        statusId: 'S2'
+                    },
+                    include: [
+                        {
+                            model: db.Patient, as: 'PatientData',
+                            attributes: ['email', 'fullname', 'address', 'birthDay', 'gender'],
+                            include: [
+                                {
+                                    model: db.Allcode, as: 'genderPatient',
+                                    attributes: ['valueEn', 'valueVi'],
+
+                                }
+
+                            ]
+                        },
+                        {
+                            model: db.Allcode, as: 'statusBooking',
+                            attributes: ['valueEn', 'valueVi'],
+                        },
+                        {
+                            model: db.Allcode, as: 'timeTypeBooking',
+                            attributes: ['valueEn', 'valueVi'],
+                        }
+                    ],
+                    raw: true,
+                    nest: true
+
+                })
+
+                if (!data) data = {}
+                resolve({
+                    errCode: 0,
+                    data: data
+                })
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
 module.exports = {
     getTopDoctorHomeServices: getTopDoctorHomeServices,
     getAllDoctors: getAllDoctors,
@@ -428,5 +556,8 @@ module.exports = {
     getScheduleBydate: getScheduleBydate,
     postInforCostDoctorService: postInforCostDoctorService,
     getCostInforDoctorByIdService: getCostInforDoctorByIdService,
-    getProfileDoctorByIdService: getProfileDoctorByIdService
+    getProfileDoctorByIdService: getProfileDoctorByIdService,
+    getDataDoctorByEmail: getDataDoctorByEmail,
+    DoctorDeleteSchedule: DoctorDeleteSchedule,
+    getListPatientforDoctorServices: getListPatientforDoctorServices
 }

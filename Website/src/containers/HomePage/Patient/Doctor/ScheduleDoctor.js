@@ -31,13 +31,6 @@ class ScheduleDoctor extends Component {
             allDays: alldays,
             allAvalableTime: res.infor.data
         })
-
-
-
-        // this.setState({
-        //     allDays: alldays,
-        // })
-
     }
 
 
@@ -152,11 +145,6 @@ class ScheduleDoctor extends Component {
                 })
 
             }
-
-
-
-
-
         }
 
 

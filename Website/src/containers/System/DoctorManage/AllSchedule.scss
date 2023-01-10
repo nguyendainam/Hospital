@@ -1,0 +1,46 @@
+.from-container-schedule {
+  height: auto;
+  width: auto;
+  margin-bottom: 10px;
+  .formSchedule {
+    .formselect {
+      margin: auto;
+      width: 350px;
+      display: flex;
+      flex-direction: row;
+
+      .selectDate {
+        width: 200px;
+        margin-left: 20px;
+      }
+    }
+
+    .form_time {
+      width: auto;
+      margin-top: 50px;
+      border: 1px solid;
+      display: flex;
+      flex-direction: row;
+
+      .times {
+        display: inline-flex;
+        flex-direction: row;
+        border: 1px solid rgb(38, 2, 14);
+        width: 700px;
+        height: 300px;
+        margin: auto;
+        .btntime_list {
+          margin: 10px 10px;
+          height: 100%;
+          width: 100%;
+        }
+        button.btntime.btn.btn-outline-success {
+          width: 195px;
+          height: 50px;
+          margin: 10px 10px;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './Clinic.scss'
 import { FormattedMessage } from 'react-intl'
-import { getAddressClinic } from '../../../../services/userService'
-
-
-
+import ProfileDoctor from '../Doctor/ProfileDoctor';
+import Address_DoctorClinic from '../Doctor/Address_DoctorClinic';
+import ScheduleDoctor from '../Doctor/ScheduleDoctor';
 import Header from '../../Header/Header';
 import { LANGUAGES } from '../../../../utils/constant';
+import { getDataDoctorClinic, getAddressClinic, getAllcodeSpecialty } from '../../../../services/userService';
+
 
 
 class Clinic extends Component {
@@ -16,22 +17,52 @@ class Clinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrClinic: []
+            arrClinic: [],
+            selecSpecialty: 'ALL',
+            arrDoctorClinic: [],
+            dataSpecialty: []
         }
     }
 
     async componentDidMount() {
         let id = this.props.match.params.id
         let data = await getAddressClinic(id)
+        this.dataDoctorClinic(id, this.state.selecSpecialty)
+        this.getAllcodeSpecialty()
         this.setState({
-            arrClinic: data
+            arrClinic: data,
+        })
+
+
+
+    }
+
+    dataDoctorClinic = async (idClinic, idSpecialty) => {
+
+        let datadoctor = await getDataDoctorClinic(idClinic, idSpecialty)
+        this.setState({
+            arrDoctorClinic: datadoctor.data
         })
     }
 
+    getAllcodeSpecialty = async () => {
+        let data = await getAllcodeSpecialty()
+        let list = data.data.data
+        if (list && list.length > 0) {
+            list.unshift({
+                id: 'ALL',
+                nameEn: 'All',
+                nameVi: "Tất cả các khoa",
+            })
+            this.setState({
+                dataSpecialty: list
+            })
+        } else {
+            console.log("err")
+        }
 
 
-
-
+    }
 
 
 
@@ -39,12 +70,17 @@ class Clinic extends Component {
 
     }
 
+    handleSelectOptions = (event) => {
+        let id = this.props.match.params.id
+        this.dataDoctorClinic(id, event.target.value)
+
+    }
 
     render() {
         let imageBase64, name_clinic, addressClinic, description = ''
         let { language } = this.props
-        const { arrClinic } = this.state
-        console.log('dataa....', arrClinic.data)
+        const { arrClinic, arrDoctorClinic, dataSpecialty } = this.state
+        //console.log('dataa....', arrClinic.data)
 
         if (arrClinic && arrClinic.data) {
             imageBase64 = new Buffer(arrClinic.data.image, 'base64').toString('binary')
@@ -52,6 +88,8 @@ class Clinic extends Component {
             addressClinic = arrClinic.data.address
             description = arrClinic.data.descriptionHTML
         }
+
+        // console.log('...doctorClinic.........', arrDoctorClinic)
 
         return (
             <>
@@ -69,6 +107,54 @@ class Clinic extends Component {
                     </div>
                     <div className='content_clinic'>
                         <div dangerouslySetInnerHTML={{ __html: description }} ></div>
+                    </div>
+                    <div className='from_list_specialty'>
+                        <span><FormattedMessage id={'home-header.chooseSpecialty'} /> </span>
+                        <select className='form-control'
+                            onClick={(event) => this.handleSelectOptions(event)}
+                        >
+                            {dataSpecialty && dataSpecialty.length > 0
+                                && dataSpecialty.map((item, index) => {
+                                    return (
+                                        <option key={index}
+                                            value={item.id}
+                                        >
+                                            {language === LANGUAGES.VI ? item.nameVi : item.nameEn}
+                                        </option>
+                                    )
+                                })
+
+
+                            }
+                        </select>
+
+                    </div>
+                    <div className='doctor_clinic'>
+
+                        {arrDoctorClinic && arrDoctorClinic.length > 0 && arrDoctorClinic.map((item, index) => {
+                            return (
+                                <div className='form_doctor_clinic' key={index}>
+                                    <div className='infor_dr'>
+                                        <ProfileDoctor
+                                            id={item.doctorId
+                                            }
+                                            doctorId={item.doctorId}
+                                            OpenDescription={true}
+                                        />
+
+                                    </div>
+
+                                    <div className='schedule'>
+                                        <ScheduleDoctor
+                                            doctorId={item.doctorId}
+                                        />
+                                    </div>
+                                </div>
+                            )
+
+                        })}
+
+
                     </div>
 
                 </div>

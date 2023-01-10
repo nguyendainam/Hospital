@@ -29,9 +29,8 @@
         "unSee_details":"Ẩn xem chi tiết",
         "city":"Thành Phố",
         "address":"Địa chỉ: ",
-        "freeSchedule":"Miễn Phí đặt lịch"
-
-        ,
+        "freeSchedule":"Miễn Phí đặt lịch",
+        "chooseSpecialty":"Lựa chọn khoa khám bệnh",
 
 
         "patient" :{
@@ -87,7 +86,9 @@
             "note":"Ghi chú",
             "tittle_inforDR":"Thông tin khám bệnh",
             "dr_specialty":"Chuyên Khoa",
-            "dr_clinic":"Phòng khám"
+            "dr_clinic":"Phòng khám",
+            "information": "Thông tin bác sĩ",
+            "listpatient":"Danh sách bệnh nhân"
         }
     },
 

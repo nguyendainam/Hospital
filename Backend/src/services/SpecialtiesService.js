@@ -160,10 +160,29 @@ let getSpecialtyByIdService = (id) => {
     })
 }
 
+let getAllcodeSpecialtyService = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.Specialty.findAll({
+                attributes: {
+                    exclude: ['description', 'contentHTML', 'image', 'createdAt', 'updatedAt']
+                }
+            })
+            resolve({
+                errCode: 0,
+                data: data
+            })
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     createNewSpecialties: createNewSpecialties,
     getAllSpecialtyService: getAllSpecialtyService,
     getIdNameSpecaltyService: getIdNameSpecaltyService,
     getDoctorSpecialtyService: getDoctorSpecialtyService,
-    getSpecialtyByIdService: getSpecialtyByIdService
+    getSpecialtyByIdService: getSpecialtyByIdService,
+    getAllcodeSpecialtyService: getAllcodeSpecialtyService
 }

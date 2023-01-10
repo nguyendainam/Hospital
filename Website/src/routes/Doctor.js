@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Header from '../containers/Header/Header';
-import manageSchedule from '../containers/System/Doctor/manageSchedule';
-import Doctor_infor from '../containers/System/Doctor/Doctor_infor';
+import DrInfor from '../containers/System/DoctorManage/DrInfor';
+import ScheduleDoctor from '../containers/System/DoctorManage/ScheduleDoctor';
+import ListPatient from '../containers/System/DoctorManage/ListPatient';
+
+
 class Doctor extends Component {
     render() {
         //    {/*  */}
@@ -14,9 +17,9 @@ class Doctor extends Component {
                 <div className="Doctor-container">
                     <div className="Doctor-list">
                         <Switch>
-                            <Route path="/doctor/manage-schedule" component={manageSchedule} />
-                            <Route path="/doctor/dr-information" component={Doctor_infor} />
-
+                            <Route path="/doctor/manage-information" component={DrInfor} />
+                            <Route path="/doctor/dr-manage-schedule" component={ScheduleDoctor} />
+                            <Route path="/doctor/dr-manage-list-patient" component={ListPatient} />
 
                         </Switch>
                     </div>

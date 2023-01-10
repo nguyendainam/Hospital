@@ -30,6 +30,7 @@
         "city":"City",
         "address":"Address: ",
         "freeSchedule":"Free booking",
+        "chooseSpecialty":"Choosing a medical department",
 
         "patient" :{
             "bookSchedule":"Book a medical appointment",
@@ -88,7 +89,9 @@
             "note":"Note",
             "tittle_inforDR":"Information Doctor",
             "dr_specialty":"Specialties",
-            "dr_clinic":"Clinics"
+            "dr_clinic":"Clinics",
+            "information": "Thông tin bác sĩ",
+            "listpatient":"Patient List"
         }
 
     },

@@ -133,6 +133,47 @@ let getProfileDoctorbyId = async (req, res) => {
 }
 
 
+let getInforDoctorbyEmail = async (req, res) => {
+    try {
+
+        let dataDoctor = await DoctorServices.getDataDoctorByEmail(req.query.email)
+        return res.status(200).json({ dataDoctor })
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Missing parameter from getInforDoctorEmail'
+        })
+    }
+}
+
+
+let getDoctorDeleteSchedule = async (req, res) => {
+    try {
+        let schedule = await DoctorServices.DoctorDeleteSchedule(req.body)
+        return res.status(200).json(schedule)
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Missing parameter from getDoctorDeleteSchedule'
+        })
+    }
+}
+
+
+
+let getListPatientforDoctor = async (req, res) => {
+    try {
+        let data = await DoctorServices.getListPatientforDoctorServices(req.query.doctorId, req.query.date)
+        return res.status(200).json(data)
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from getListPatientforDoctor '
+        })
+    }
+}
+
 
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
@@ -143,5 +184,8 @@ module.exports = {
     getScheduleByDay: getScheduleByDay,
     postInforCostDoctor: postInforCostDoctor,
     getCostInforDoctorByid: getCostInforDoctorByid,
-    getProfileDoctorbyId: getProfileDoctorbyId
+    getProfileDoctorbyId: getProfileDoctorbyId,
+    getInforDoctorbyEmail: getInforDoctorbyEmail,
+    getDoctorDeleteSchedule: getDoctorDeleteSchedule,
+    getListPatientforDoctor: getListPatientforDoctor
 }

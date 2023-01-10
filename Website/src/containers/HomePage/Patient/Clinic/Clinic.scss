@@ -37,4 +37,34 @@
     width: 100%;
     height: auto;
   }
+
+  .from_list_specialty {
+    width: 200px;
+  }
+
+  .doctor_clinic {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    .form_doctor_clinic {
+      width: 100%;
+      height: 330px;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid seashell;
+      border-radius: 20px;
+      padding-top: 30px;
+      margin-bottom: 10px;
+      .infor_dr {
+        width: 45%;
+        height: 100%;
+        margin-right: 20px;
+      }
+
+      .schedule {
+        width: 50%;
+        height: 100%;
+      }
+    }
+  }
 }
