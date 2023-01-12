@@ -62,6 +62,12 @@ export const adminMenu = [
             {
                 name: 'menu.admin.manage-specialty', link: '/system/manage-specialist'
 
+            },
+
+
+            {
+                name: 'menu.admin.manage-listSpecialty', link: '/system/manage-specialist-information'
+
             }
 
         ]
@@ -76,24 +82,30 @@ export const adminMenu = [
             {
                 name: 'menu.admin.manage-clinic', link: '/system/manage-clinics'
 
-            }
-
-        ]
-    },
-
-    { //hệ thống quản lý phòng khám
-        name: 'menu.admin.manage-handbook',
-
-
-        menus: [
-
+            },
             {
-                name: 'menu.admin.manage-handbook', link: '/system/manage-handbook'
+                name: 'menu.admin.manage-listClinic', link: '/system/manage-inform-clinics'
 
             }
 
+
+
         ]
     },
+
+    // { //hệ thống quản lý phòng khám
+    //     name: 'menu.admin.manage-handbook',
+
+
+    //     menus: [
+
+    //         {
+    //             name: 'menu.admin.manage-handbook', link: '/system/manage-handbook'
+
+    //         }
+
+    //     ]
+    // },
 ];
 
 export const DoctorMenu = [
@@ -102,9 +114,11 @@ export const DoctorMenu = [
         name: 'menu.admin.manage-user',
         menus: [
 
-
             {
-                name: 'menu.doctor.information', link: '/doctor/manage-information',
+                name: 'menu.doctor.information', link: '/doctor/dr-manage-information-spe',
+            },
+            {
+                name: 'menu.doctor.inforspecialist', link: '/doctor/manage-information',
             },
             {
                 name: 'menu.doctor.menu-schedule', link: '/doctor/dr-manage-schedule',
@@ -113,6 +127,8 @@ export const DoctorMenu = [
             {
                 name: 'menu.doctor.listpatient', link: '/doctor/dr-manage-list-patient',
             },
+
+
 
 
 

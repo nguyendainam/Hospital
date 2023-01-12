@@ -77,7 +77,7 @@ let getAllCode = async (req, res) => {
         setTimeout(async () => {
             let data = await UserService.getAllCodeService(req.query.type)
             return res.status(200).json(data)
-        }, 4000)
+        })
 
 
     } catch (e) {

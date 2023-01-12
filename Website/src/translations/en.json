@@ -31,6 +31,9 @@
         "address":"Address: ",
         "freeSchedule":"Free booking",
         "chooseSpecialty":"Choosing a medical department",
+        "topbacsi":"Doctor", 
+        "chuyenkhoanoitieng" :"Famous Specialization",
+        "chinhanhphongkham":"Clinic Branches",
 
         "patient" :{
             "bookSchedule":"Book a medical appointment",
@@ -74,7 +77,8 @@
             "crud-redux" : "CRUD Redux",
             "manage-clinic":"Clinic",
             "manage-specialty":"Specialty",
-            "manage-handbook":"Manage Handbook"
+            "manage-handbook":"Manage Handbook",
+            "manage-listSpecialty":"manage listSpecialty"
         },
         "doctor" :{
             "menu-schedule": "Manage medical examination plan" ,
@@ -90,8 +94,10 @@
             "tittle_inforDR":"Information Doctor",
             "dr_specialty":"Specialties",
             "dr_clinic":"Clinics",
-            "information": "Thông tin bác sĩ",
-            "listpatient":"Patient List"
+            "information": "information Doctor",
+            "listpatient":"Patient List",
+            "inforspecialist":"Specialized information" ,
+            "manage-listClinic":"Manage Information Clinic"
         }
 
     },

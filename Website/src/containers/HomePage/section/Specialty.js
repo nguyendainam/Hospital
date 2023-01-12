@@ -59,10 +59,8 @@ class Specialty extends Component {
                 <div className='section-MedicalFacility'>
                     <div className='speciaty-content'>
                         <div className='MedicalFacility-header'>
-                            <span className='title-header-MedicalFacility'>Chuyên Khoa Nổi Tiếng</span>
-                            <div className='Button-header-MedicalFacility'>
-                                <button type="button" className="btn btn-outline-secondary">Xem thêm</button>
-                            </div>
+                            <span className='title-header-MedicalFacility'><FormattedMessage id={'home-header.chuyenkhoanoitieng'} /></span>
+
                         </div>
                         <div className='container'>
                             <Slider {...settings}>

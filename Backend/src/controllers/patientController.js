@@ -74,7 +74,19 @@ let getPatientGetSchedule = async (req, res) => {
     } catch (e) {
         return res.status(200).json({
             errCode: -1,
-            errMessage: "getPatientGetSchedule"
+            errMessage: " err from getPatientGetSchedule"
+        })
+    }
+}
+
+let getCancelSchedule = async (req, res) => {
+    try {
+        let data = await PatientServices.getCancelScheduleFromPatient(req.query.patientId, req.query.token)
+        return res.status(200).json(data)
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: " err from getCancelSchedule"
         })
     }
 }
@@ -85,5 +97,6 @@ module.exports = {
     postVerifyBookAppointment: postVerifyBookAppointment,
     handleCreateNewUserPatient: handleCreateNewUserPatient,
     handlePatientLogin: handlePatientLogin,
-    getPatientGetSchedule: getPatientGetSchedule
+    getPatientGetSchedule: getPatientGetSchedule,
+    getCancelSchedule: getCancelSchedule
 }

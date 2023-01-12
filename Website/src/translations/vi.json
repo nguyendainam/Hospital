@@ -31,6 +31,10 @@
         "address":"Địa chỉ: ",
         "freeSchedule":"Miễn Phí đặt lịch",
         "chooseSpecialty":"Lựa chọn khoa khám bệnh",
+        "topbacsi":"Bác sĩ", 
+        "chuyenkhoanoitieng" :"Chuyên khoa",
+        "chinhanhphongkham":"Chi nhánh phòng khám",
+
 
 
         "patient" :{
@@ -69,7 +73,10 @@
             "crud-redux" : "CRUD Redux",
             "manage-clinic":"Phòng khám",
             "manage-specialty":"Chuyên Khoa",
-            "manage-handbook":"Bài Viết Cẩm Nang"
+            "manage-handbook":"Bài Viết Cẩm Nang",
+            "manage-listSpecialty":"Quản lý thông tin chuyên khoa",
+            "manage-listClinic":"Quản lý thông tin phòng khám"
+
 
 
         },
@@ -88,7 +95,8 @@
             "dr_specialty":"Chuyên Khoa",
             "dr_clinic":"Phòng khám",
             "information": "Thông tin bác sĩ",
-            "listpatient":"Danh sách bệnh nhân"
+            "listpatient":"Danh sách bệnh nhân",
+            "inforspecialist":"Thông tin chuyên khoa"
         }
     },
 

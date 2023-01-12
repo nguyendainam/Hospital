@@ -20,7 +20,7 @@ class HomePage extends Component {
                 <MedicalFacility />
                 <Specialty />
                 <Doctor_OutStanding />
-                <Handbook />
+                {/* <Handbook /> */}
 
                 <Footer />
 

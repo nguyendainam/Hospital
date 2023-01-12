@@ -101,6 +101,19 @@ let getAllCodeSpecialty = async (req, res) => {
     }
 }
 
+let UpdateInformationSpecialty = async (req, res) => {
+    try {
+        let data = await Specialties.UpdateInformationSpecialtyService(req.body)
+        return res.status(200).json(data)
+
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Err from getAllCodeSpecialty'
+        })
+    }
+}
+
 
 module.exports = {
     createNewSpecialty: createNewSpecialty,
@@ -108,5 +121,6 @@ module.exports = {
     getIdNameSpecalty: getIdNameSpecalty,
     getDoctorSpecitalty: getDoctorSpecitalty,
     getSpecialtybyId: getSpecialtybyId,
-    getAllCodeSpecialty: getAllCodeSpecialty
+    getAllCodeSpecialty: getAllCodeSpecialty,
+    UpdateInformationSpecialty: UpdateInformationSpecialty
 }

@@ -178,11 +178,50 @@ let getAllcodeSpecialtyService = () => {
     })
 }
 
+let UpdateInformationSpecialtyService = (dataSend) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!dataSend.id) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing data required'
+                })
+            } else {
+                let data = await db.Specialty.findOne({
+                    where: { id: dataSend.id },
+                    raw: false
+                })
+
+                if (data) {
+                    data.description = dataSend.description
+                    data.contentHTML = dataSend.contentHTML
+                    data.image = dataSend.image
+                    data.nameVi = dataSend.nameVi
+                    data.nameEn = dataSend.nameEn
+                    await data.save()
+                }
+
+
+
+            }
+            resolve({
+                errCode: 0,
+                errMessage: 'update success full',
+            })
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
 module.exports = {
     createNewSpecialties: createNewSpecialties,
     getAllSpecialtyService: getAllSpecialtyService,
     getIdNameSpecaltyService: getIdNameSpecaltyService,
     getDoctorSpecialtyService: getDoctorSpecialtyService,
     getSpecialtyByIdService: getSpecialtyByIdService,
-    getAllcodeSpecialtyService: getAllcodeSpecialtyService
+    getAllcodeSpecialtyService: getAllcodeSpecialtyService,
+    UpdateInformationSpecialtyService: UpdateInformationSpecialtyService
 }

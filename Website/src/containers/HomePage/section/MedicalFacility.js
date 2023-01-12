@@ -53,7 +53,7 @@ class MedicalFacility extends Component {
                 <div className='section-specialty'>
                     <div className='speciaty-content'>
                         <div className='specialty-header'>
-                            <span className='title-header-specialty'>Các Chi Nhánh Phòng Khám</span>
+                            <span className='title-header-specialty'><FormattedMessage id={'home-header.chinhanhphongkham'} /></span>
                             <div className='Button-header-specialty'>
                                 <button type="button" className="btn btn-outline-secondary">Xem thêm</button>
                             </div>

@@ -5,7 +5,7 @@ import Header from '../containers/Header/Header';
 import DrInfor from '../containers/System/DoctorManage/DrInfor';
 import ScheduleDoctor from '../containers/System/DoctorManage/ScheduleDoctor';
 import ListPatient from '../containers/System/DoctorManage/ListPatient';
-
+import InformationDoctor from '../containers/System/DoctorManage/InformationDoctor';
 
 class Doctor extends Component {
     render() {
@@ -20,7 +20,7 @@ class Doctor extends Component {
                             <Route path="/doctor/manage-information" component={DrInfor} />
                             <Route path="/doctor/dr-manage-schedule" component={ScheduleDoctor} />
                             <Route path="/doctor/dr-manage-list-patient" component={ListPatient} />
-
+                            <Route path="/doctor/dr-manage-information-spe" component={InformationDoctor} />
                         </Switch>
                     </div>
                 </div>

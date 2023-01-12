@@ -22,21 +22,25 @@ class PatientSchedule extends Component {
 
     async componentDidMount() {
         let getDate = this.getArrayDate()
-        let firstDate = getDate[7].key
+        let firstDate = getDate[5].key
         let idPatient = this.props.dataUser.id
 
-        axios({
+        this.getData(idPatient, firstDate)
+        this.setState({
+            arrDate: getDate
+        })
+    }
+
+    getData = async (idPatient, date) => {
+        await axios({
             method: 'GET',
-            url: `${baseurl}/api/patient-get-schedule?patientId=13&date=1673283600000`
+            url: `${baseurl}/api/patient-get-schedule?patientId=${idPatient}&date=${date}`
         }).then(data => {
             this.setState({
                 dataPatient: data.data
             })
         })
 
-        this.setState({
-            arrDate: getDate
-        })
     }
 
 
@@ -44,7 +48,7 @@ class PatientSchedule extends Component {
     getArrayDate = () => {
 
         let arrDate = []
-        for (let i = -7; i < 7; i++) {
+        for (let i = -5; i < 5; i++) {
             let object = {}
             if (i === 0) {
                 let today = moment(new Date()).format('- DD/MM')
@@ -74,18 +78,37 @@ class PatientSchedule extends Component {
     }
 
     dateSelected = (key) => {
-        console.log("keyyyyyyy", key)
+        let idPatient = this.props.dataUser.id
+        this.getData(idPatient, key)
     }
 
+
+    cancelSchedule = async (item) => {
+        await axios({
+            method: 'GET',
+            url: `${baseurl}/api/patient-cancel-schedule?patientId=${item.patientId}&token=${item.token}`
+        }).then(data => {
+            let notifi = data.data
+            console.log("...........", notifi)
+            if (notifi.errCode === 0) {
+                let idPatient = this.props.dataUser.id
+                this.getData(idPatient, item.date)
+            }
+        })
+
+
+
+
+    }
 
     render() {
 
         let { arrDate } = this.state
         let dataPatient = this.state.dataPatient.data
-        console.log('date....', this.state.dataPatient)
+        //   console.log('date....', dataPatient)
         return (
             <>
-                <View>
+                <View style={styles.containerSchedule}>
                     <Text>Lịch khám bệnh</Text>
 
                     <View>
@@ -101,7 +124,7 @@ class PatientSchedule extends Component {
                             placeholder='Chọn lịch '
                             dropdownTextStyles={{ color: '#FF8E9E', fontWeight: '700' }}
                             dropdownItemStyles={{ marginHorizontal: 10 }}
-                            defaultOption={key = arrDate[7]}
+                            defaultOption={key = arrDate[5]}
 
 
 
@@ -129,16 +152,22 @@ class PatientSchedule extends Component {
                                         </View>
                                         <View style={styles.form1}>
                                             <Text style={{ width: '50%' }}>Trạng thái</Text>
-                                            <Text style={{ width: '50%' }}>{item.statusBooking.valueVi}</Text>
+                                            <Text style={{ width: '50%', color: 'red' }}>{item.statusBooking.valueVi}</Text>
                                         </View>
 
 
+                                        {item.statusId === 'S3' || item.statusId === 'S4' ?
+                                            <Text></Text> :
+                                            <TouchableOpacity
+                                                onPress={() => this.cancelSchedule(item)}
+                                            >
+                                                <View style={styles.button}>
+                                                    <Text style={{ color: 'black' }}>Hủy lịch hẹn</Text>
+                                                </View>
+                                            </TouchableOpacity>
 
-                                        <TouchableOpacity>
-                                            <View style={styles.button}>
-                                                <Text style={{ color: 'black' }}>Hủy</Text>
-                                            </View>
-                                        </TouchableOpacity>
+                                        }
+
 
                                     </View>
                                 )
@@ -173,6 +202,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 const styles = StyleSheet.create({
+
+
+    containerSchedule: {
+        marginTop: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 
     button: {
         marginTop: 20,

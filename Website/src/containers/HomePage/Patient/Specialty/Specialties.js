@@ -130,8 +130,14 @@ class Specialties extends Component {
                             </div>
                             <div className='container'>
                                 <div className='name_specialty'>{language === LANGUAGES.VI ? arrSpecialty.data.nameVi : arrSpecialty.data.nameEn}</div>
+
                                 <div className='form_descipt'>
-                                    <div dangerouslySetInnerHTML={{ __html: arrSpecialty.data.contentHTML }} ></div>
+
+                                    <form className='listent_DES'>
+                                        <span dangerouslySetInnerHTML={{ __html: arrSpecialty.data.contentHTML }} ></span>
+                                    </form>
+
+
 
                                 </div>
 

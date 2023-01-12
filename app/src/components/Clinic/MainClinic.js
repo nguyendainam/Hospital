@@ -41,16 +41,6 @@ class MainClinic extends Component {
         })
     }
 
-
-
-
-
-
-
-
-
-
-
     async componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
@@ -108,6 +98,7 @@ class MainClinic extends Component {
 
                             <DoctorClinic
                                 idClinic={this.props.route.params.idClinic}
+                                navigation={this.props.navigation}
                             />
 
                         </View>

@@ -1,4 +1,4 @@
-import { reject } from "lodash";
+import { get, reject } from "lodash";
 import db from "../models";
 
 let createNewClinicService = (data) => {
@@ -157,6 +157,50 @@ let getDoctorClinicServices = (ClinicId, specialtyId) => {
 }
 
 
+let UpdateInformationClinicService = (dataInput) => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!dataInput.id) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing data required'
+                })
+
+            }
+            else {
+
+                let data = await db.Clinic.findOne({
+                    where: { id: dataInput.id },
+                    raw: false
+                })
+
+                // console.log(data)
+                if (data) {
+                    data.address = dataInput.address
+                    data.province = dataInput.province
+                    data.description = dataInput.description
+                    data.descriptionHTML = dataInput.descriptionHTML
+                    data.image = dataInput.image
+                    data.nameVi = dataInput.nameVi
+                    data.nameEn = dataInput.nameEn
+
+                    await data.save()
+                }
+
+
+            }
+            resolve({
+                errCode: 0,
+                errMessage: 'Update success full'
+            })
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 
 
 module.exports = {
@@ -164,5 +208,6 @@ module.exports = {
     getIdNameClinicService: getIdNameClinicService,
     getAddressClinicByIdService: getAddressClinicByIdService,
     getAllClinicService: getAllClinicService,
-    getDoctorClinicServices: getDoctorClinicServices
+    getDoctorClinicServices: getDoctorClinicServices,
+    UpdateInformationClinicService: UpdateInformationClinicService
 }

@@ -58,10 +58,8 @@ class Doctor_OutStanding extends Component {
                 <div className='section-Doctor_OutStanding'>
                     <div className='speciaty-content'>
                         <div className='Doctor_OutStanding-header'>
-                            <span className='title-header-Doctor_OutStanding'>Bác Sĩ Nổi Bật</span>
-                            <div className='Button-header-Doctor_OutStanding'>
-                                <button type="button" className="btn btn-outline-secondary">Xem thêm</button>
-                            </div>
+                            <span className='title-header-Doctor_OutStanding'><FormattedMessage id={'home-header.topbacsi'} /></span>
+
                         </div>
                         <div className='container'>
                             <Slider {...settings}>

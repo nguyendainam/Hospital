@@ -106,7 +106,10 @@ class Clinic extends Component {
                         <span className='address_clinic_text'>{addressClinic}</span>
                     </div>
                     <div className='content_clinic'>
-                        <div dangerouslySetInnerHTML={{ __html: description }} ></div>
+                        <form className='from_des_clinic'>
+                            <span dangerouslySetInnerHTML={{ __html: description }} ></span>
+                        </form>
+
                     </div>
                     <div className='from_list_specialty'>
                         <span><FormattedMessage id={'home-header.chooseSpecialty'} /> </span>

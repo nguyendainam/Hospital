@@ -329,11 +329,47 @@ let getPatientGetScheduleService = (id, date) => {
 }
 
 
+let getCancelScheduleFromPatient = (idPatien, token) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!idPatien || !token) {
+                resolve({
+                    errMessage: 'missing parameter required',
+                    errCode: 1
+                })
+                console.log('errr')
+            } else {
+                let data = await db.Booking.findOne({
+                    where: {
+                        patientId: idPatien,
+                        token: token
+                    },
+
+                    raw: false
+                })
+                console.log('')
+                if (data) {
+                    data.statusId = 'S4'
+                }
+                await data.save()
+            }
+            resolve({
+                errCode: 0,
+                errMessage: 'Cancel schedule successfull'
+            })
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
 
 module.exports = {
     postBookAppointmentService: postBookAppointmentService,
     postVerifyBookAppointmentService: postVerifyBookAppointmentService,
     CreateNewUserPatient: CreateNewUserPatient,
     handlePatientLoginService: handlePatientLoginService,
-    getPatientGetScheduleService: getPatientGetScheduleService
+    getPatientGetScheduleService: getPatientGetScheduleService,
+    getCancelScheduleFromPatient: getCancelScheduleFromPatient
 }

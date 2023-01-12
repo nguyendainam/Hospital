@@ -9,6 +9,8 @@ import Specialist from '../containers/System/Specialist/Specialist';
 import Clinic from '../containers/System/Clinic/Clinic';
 import manageSchedule from '../containers/System/Doctor/manageSchedule';
 import Doctor_infor from '../containers/System/Doctor/Doctor_infor';
+import ManageSpecialist from '../containers/System/Specialist/ManageSpecialist';
+import ManageClinics from '../containers/System/Clinic/ManageClinics';
 class System extends Component {
     render() {
         //    {/*  */}
@@ -26,6 +28,11 @@ class System extends Component {
                             <Route path='/system/manage-clinics' component={Clinic} />
                             <Route path='/system/doctor/manage-schedule' component={manageSchedule} />
                             <Route path='/system/doctor/dr-information' component={Doctor_infor} />
+                            <Route path='/system/manage-specialist-information' component={ManageSpecialist} />
+                            <Route path='/system/manage-inform-clinics' component={ManageClinics} />
+
+                            {/*  */}
+
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>

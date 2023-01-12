@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './Doctor_infor.scss'
+import { connect } from "react-redux";
+import './InformationDoctor.scss'
+import { FormattedMessage } from 'react-intl'
+import { getInforDoctor } from '../../../services/doctorService';
+import { getDataCostInforDoctor, getIdNameSpecialty, getIdNameClinic, saveBulkSchedule, getAddressClinic } from '../../../services/userService'
+import { LANGUAGES } from '../../../utils';
 import * as actions from '../../../store/actions'
-import { CRUD_ACTION, LANGUAGES, dateFormat } from '../../../utils';
-import DatePicker from '../../../components/Input/DatePicker';
-import moment from 'moment';
-import _, { isEmpty, result } from 'lodash';
-import { fetchAllPayment } from '../../../store/actions';
 import Select from 'react-select';
-import { FormattedMessage } from 'react-intl';
-
-import { getDataCostInforDoctor, getIdNameSpecialty, getIdNameClinic, saveBulkSchedule, getAddressClinic } from '../../../services/userService';
+import _ from 'lodash';
 
 
-
-
-class DoctorInfor extends Component {
-
-
-
+class InformationDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
             arrInformation: [],
             listDoctor: [],
-            selectedDoctor: '',
+            dataInforDoctor: [],
             listPrice: [],
             listPayment: [],
             listProvince: [],
@@ -39,85 +31,52 @@ class DoctorInfor extends Component {
             btnUpdate: false,
             isloadingData: false,
             selectedSpecialty: '',
-            selectedClinic: ''
+            selectedClinic: '',
+            selectedDoctor: '',
 
         }
     }
-    componentDidMount = async () => {
+
+    async componentDidMount() {
+        // lay data 
         this.props.fetchAllPriceStart()
         this.props.fetchAllPaymentStart()
         this.props.fetchAllProvinceStart()
-        this.props.fetchallDoctor()
         let arraySpe = await this.fetchAllSpecials()
         let arrayCli = await this.fetchAllClinic()
+        let email = this.props.userInfo.email
+        let dataDr = await getInforDoctor(email)
         this.setState({
-            isloadingData: this.props.isloadingData,
+            dataInforDoctor: dataDr.dataDoctor.dataDoctor,
             arrSpecialty: arraySpe,
             arrClinic: arrayCli
+
         })
-
-
-    }
-
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.allDoctors !== prevProps.allDoctors) {
-            let res = this.fetchAlldoctor(this.props.allDoctors)
-
-            this.setState({
-                listDoctor: res
-            })
-        }
-        if (this.props.allPrices !== prevProps.allPrices) {
-            let resPrice = this.fetchAllPrice(this.props.allPrices)
-            this.setState({
-                listPrice: resPrice
-            })
-        }
-
-        if (this.props.allPayments !== prevProps.allPayments) {
-            let resPayments = this.fetchAllPayment(this.props.allPayments)
-            this.setState({
-                listPayment: resPayments
-            })
-        }
-
-        if (this.props.allProvince !== prevProps.allProvince) {
-            let resAllProvince = this.fetchAllProvince(this.props.allProvince)
-            this.setState({
-                listProvince: resAllProvince
-            })
-        }
-
-        if (this.props.language !== prevProps.language) {
-            let res = this.fetchAlldoctor(this.props.allDoctors)
-            let resPrice = this.fetchAllPrice(this.props.allPrices)
-            let resPayments = this.fetchAllPayment(this.props.allPayments)
-            let resAllProvince = this.fetchAllProvince(this.props.allProvince)
-            let arraySpe = await this.fetchAllSpecials()
-            let arrayCli = await this.fetchAllClinic()
-
-            this.setState({
-                listDoctor: res,
-                listPrice: resPrice,
-                listPayment: resPayments,
-                listProvince: resAllProvince,
-                arrSpecialty: arraySpe,
-                arrClinic: arrayCli
-            })
-        }
-
-
-        if (this.props.isloadingData !== prevProps.isloadingData) {
-            this.setState({
-                isloadingData: this.props.isloadingData,
-            })
-        }
-
-
+        this.getdataInformationDoctor(dataDr)
 
 
 
     }
+
+
+
+    inputChangedHandle = (name, value) => {
+        this.setState({
+            ...this.state,
+            [name]: value
+        })
+    }
+
+
+    onChangeInput = (event, id) => {
+        let copyState = { ...this.state }
+        copyState[id] = event.target.value
+
+        this.setState({
+            ...copyState
+        })
+    }
+
 
     fetchAllClinic = async () => {
         let language = this.props.language
@@ -134,8 +93,6 @@ class DoctorInfor extends Component {
         }
         return arrayClinic
     }
-
-
     fetchAllSpecials = async () => {
         let language = this.props.language
         let data = await getIdNameSpecialty()
@@ -152,7 +109,37 @@ class DoctorInfor extends Component {
             })
         } return array
     }
+    fetchAllPrice = (inputPrice) => {
+        let language = this.props.language
+        let arrPrice = []
+        if (inputPrice && inputPrice.length > 0) {
+            inputPrice.map((item, index) => {
+                let ObjectPrice = {}
+                let priceVi = `${item.valueVi}.VNĐ`
+                let priceEn = `${item.valueEn}$`
+                ObjectPrice.label = language === LANGUAGES.VI ? priceVi : priceEn
+                ObjectPrice.value = item.keyMap
+                arrPrice.push(ObjectPrice)
+            })
+        }
+        return arrPrice
+    }
+    fetchAllPayment = (inputpayment) => {
+        let language = this.props.language
+        let arrPayment = []
+        if (inputpayment && inputpayment.length > 0) {
+            inputpayment.map((item, index) => {
+                let ObjectPayment = {}
+                let paymentVi = `${item.valueVi}`
+                let paymentEn = `${item.valueEn}`
+                ObjectPayment.label = language === LANGUAGES.VI ? paymentVi : paymentEn
+                ObjectPayment.value = item.keyMap
+                arrPayment.push(ObjectPayment)
+            })
+        }
+        return arrPayment
 
+    }
     fetchAllProvince = (inputProvince) => {
         let language = this.props.language
         let arrProvince = []
@@ -171,75 +158,29 @@ class DoctorInfor extends Component {
         return arrProvince
     }
 
-    fetchAllPayment = (inputpayment) => {
-        let language = this.props.language
-        let arrPayment = []
-        if (inputpayment && inputpayment.length > 0) {
-            inputpayment.map((item, index) => {
-                let ObjectPayment = {}
-                let paymentVi = `${item.valueVi}`
-                let paymentEn = `${item.valueEn}`
-                ObjectPayment.label = language === LANGUAGES.VI ? paymentVi : paymentEn
-                ObjectPayment.value = item.keyMap
-                arrPayment.push(ObjectPayment)
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.allPrices !== prevProps.allPrices) {
+            let resPrice = this.fetchAllPrice(this.props.allPrices)
+            this.setState({
+                listPrice: resPrice
             })
         }
-        return arrPayment
-
-    }
-
-    fetchAllPrice = (inputPrice) => {
-        let language = this.props.language
-        let arrPrice = []
-        if (inputPrice && inputPrice.length > 0) {
-            inputPrice.map((item, index) => {
-                let ObjectPrice = {}
-                let priceVi = `${item.valueVi}.VNĐ`
-                let priceEn = `${item.valueEn}$`
-                ObjectPrice.label = language === LANGUAGES.VI ? priceVi : priceEn
-                ObjectPrice.value = item.keyMap
-                arrPrice.push(ObjectPrice)
+        if (this.props.allPayments !== prevProps.allPayments) {
+            let resPayments = this.fetchAllPayment(this.props.allPayments)
+            this.setState({
+                listPayment: resPayments
             })
         }
-        return arrPrice
-    }
-
-
-    fetchAlldoctor = (inputdata) => {
-        let language = this.props.language
-        let arrDoctor = [];
-        if (inputdata && inputdata.length > 0) {
-            inputdata.map((item, index) => {
-                let Object = {};
-                let labelVi = `${item.lastName} ${item.firstName}`
-                let labelEn = `${item.firstName}${item.lastName} `
-                Object.label = language === LANGUAGES.VI ? labelVi : labelEn
-                Object.value = item.id
-                arrDoctor.push(Object)
+        if (this.props.allProvince !== prevProps.allProvince) {
+            let resAllProvince = this.fetchAllProvince(this.props.allProvince)
+            this.setState({
+                listProvince: resAllProvince
             })
-
         }
-        return arrDoctor
-
     }
 
-    inputChangedHandle = (name, value) => {
-        this.setState({
-            ...this.state,
-            [name]: value
-        })
 
-
-
-    }
-    onChangeInput = (event, id) => {
-        let copyState = { ...this.state }
-        copyState[id] = event.target.value
-
-        this.setState({
-            ...copyState
-        })
-    }
 
     HandleOnChangeClinic = async (selectedClinic) => {
         this.setState({ selectedClinic: selectedClinic })
@@ -263,11 +204,13 @@ class DoctorInfor extends Component {
     }
 
 
+    getdataInformationDoctor = async (data) => {
 
-    handleOnchangDoctor = async (selectedDoctor) => {
-        // console.log("selected doctor......", selectedDoctor.value)
-        this.setState({ selectedDoctor: selectedDoctor })
-        let res = await getDataCostInforDoctor(selectedDoctor.value)
+        let id = data.dataDoctor.dataDoctor.id
+        this.setState({ selectedDoctor: id })
+        let res = await getDataCostInforDoctor(id)
+
+        console.log('.........................', res)
         let { listPrice, listPayment, listProvince, arrSpecialty, arrClinic } = this.state
         if (res.data.data && res.data.errCode === 0 && res.data.data.doctorId &&
             res.data.data.paymentId) {
@@ -331,11 +274,7 @@ class DoctorInfor extends Component {
 
             })
         }
-
     }
-
-
-
 
 
     handleOnsave = () => {
@@ -352,7 +291,7 @@ class DoctorInfor extends Component {
         } else {
             const { btnUpdate } = this.state
             this.props.saveInforCostDoctor({
-                doctorId: this.state.selectedDoctor.value,
+                doctorId: this.state.selectedDoctor,
                 specialtyId: this.state.selectedSpecialty.value,
                 clinicId: this.state.selectedClinic.value,
                 priceId: this.state.selectedPrice.value,
@@ -376,29 +315,32 @@ class DoctorInfor extends Component {
 
     }
 
+
+
+
     render() {
-        const { nameClinic, addressClinic, note, btnUpdate, isloadingData, listProvince, arrSpecialty } = this.state
+        let { language } = this.props
+        const { nameClinic, addressClinic, note, btnUpdate, isloadingData, listProvince, arrSpecialty, dataInforDoctor } = this.state
+        console.log('this....', this.props.userInfo)
+        let nameDr = ''
+        if (dataInforDoctor && !_.isEmpty(dataInforDoctor)) {
+            nameDr = language === LANGUAGES.VI ? `${dataInforDoctor.lastName}${dataInforDoctor.firstName}` : `${dataInforDoctor.firstName}${dataInforDoctor.lastName}`
+        }
+
         return (
-            <div className='container'>
-                <span className='tittle_infor'> <FormattedMessage id={'menu.doctor.tittle_inforDR'} /></span>
+            <>
+                <div className='title'>Quản lý thông tin bác sĩ</div>
 
-                <div className='form_InformationDr pt-5'>
-                    {isloadingData && isloadingData === true ?
-                        ""
-                        :
-                        <div className='text_loading'>Loadding data ........</div>
 
-                    }
+                <div className='container'>
                     <form>
 
                         <div className="row">
 
                             <div className="col-3">
                                 <span><FormattedMessage id={'menu.doctor.doctor'} /></span>
-                                <Select className='form-control'
-                                    value={this.state.selectedDoctor}
+                                <input type="text" className='form-control' disabled placeholder={nameDr}
                                     onChange={this.handleOnchangDoctor}
-                                    options={this.state.listDoctor}
                                 />
 
 
@@ -406,8 +348,7 @@ class DoctorInfor extends Component {
                             </div>
                             <div className="col-3">
                                 <span><FormattedMessage id={'menu.doctor.price'} /></span>
-                                <Select
-                                    className='form-control'
+                                <Select className='form-control'
                                     value={this.state.selectedPrice}
                                     onChange={this.inputChangedHandle.bind(this, "selectedPrice")}
                                     options={this.state.listPrice}
@@ -427,7 +368,7 @@ class DoctorInfor extends Component {
                                 <Select className='form-control'
                                     value={this.state.selectedProvince}
                                     onChange={this.inputChangedHandle.bind(this, "selectedProvince")}
-                                    options={listProvince}
+                                    options={this.state.listProvince}
 
                                 />
                             </div>
@@ -490,6 +431,7 @@ class DoctorInfor extends Component {
 
 
                     </form>
+
                     <div className='pt-5 but_sendata'>
 
                         <button
@@ -506,37 +448,31 @@ class DoctorInfor extends Component {
 
                         </button>
                     </div>
+
                 </div>
-
-
-            </div>
-
-
+            </>
         );
     }
-
 }
 
 const mapStateToProps = state => {
     return {
-        allDoctors: state.admin.allDoctors,
         language: state.app.language,
+        userInfo: state.user.userInfo,
         allPrices: state.admin.allPrices,
         allPayments: state.admin.allPayments,
         allProvince: state.admin.allProvince,
-        isloadingData: state.admin.isloadingData,
-
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+
         fetchAllPriceStart: () => dispatch(actions.fetchAllPrice()),
         fetchAllPaymentStart: () => dispatch(actions.fetchAllPayment()),
         fetchAllProvinceStart: () => dispatch(actions.fetchAllProvince()),
-        fetchallDoctor: () => dispatch(actions.fetchallDoctor()),
         saveInforCostDoctor: (data) => dispatch(actions.saveInforCostDoctor(data))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorInfor);
+export default connect(mapStateToProps, mapDispatchToProps)(InformationDoctor);

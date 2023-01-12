@@ -120,6 +120,7 @@ class DoctorClinic extends Component {
                                                 <ProfileDrBooking
                                                     idDoctor={item.doctorId}
                                                     isClose={true}
+
                                                 />
 
                                             </View>
