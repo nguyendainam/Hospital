@@ -89,7 +89,7 @@ class ScheduleDoctor extends Component {
 
 
     dateSelected = async (key) => {
-        let doctorId = this.props.idDoctor.data.id
+        let doctorId = this.props.idDr
         let date = key
         await axios({
             method: 'GET',
@@ -122,7 +122,7 @@ class ScheduleDoctor extends Component {
 
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
-        if (this.props.idDr != prevProps.idDr) {
+        if (this.props.idDr !== prevProps.idDr) {
             let idDoctor = this.props.idDr
             let getDate = this.getArrayDate()
             let firstDate = getDate[0].key
@@ -136,14 +136,13 @@ class ScheduleDoctor extends Component {
             }).catch((err) => {
                 console.log("ERROR................", err);
             })
-
-
-
-
             this.setState({
                 allDays: getDate,
                 idDr: idDoctor
             })
+
+
+
 
         }
     }
@@ -154,7 +153,8 @@ class ScheduleDoctor extends Component {
         ListDate = this.state.ListDate.data
         let idDoctor = this.props.idDr
 
-        // console.log('List Date', ListDate)
+        let isCloseAdd = this.props.isCloseAdd
+
 
         return (
             <View style={styles.mainSchedule}>
@@ -190,8 +190,7 @@ class ScheduleDoctor extends Component {
                             <View style={styles.formClinicDoctor}>
                                 <AddressDoctor
                                     idDoctor={idDoctor}
-
-
+                                    openaddress={isCloseAdd}
                                 />
                             </View>
 

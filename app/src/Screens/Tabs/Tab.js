@@ -23,13 +23,6 @@ export default function HomeTabs() {
                     <Image source={require("../../picture/user_icon.png")} style={{ width: 30, height: 30, tintColor: "pink" }} resizeMode="stretch" />
                 )
             }} />
-            <Tab.Screen name="Schedule" component={Schedule}
-                options={{
-                    tabBarIcon: () => (
-                        <Image source={require("../../picture/alarm_icon.png")} style={{ width: 30, height: 30, tintColor: "pink" }} resizeMode="stretch" />
-                    )
-                }} />
-
         </Tab.Navigator>
     );
 }

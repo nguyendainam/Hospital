@@ -21,6 +21,7 @@ import Register from "./home/Register";
 import BookSchedule from "../components/Doctor/bookSchedule";
 import MainSpecialty from "../components/Specialty/MainSpecialty";
 import MainClinic from "../components/Clinic/MainClinic";
+import patientSchedule from "../components/Profile/patientSchedule";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,11 +49,7 @@ export default class RootComponent extends React.Component {
                         <Stack.Screen name="BookSchedule" component={BookSchedule} />
                         <Stack.Screen name="MainSpecialty" component={MainSpecialty} />
                         <Stack.Screen name="MainClinic" component={MainClinic} />
-
-
-
-
-
+                        <Stack.Screen name="PatientSchedule" component={patientSchedule} />
 
 
                     </Stack.Navigator>

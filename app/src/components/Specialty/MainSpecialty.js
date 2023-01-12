@@ -46,6 +46,10 @@ class MainSpecialty extends Component {
 
     }
 
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+    }
+
+
     GetAllProvince = async (inputType) => {
         await axios({
             method: 'GET',
@@ -70,9 +74,6 @@ class MainSpecialty extends Component {
                 return result
             }
 
-
-
-
         }).then(result => {
             if (result && result.length > 0) {
                 result.unshift({
@@ -85,16 +86,6 @@ class MainSpecialty extends Component {
             })
         })
     }
-
-
-
-
-
-
-
-
-
-
     doctorSpecialty = async (id, localtion) => {
         await axios({
             method: 'GET',
@@ -107,14 +98,6 @@ class MainSpecialty extends Component {
             })
         })
     }
-
-
-
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-
-    }
-
-
     selectedProvince = (key) => {
         // console.log("keyy........", key)
         if (key) {
@@ -163,8 +146,7 @@ class MainSpecialty extends Component {
                                 setSelected={(key) => this.selectedProvince(key)}
                                 search={false}
                                 data={dataProvince}
-                                // defaultOption={{ key: 'ALL', value: 'Toàn Quốc' }}
-                                defaultOption={ket = dataProvince[0]}
+                                defaultOption={key = dataProvince[0]}
                             />
                         </View>
                     </View>
@@ -187,7 +169,7 @@ class MainSpecialty extends Component {
                                                 <ScheduleDoctor
                                                     idDr={item.doctorId}
                                                     navigation={this.props.navigation}
-
+                                                    isCloseAdd={false}
                                                 />
                                             </View>
 

@@ -12,8 +12,11 @@ let deleteSchedule = async (data) => {
 let getlistPatientforDr = async (doctorId, date) => {
     return await axios.get(`/api/doctor-get-list-patien?doctorId=${doctorId}&date=${date}`)
 }
+const PostsendPemery = (data) => {
+    return axios.post(`/api/doctor-send-remedy`, data)
+}
 
 export {
-    getInforDoctor, deleteSchedule, getlistPatientforDr
+    getInforDoctor, deleteSchedule, getlistPatientforDr, PostsendPemery
 
 } 

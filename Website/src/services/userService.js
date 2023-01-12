@@ -141,6 +141,7 @@ const getDataDoctorClinic = (idClinic, idSpecialty) => {
 
 
 
+
 export {
     handleLoginApi, getAllUsers, createNewUserService,
     deleUserService, editUserService, getAllCodeService,
@@ -148,5 +149,6 @@ export {
     getDetailsInforDoctor, saveBulkSchedule, getScheduleDoctorbyDay, postCostInforDoctor,
     getDataCostInforDoctor, getDataProfileDoctor, postPatientAppoiment, postVerifyPatientAppoiment,
     createNewSpecialty, getAllSpecialty, createNewClinic, getIdNameSpecialty, getIdNameClinic, getAddressClinic,
-    getAllClinic, getdoctorSpecitalty, getInforSpecitaltybyId, getDataDoctorClinic, getAllcodeSpecialty
+    getAllClinic, getdoctorSpecitalty, getInforSpecitaltybyId, getDataDoctorClinic, getAllcodeSpecialty,
+
 } 

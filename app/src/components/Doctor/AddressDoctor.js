@@ -18,7 +18,7 @@ class AddressDoctor extends Component {
         super(props);
         this.state = {
             dataAddress: [],
-            isshowModel: false
+            isshowModel: false,
         }
     }
 
@@ -105,13 +105,19 @@ class AddressDoctor extends Component {
             }
         }
 
+        let Openaddress = this.props.openaddress
 
         return (
             <View>
                 <View>
                     <Text style={styles.title_adr}>Địa chỉ phòng khám </Text>
                     <Text style={styles.nameClinic}>{nameClinic}</Text>
-                    <Text style={styles.addressClinic} >{address}</Text>
+
+                    {Openaddress === false
+                        ? <Text style={styles.addressClinic} >{address}</Text>
+                        : ''
+                    }
+
 
 
 
@@ -123,6 +129,7 @@ class AddressDoctor extends Component {
                                     <Text style={styles.price}>{money}</Text>
                                     <Text>{typePrice}</Text>
                                     <Text >
+
                                         {dataAddress && dataAddress.data && dataAddress.data.note ? dataAddress.data.note : ''}
                                     </Text>
                                     <Text style={styles.detailShow}>Ẩn Xem Chi Tiết</Text>

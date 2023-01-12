@@ -20,8 +20,7 @@ const Register = ({ navigation }) => {
     const [errMessage, seterrMessage] = useState('')
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
-    const [firstName, setfirstName] = useState("")
-    const [lastName, setlastName] = useState("")
+    const [fullname, setfullname] = useState("")
     const [phonenumber, setphonenumber] = useState("")
     const [address, setaddress] = useState("")
     const [gender, setGender] = useState("")
@@ -31,23 +30,22 @@ const Register = ({ navigation }) => {
     }
 
     const SaveDataUser = async () => {
-        if (!email || !password || !firstName || !lastName) {
+        if (!email || !password || !fullname) {
             seterrMessage("Vui lòng nhập đầy đủ thông tin ")
             setShowModal(true)
             return;
         }
         await axios({
-            url: `${baseurl}/api/create-new-users`,
+            url: `${baseurl}/api/create-new-users-patient`,
+
             method: 'POST',
             data: {
                 email: email,
                 password: password,
-                firstName: firstName,
-                lastName: lastName,
+                fullname: fullname,
                 phonenumber: phonenumber,
                 address: address,
                 gender: gender,
-                roleId: 'R3'
             },
         }).then(result => {
             seterrMessage("" + result.data.errMessage);
@@ -60,10 +58,8 @@ const Register = ({ navigation }) => {
                 setShowModal(true)
             }
         }).catch(e => {
-            // console.log(data.message)
             seterrMessage(e.response.data.errMessage);
             setShowModal(true)
-            // seterrMessage = data.message;
         });
 
 
@@ -84,16 +80,12 @@ const Register = ({ navigation }) => {
             <SysModal message={errMessage} visible={ShowModal} onHide={OnHideNotification} />
             <Text style={styles.title_Register}>TẠO TÀI KHOẢN </Text>
             <View style={styles.from_register}>
-                <View style={styles.Name_user}>
-                    <Text style={styles.text_name}>Họ</Text>
-                    <TextInput style={styles.text_input_name}
-                        onChangeText={(value) => setfirstName(value)}
+                <View style={styles.nofification_1}>
+                    <Text style={styles.text_name_1}>Họ và tên</Text>
+                    <TextInput style={styles.text_notifi}
+                        onChangeText={(value) => setfullname(value)}
                     />
-                    <Text style={styles.text_name} >Tên</Text>
-                    <TextInput style={styles.text_input_name}
-                        onChangeText={(value) => setlastName(value)}
 
-                    />
                 </View>
 
                 <View style={styles.nofification_1}>

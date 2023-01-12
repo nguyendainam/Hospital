@@ -18,6 +18,7 @@ class headerHome extends Component {
         const isLoading = loaddingUser
         console.log('isloading', isLoading)
 
+        console.log('isloading', dataUser)
 
         return (
             <View style={styles.mainHeader}>
@@ -27,7 +28,7 @@ class headerHome extends Component {
 
                         <Text style={styles.title_text_1}>
                             {dataUser && dataUser.userInfor ?
-                                dataUser.userInfor.firstName
+                                dataUser.userInfor.fullname
                                 :
                                 ''}
                         </Text>

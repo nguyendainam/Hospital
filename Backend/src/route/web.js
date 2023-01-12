@@ -45,12 +45,16 @@ let initWebRoutes = (app) => {
     router.get('/api/doctor-getinfor-email', doctorController.getInforDoctorbyEmail)
     router.post('/api/doctor-delete-schedule', doctorController.getDoctorDeleteSchedule)
     router.get('/api/doctor-get-list-patien', doctorController.getListPatientforDoctor)
+    router.post('/api/doctor-send-remedy', doctorController.postDoctorsendRemedy)
 
 
     // =========================PATIENT=================================
 
     router.post('/api/patient-book-Appointment', patientController.postBookAppointment);
     router.post('/api/comfirm-verify-book-Appointment', patientController.postVerifyBookAppointment);
+    router.post('/api/create-new-users-patient', patientController.handleCreateNewUserPatient);
+    router.post('/api/patient-login', patientController.handlePatientLogin)
+    router.get('/api/patient-get-schedule', patientController.getPatientGetSchedule)
 
     // =========================SPECIALTY=================================
 

@@ -9,7 +9,7 @@ import { getInforDoctor, getlistPatientforDr } from '../../../services/doctorSer
 import { LANGUAGES } from '../../../utils';
 
 import RemedyModal from './RemedyModal';
-
+import { PostsendPemery } from '../../../services/doctorService';
 
 class ListPatients extends Component {
 
@@ -22,7 +22,8 @@ class ListPatients extends Component {
             ArrList: [],
             isOpenModal: false,
             dataModal: {},
-            isCloseModal: false
+            isCloseModal: false,
+            choosendate: ''
         }
     }
 
@@ -51,7 +52,8 @@ class ListPatients extends Component {
 
         if (data && data.errCode === 0) {
             this.setState({
-                ArrList: data.data
+                ArrList: data.data,
+                choosendate: formatdate
             })
         }
 
@@ -63,7 +65,10 @@ class ListPatients extends Component {
         let data = {
             doctorId: item.doctorId,
             patientId: item.patientId,
-            email: item.PatientData.email
+            email: item.PatientData.email,
+            timeType: item.timeType,
+            fullname: item.PatientData.fullname
+
         }
 
         this.setState({
@@ -81,8 +86,51 @@ class ListPatients extends Component {
         })
     }
 
-    sendRemedy = () => {
-        alert("oke")
+
+
+    getPatien = async (date) => {
+        let data = await getlistPatientforDr(this.state.DoctorId, date)
+        if (data && data.errCode === 0) {
+            this.setState({
+                ArrList: data.data
+            })
+        }
+
+    }
+
+
+    sendRemedy = async (datafromRemedy) => {
+
+        let { language } = this.props
+        let { dataModal, choosendate } = this.state
+        let res = await PostsendPemery({
+
+            imgBase64: datafromRemedy.imgBase64,
+            email: datafromRemedy.email,
+            doctorId: dataModal.doctorId,
+            fullname: dataModal.fullname,
+            patientId: dataModal.patientId,
+            timeType: dataModal.timeType,
+            language: language === LANGUAGES.VI ? 'vi' : 'en'
+
+        })
+        if (res && res.errCode === 0) {
+
+            language === LANGUAGES.VI ?
+                alert("Cập nhật thành công") :
+                alert("Update successful")
+            this.getPatien(choosendate)
+        } else {
+            language === LANGUAGES.VI ?
+                alert("Lỗi") :
+                alert("Error")
+        }
+
+        console.log("data....from remedy..", res)
+        this.setState({
+            isOpenModal: false
+        })
+
     }
 
 
@@ -110,7 +158,7 @@ class ListPatients extends Component {
 
                         />
                     </div>
-                    <table class="table">
+                    <table className="table">
                         <caption>List of users</caption>
                         <thead>
                             <tr> <th scope="col">#</th>
@@ -155,9 +203,9 @@ class ListPatients extends Component {
 
                             })
                                 :
-                                <div>
-                                    <span>Không có lịch khám nào </span>
-                                </div>
+                                <tr>
+                                    <td colSpan="12">Không có lịch khám nào </td>
+                                </tr>
 
                             }
                         </tbody>

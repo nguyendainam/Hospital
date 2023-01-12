@@ -63,28 +63,23 @@ class Login extends Component {
                 })
             }
             await axios({
-                url: `${baseurl}/api/login`,
+                url: `${baseurl}/api/patient-login`,
                 method: 'POST',
                 data: {
                     email: email,
                     password: password,
                 },
             }).then(response => {
-
-
                 const currentUser = response.data.user
 
-                console.log(response.data)
-                console.log("USERRRRRRR", currentUser)
                 if (response.data.errCode === 0) {
                     this.setState({ userLogin: true })
                     this.props.userLoginSuccess(currentUser)
                     this.props.navigation.navigate('Tab')
 
                 } if (response.data.errCode !== 0) {
-
                     this.setState({
-                        errMessage: response.data.message,
+                        errMessage: response.data.errMessage,
                         ShowModal: true
                     })
 

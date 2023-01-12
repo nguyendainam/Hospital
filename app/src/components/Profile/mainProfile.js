@@ -5,49 +5,74 @@ import ScreenSetting from './ScreenSetting'
 import { useNavigation } from '@react-navigation/native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-function mainProfile() {
+import { connect } from 'react-redux'
+class mainProfile extends Component {
 
-    const navigation = useNavigation()
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: false,
+        };
+    }
 
 
-    return (
-        <View style={styles.main_Profile}>
-            <View style={styles.title_profile}>
-                <Text style={styles.text_tittle}>General </Text>
+    render() {
+        const { loaddingUser, dataUser, logout_user } = this.props
+        console.log(loaddingUser)
+
+        console.log(".......main Profile...", loaddingUser)
+
+        return (
+            <View style={styles.main_Profile}>
+                <View style={styles.title_profile}>
+                    <Text style={styles.text_tittle}>General </Text>
+                </View>
+                {loaddingUser === false ?
+                    <View style={styles.form_all_button}>
+                        <TouchableOpacity style={styles.form_button}>
+                            <View style={styles.image_user}>
+                                <Image source={image.icon_cus} style={styles.icon_mainProfile} />
+                            </View>
+                            <View style={styles.userInfor_content}>
+                                <Text style={styles.title_profile_1}>Theo Dõi lịch khám</Text>
+                                <Text>Đăng nhập để theo dõi lịch khám</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
+                    : <View style={styles.form_all_button}>
+                        <TouchableOpacity style={styles.form_button}
+                            onPress={() => this.props.navigation.push('PatientSchedule')}
+                        >
+                            <View style={styles.image_user}>
+                                <Image source={image.icon_cus} style={styles.icon_mainProfile} />
+                            </View>
+                            <View style={styles.userInfor_content}>
+                                <Text style={styles.title_profile_1}>Theo Dõi lịch khám</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
+
+                }
+
+
             </View>
+        )
 
-            <View style={styles.form_all_button}>
-                <TouchableOpacity style={styles.form_button}>
-                    <View style={styles.image_user}>
-                        <Image source={image.icon_cus} style={styles.icon_mainProfile} />
-                    </View>
-                    <View style={styles.userInfor_content}>
-                        <Text style={styles.title_profile_1}>Account Information </Text>
-                        <Text>TouchableOpacity</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        loaddingUser: state.authReducer.isloading,
+        dataUser: state.authReducer
 
-            <View style={styles.form_all_button}>
-                <TouchableOpacity style={styles.form_button}>
-                    <View style={styles.image_user}>
-                        <Image source={image.clinic} style={styles.icon_mainProfile} />
-                    </View>
-                    <View style={styles.userInfor_content}>
-                        <Text style={styles.title_profile_1}>Clinic Infor</Text>
-                        <Text>TouchableOpacity</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-
-
-
-
-        </View>
-    )
-
+    }
 }
 
+const mapDispatchToProps = dispatch => ({
+    logout_user: () => dispatch(action.Logout())
+})
 const styles = StyleSheet.create({
     main_Profile: {
         marginTop: 20,
@@ -116,4 +141,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default mainProfile
+export default connect(mapStateToProps, mapDispatchToProps)(mainProfile)

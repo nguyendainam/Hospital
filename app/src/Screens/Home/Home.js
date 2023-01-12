@@ -21,7 +21,6 @@ class Home extends Component {
                         <Header />
                         <Clinic navigation={this.props.navigation} />
                         <TopDoctor navigation={this.props.navigation} />
-
                         <Specialties navigation={this.props.navigation} />
 
 

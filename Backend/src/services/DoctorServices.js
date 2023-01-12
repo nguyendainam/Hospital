@@ -1,6 +1,9 @@
 import db from '../models/index'
 require('dotenv').config();
-import _ from 'lodash';
+
+
+import SendEmailService from './SendEmailService'
+import _, { reject } from 'lodash';
 
 
 
@@ -547,6 +550,45 @@ let getListPatientforDoctorServices = (doctorId, date) => {
 }
 
 
+let postDoctorsendRemedyService = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.email || !data.doctorId || !data.patientId || !data.timeType) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing required parameter"
+                })
+            } else {
+                // chuyen doi trang thai
+                let appointment = await db.Booking.findOne({
+                    where: {
+                        statusId: 'S2',
+                        doctorId: data.doctorId,
+                        patientId: data.patientId,
+                        timeType: data.timeType
+                    },
+                    raw: false
+                })
+                if (appointment) {
+                    appointment.statusId = 'S3'
+                    await appointment.save()
+                }
+                // console.log("dataa......", data)
+                await SendEmailService.sendRemedy(data)
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Send successfull'
+                })
+
+                //gui email
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
 module.exports = {
     getTopDoctorHomeServices: getTopDoctorHomeServices,
     getAllDoctors: getAllDoctors,
@@ -559,5 +601,6 @@ module.exports = {
     getProfileDoctorByIdService: getProfileDoctorByIdService,
     getDataDoctorByEmail: getDataDoctorByEmail,
     DoctorDeleteSchedule: DoctorDeleteSchedule,
-    getListPatientforDoctorServices: getListPatientforDoctorServices
+    getListPatientforDoctorServices: getListPatientforDoctorServices,
+    postDoctorsendRemedyService: postDoctorsendRemedyService
 }

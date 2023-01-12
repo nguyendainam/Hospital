@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionType"
 import * as t from '../actions/index'
 const initiaState = {
-    userInfor: null,
+    userInfor: [],
     // emai: '',
     isloading: false
 }

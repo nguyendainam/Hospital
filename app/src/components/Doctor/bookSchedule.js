@@ -28,19 +28,39 @@ class BookSchedule extends Component {
             getday: '',
 
 
+
         }
     }
 
     componentDidMount() {
         let data = this.props.route.params.data
         let timeType = this.props.route.params.Time
+        let dataUser = this.props.dataUser.userInfor
 
-        this.setState({
-            dataFromParent: data,
-            Time: timeType
+        console.log('______', dataUser)
+        if (dataUser) {
+            this.setState({
+                dataFromParent: data,
+                Time: timeType,
+                setGender: dataUser.gender,
+                address: dataUser.address,
+                email: dataUser.email,
+                fullName: dataUser.fullname,
+            })
+
+        } else {
+            this.setState({
+                dataFromParent: data,
+                Time: timeType,
+                setGender: '',
+                address: '',
+                email: '',
+                fullName: '',
+            })
+
+        }
 
 
-        })
     }
 
 
@@ -114,7 +134,7 @@ class BookSchedule extends Component {
         }
     }
     render() {
-        const { Time } = this.state
+        const { Time, } = this.state
         let timeSchedule, date, value = ''
         if (Time && Time.TimeTypeData && Time.date) {
             timeSchedule = Time.TimeTypeData.valueVi
@@ -129,6 +149,11 @@ class BookSchedule extends Component {
             { key: 'F', value: 'Nữ' },
             { key: 'O', value: 'Khác' },
         ];
+
+
+
+
+        let { loaddingUser, dataUser } = this.props
         return (
             <>
 
@@ -206,13 +231,27 @@ class BookSchedule extends Component {
                             />
                         </View>
                         <View>
-                            <TouchableOpacity
-                                onPress={this.sendDataBooking}
-                            >
-                                <View style={styles.button_schedule}>
-                                    <Text>ĐẶT LỊCH KHÁM</Text>
-                                </View>
-                            </TouchableOpacity>
+                            {loaddingUser === false ?
+                                <>
+                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <Text>Vui lòng </Text>
+                                        <TouchableOpacity
+                                            onPress={() => this.props.navigation.navigate('Login')}
+                                        >
+                                            <Text style={{ color: 'blue' }}> đăng nhập</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </>
+                                :
+                                <TouchableOpacity
+                                    onPress={this.sendDataBooking}
+                                >
+                                    <View style={styles.button_schedule}>
+                                        <Text>ĐẶT LỊCH KHÁM</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            }
+
 
 
                         </View>
@@ -232,6 +271,9 @@ class BookSchedule extends Component {
 
 const mapStateToProps = state => {
     return {
+        // userInfor: state.
+        dataUser: state.authReducer,
+        loaddingUser: state.authReducer.isloading,
     };
 };
 

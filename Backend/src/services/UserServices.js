@@ -2,6 +2,8 @@ import db from '../models/index'
 import bcrypt, { hash } from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10);
 
+
+
 // ====================CHECK EMAIL USER ========================
 
 // kiểm tra email 

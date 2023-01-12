@@ -69,7 +69,7 @@ class Login extends Component {
                     <div className='login-content row'>
                         <div className='col-12 text-center text-login'>Login</div>
                         <div className='col-12 form-group text-form'>
-                            <text>UserName:</text>
+                            <span>UserName:</span>
                             <input type='text'
                                 className='form-control'
                                 placeholder='Enter your usename'
@@ -78,7 +78,7 @@ class Login extends Component {
                             />
                         </div>
                         <div className='col-12 form-group text-form '>
-                            <text>Password:</text>
+                            <span>Password:</span>
                             <input type='password'
                                 className='form-control'
                                 placeholder='Enter your password'

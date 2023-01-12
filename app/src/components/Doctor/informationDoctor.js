@@ -102,6 +102,8 @@ function Infor({ route, navigation }) {
                                 idDoctor={dataDoctor}
                                 navigation={navigation}
                                 idDr={id}
+                                isCloseAdd={false}
+
                             />
                         </View>
 
@@ -124,7 +126,7 @@ function Infor({ route, navigation }) {
                                         contentWidth={width}
                                         source={{ html }}
                                         enableExperimentalMarginCollapsing={true}
-                                        baseStyle={{ color: 'black', fontSize: 17 }}
+                                        baseStyle={{ color: 'black', fontSize: 15 }}
 
                                     />
 

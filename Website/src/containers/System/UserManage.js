@@ -125,76 +125,13 @@ class UserManage extends Component {
 
     render() {
         console.log(this.state)
-        let arrUsers = this.state.arrUsers
         return (
             <div className="container ">
-                <ModalUser
-                    isOpen={this.state.isOpenAddNewUser}
-                    toggleUserModal={this.toggleUserModal}
-                    createNewUser={this.createNewUser} />
-
-                {this.state.isOpenEditUser &&
-                    <ModalEditUser
-                        isOpen={this.state.isOpenEditUser}
-                        toggleUserModal={this.toggleEditUser}
-                        currentUser={this.state.userEdit}
-                        editUser={this.EditUser}
-                    />}
 
 
                 <div className='title text-center'>Wellcome </div>
 
-                <div className='mt-3 px-5 pb-3'>
-                    <button
-                        onClick={() => this.handleAddNewUser()}
-                        className='btn btn-outline-success px-4'>
-                        <i className="fas fa-user-plus" />Add new user
-                    </button>
 
-                </div>
-                <div className='table-container '>
-                    <table className="table  mr-4   ">
-                        <thead>
-                            <tr>
-                                <th className='w-20' scope="col">Email</th>
-                                <th className='w-20' scope="col">FirstName</th>
-                                <th className='w-20' scope="col">LastName</th>
-                                <th className='w-20' scope="col">Address</th>
-                                <th className='w-20' cope="col">Acction</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            {
-                                arrUsers && arrUsers.map((item, index) => {
-                                    // console.log("check map", item, index)
-                                    return (
-                                        <>
-                                            <tr>
-                                                <td>{item.email}</td>
-                                                <td>{item.firstName}</td>
-                                                <td>{item.lastName}</td>
-                                                <td>{item.address}</td>
-                                                <td>
-                                                    <button className='btn-edit' onClick={() => this.handleEditUser(item)}>
-                                                        <i className="fas fa-pencil-alt" /> Edit</button>
-                                                    <button className='btn-delete'
-                                                        onClick={() => this.handleDeleteUser(item)}
-                                                    > <i className="fas fa-user-times" /> Delete</button>
-                                                </td>
-                                            </tr>
-                                        </>
-
-                                    )
-                                })
-                            }
-
-
-                        </tbody>
-                    </table>
-
-                </div>
             </div>
 
         );

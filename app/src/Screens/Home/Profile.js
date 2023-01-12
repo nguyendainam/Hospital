@@ -65,7 +65,11 @@ class Profile extends Component {
                     </View>
                 }
 
-                <MainProfile />
+                <MainProfile
+                    navigation={this.props.navigation}
+                />
+
+
             </View>
         )
     }
@@ -139,6 +143,7 @@ const mapStateToProps = (state) => {
     return {
         loaddingUser: state.authReducer.isloading,
         dataUser: state.authReducer
+
     }
 }
 

@@ -15,6 +15,7 @@ class PhofileDrBooking extends Component {
         this.state = {
             images: '',
             data: [],
+            isCloseAddress: false,
             isCloseAddress: false
         }
     }
@@ -85,8 +86,6 @@ class PhofileDrBooking extends Component {
 
 
     render() {
-
-
         const { data, isCloseAddress } = this.state
         let fullNameDr, nameClinic, addClinic, city, price, description = ''
         if (data && data.data &&
@@ -98,7 +97,7 @@ class PhofileDrBooking extends Component {
 
         ) {
             console.log(data.data.positionData.valueVi)
-            fullNameDr = `${data.data.positionData.valueVi} ${data.data.lastName} ${data.data.firstName}`
+            fullNameDr = `${data.data.positionData.valueVi}: ${data.data.lastName} ${data.data.firstName}`
             nameClinic = `${data.data.Doctor_infor.nameClinic}`
             addClinic = ` ${data.data.Doctor_infor.addressClinic}`
             city = `${data.data.Doctor_infor.ProVinceData.valueVi}`
@@ -118,9 +117,9 @@ class PhofileDrBooking extends Component {
         return (
             <>
                 <View style={styles.title}>
-                    {isCloseAddress === false ?
-                        <Text style={styles.nameDr} >ĐẶT LỊCH KHÁM</Text>
-                        : ''}
+                    {/* {isCloseAddress === false ?
+                        ''
+                        : ''} */}
                 </View>
                 <View style={styles.main_container}>
                     <View style={styles.image_doctor}>
@@ -141,9 +140,12 @@ class PhofileDrBooking extends Component {
                             :
                             ''
                         }{isCloseAddress === true ?
-                            <View style={{ width: 200, height: 100 }}>
-                                <ScrollView >
-                                    <Text>{description}</Text>
+                            <View style={{ width: 220, height: 120 }}>
+                                <ScrollView horizontal={false} >
+                                    <View style={{ width: '100%', height: '100%' }}>
+                                        <Text>{description}</Text>
+                                    </View>
+
                                 </ScrollView>
 
                             </View>
@@ -160,6 +162,7 @@ class PhofileDrBooking extends Component {
 
 const mapStateToProps = state => {
     return {
+
     };
 };
 
@@ -212,7 +215,9 @@ const styles = StyleSheet.create({
     nameDr: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: 'deeppink'
+        color: 'deeppink',
+        width: '90%',
+        paddingRight: 10
     }
 
     ,

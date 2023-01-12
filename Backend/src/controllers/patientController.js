@@ -38,8 +38,52 @@ let postVerifyBookAppointment = async (req, res) => {
 }
 
 
+let handleCreateNewUserPatient = async (req, res) => {
+    try {
+        let message = await PatientServices.CreateNewUserPatient(req.body)
+        return res.status(200).json(message)
+    } catch (e) {
+
+        console.log('get all code error', e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Error from server"
+        })
+
+    }
+}
+
+let handlePatientLogin = async (req, res) => {
+    try {
+        let data = await PatientServices.handlePatientLoginService(req.body)
+
+        //console.log("data login.......", data)
+        return res.status(200).json(data)
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "handlePatientLogin"
+        })
+    }
+}
+
+let getPatientGetSchedule = async (req, res) => {
+    try {
+        let data = await PatientServices.getPatientGetScheduleService(req.query.patientId, req.query.date)
+        return res.status(200).json(data)
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "getPatientGetSchedule"
+        })
+    }
+}
+
 
 module.exports = {
     postBookAppointment: postBookAppointment,
-    postVerifyBookAppointment: postVerifyBookAppointment
+    postVerifyBookAppointment: postVerifyBookAppointment,
+    handleCreateNewUserPatient: handleCreateNewUserPatient,
+    handlePatientLogin: handlePatientLogin,
+    getPatientGetSchedule: getPatientGetSchedule
 }
